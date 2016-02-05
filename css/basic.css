@@ -1,0 +1,140 @@
+/* CSS Document */
+
+body {
+     color: #000;
+     background: #fff;
+     margin: 25px 0;
+     padding: 0;
+     }
+
+.hide   {
+        text-indent: -9999px;
+        }
+
+img {
+        display: block;
+        border: 0;
+        }
+		
+a:link  {
+      font-weight : bold;
+      text-decoration : none;
+      color: #c30;
+      background: transparent;
+      }
+
+a:visited  {
+      font-weight : bold;
+      text-decoration : none;
+      color: #c30;
+      background: transparent;
+      }
+	  
+a:hover  {
+      font-weight : bold;
+      text-decoration : underline;
+      color: #f60;
+      background: transparent;
+      }
+
+a:active  {
+      font-weight : bold;
+      text-decoration : none;
+      color: #f90;
+      background: transparent;
+      }
+
+p, td, li, ul, ol, h1, h2, h3, h4, h5, h6    {
+              font-family: Georgia, "New Century Schoolbook",
+Times, serif;
+              }
+
+h1    {
+      font-size: 1.15em;
+      font-weight: normal;
+      }
+
+html p  {
+        margin-top: 0;
+        margin-bottom: 1em;
+        text-align: left;
+        font-size:  0.85em;
+        line-height: 1.5;
+        }
+
+#footer p     {
+      font-size: 11px;
+      margin-top: 25px;
+      }
+
+/* Basic page divisions */
+#primarycontent   {
+     padding-left: 25px;
+     padding-top: 25px;
+     }
+#content {
+     background: transparent url(../images/arrow.gif) no-repeat center  bottom;
+     }
+
+/* Sidebar display attributes */
+#sidebar p    {
+      font-style: italic;
+      text-align: right;
+      margin-top: 0.5em;
+      }
+#sidebar img     {
+      margin: 30px 0 15px 0;
+      }
+#sidebar h2   {
+      font-size: 1em;
+      font-weight: normal;
+      font-style: italic;
+      margin: 0;
+      line-height: 1.5;
+      text-align: right;
+      }
+
+/* Navigation bar components */
+table#nav     {
+      border-bottom: 1px solid #000;
+      border-left: 1px solid #000;
+      }
+
+table#nav td     {
+      font: 11px verdana, arial, sans-serif;
+      text-align: center;
+      border-right: 1px solid #000;
+      border-top: 1px solid #000;
+      }
+
+table#nav td a      {
+      font-weight: normal;
+      text-decoration: none;
+      display: block;
+      margin: 0;
+      padding: 0;
+      }
+
+#nav td a:link, #nav td a:visited {
+     background: transparent url(../images/bgpat.gif)  repeat;
+     display: block;
+     margin: 0;
+     width: 100px;
+     line-height: 25px;
+     }
+
+#nav td a:hover {
+    color: #000;
+    background-image: none;
+    }
+
+td#home a:link, td#home a:visited {
+     background: transparent url(../images/bgpat.gif) repeat;
+     width: 400px;
+     height: 75px;
+     }
+td#home a:hover {
+     background: white url(../images/nopat.gif) repeat;
+     width: 400px;
+     height: 75px;
+     }
