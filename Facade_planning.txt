@@ -1,0 +1,35 @@
+Facade Planning
+	LoginValidation.jsp
+ 		ApplicationLogic.loginoptions
+			Authentication object
+
+	
+	view_schedules.jsp
+		Imports:
+			java.util.Collection
+				Collections schedules
+			ApplicationLogic.ScheduleMakerController
+				ScheduleMakerController object "smc"
+			ApplicationLogic.FormatPage
+				FormatPage object "fp"
+	
+	view_schedules.jsp
+		Imports:
+			java.util.Collection
+				Collection schedules
+				Collection<String> courses
+			ApplicationLogic.ScheduleMakerController
+				ScheduleMakerController object "smc"
+			ApplicationLogic.FormatPage
+				FormatPage object "fp"
+			java.util.ArrayList
+
+		Not Imported but used:
+			
+			ApplicationLogic.ScheduleOptions
+				
+				
+	search_schedules.jsp
+		Not Imported but used:
+		ApplicationLogic.ScheduleOptions
+			
