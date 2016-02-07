@@ -1,4 +1,4 @@
-<%@ page import="ApplicationLogic.Authentication" %>
+<%@ page import="ApplicationLogic.FacadeController" %>
 <%--
   Created by IntelliJ IDEA.
   User: alain
@@ -12,9 +12,10 @@
 <head><title>Simple jsp page</title></head>
 <body>
 <%
-    Authentication smc = new Authentication();
-   
-    if (smc.isLoginValid(loginData.getPantherID(), loginData.getPassword()))
+      //  Authentication smc = new Authentication();
+      FacadeController fc = new FacadeController();
+
+    if (fc.login(loginData.getPantherID(), loginData.getPassword()))
     {
         // Valid login
         session.setAttribute("authorized", "yes");
@@ -26,8 +27,8 @@
         session.setAttribute("authorized", "no");
         response.sendRedirect("login.jsp?msg=Invalid Login Information. Please reenter your login information.");
     }
-   
- 
+
+
 %>
 </body>
 </html>
