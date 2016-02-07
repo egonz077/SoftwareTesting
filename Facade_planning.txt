@@ -1,8 +1,15 @@
 Facade Planning
-	LoginValidation.jsp
- 		ApplicationLogic.loginoptions
-			Authentication object
 
+	LoginValidation.jsp
+ 		Imports:
+			ApplicationLogic.Authentication
+				Authentication object "smc"
+		Not Imported but used:
+			ApplicationLogic.loginOptions
+
+	search_schedules.jsp
+		Not Imported but used:
+			ApplicationLogic.ScheduleOptions
 	
 	view_schedules.jsp
 		Imports:
@@ -12,8 +19,10 @@ Facade Planning
 				ScheduleMakerController object "smc"
 			ApplicationLogic.FormatPage
 				FormatPage object "fp"
+		Not Imported but used:
+			ApplicationLogic.ScheduleOptions
 	
-	view_schedules.jsp
+	view_schedules2.jsp
 		Imports:
 			java.util.Collection
 				Collection schedules
@@ -23,13 +32,8 @@ Facade Planning
 			ApplicationLogic.FormatPage
 				FormatPage object "fp"
 			java.util.ArrayList
-
 		Not Imported but used:
-			
 			ApplicationLogic.ScheduleOptions
 				
 				
-	search_schedules.jsp
-		Not Imported but used:
-		ApplicationLogic.ScheduleOptions
 			
