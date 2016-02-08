@@ -1,6 +1,6 @@
 <jsp:include page="validURL.jsp"/>
 <%@ page import="java.util.Collection" %>
-<%@ page import="ApplicationLogic.ScheduleMakerController" %>
+<%@ page import="ApplicationLogic.FacadeController" %>
 <%@ page import="ApplicationLogic.FormatPage" %>
 <jsp:useBean id="schOpt" class="ApplicationLogic.ScheduleOptions" scope="session"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -33,10 +33,11 @@
     <div id="container">
         <%
             Collection schedules;
+            FacadeController fc = new FacadeController();
             //if (session.getValue("sched") == null)
             //{
-                ScheduleMakerController smc = new ScheduleMakerController();
-                schedules = smc.createSchedule(schOpt);
+            //    ScheduleMakerController smc = new ScheduleMakerController();
+                schedules = fc.createSchedule(schOpt);
                // session.setAttribute("sched", schedules);
            // }
            // else
@@ -45,7 +46,7 @@
            // }
 
 
-            FormatPage fp = new FormatPage();
+          //  FormatPage fp = new FormatPage();
             int pg = 0;
             try
             {
@@ -79,7 +80,7 @@
                 <td align="right"><h3><a href="view_schedules.jsp?pg=<%=(pg+1)%>">next</a></h3></td>
             </tr>
         </table>
-        <%=fp.buildSchedulesPage(schedules, pg)%>
+        <%=fc.buildSchedulesPage(schedules, pg)%>
         <%
             } else {
         %>
