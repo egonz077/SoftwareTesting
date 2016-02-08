@@ -1,7 +1,6 @@
 <jsp:include page="validURL.jsp"/>
 <%@ page import="java.util.Collection" %>
 <%@ page import="ApplicationLogic.FacadeController" %>
-<%@ page import="ApplicationLogic.FormatPage" %>
 <jsp:useBean id="schOpt" class="ApplicationLogic.ScheduleOptions" scope="session"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

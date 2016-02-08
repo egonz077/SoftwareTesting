@@ -1,4 +1,5 @@
 <jsp:include page="validURL.jsp"/>
+<%@ page import="ApplicationLogic.FacadeController" %>
 <%
     response.setHeader("Cache-Control","no-cache"); //Forces caches to obtain a new copy of the page from the origin server
     response.setHeader("Cache-Control","no-store"); //Directs caches not to store the page under any circumstance
@@ -58,7 +59,8 @@
             <input type="hidden" name="pg" id="pg" value="<%=request.getParameter("pg")%>">
         <%
             Collection schedules;
-            ScheduleMakerController smc = new ScheduleMakerController();
+            //ScheduleMakerController smc = new ScheduleMakerController();
+            FacadeController fc = new FacadeController();
             Collection<String> courses = new ArrayList<String>();
             if(request.getParameter("course1") != null && !request.getParameter("course1").trim().equals(""))
                 courses.add(request.getParameter("course1"));
@@ -103,9 +105,9 @@
             else
                 SPDays += "1";
 
-            schedules = smc.createSchedule(request.getParameter("term"), courses, request.getParameter("campus"), SPDays);
+            schedules = fc.createSchedule(request.getParameter("term"), courses, request.getParameter("campus"), SPDays);
 
-            FormatPage fp = new FormatPage();
+          //  FormatPage fp = new FormatPage();
             int pg = 0;
             try
             {
@@ -139,7 +141,7 @@
                 <td align="right"><h3><a href="javascript:send(<%=(pg+1)%>)">next</a></h3></td>
             </tr>
         </table>
-        <%=fp.buildSchedulesPage(schedules, pg)%>
+        <%=fc.buildSchedulesPage(schedules, pg)%>
         <%
             } else {
         %>
