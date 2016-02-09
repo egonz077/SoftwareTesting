@@ -6,7 +6,7 @@
   Time: 11:55:28 PM
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="loginData" class="ApplicationLogic.FacadeController" scope="session"/>
+<jsp:useBean id="loginData" class="ApplicationLogic.LoginOptions" scope="session"/>
 <jsp:setProperty name="loginData" property="*"/>
 <html>
 <head><title>Simple jsp page</title></head>
@@ -15,7 +15,7 @@
       //  Authentication smc = new Authentication();
       FacadeController fc = new FacadeController();
 
-    if (fc.login(loginData.getID(), loginData.getPass()))
+    if (fc.login(loginData.getPantherID(), loginData.getPassword()))
     {
         // Valid login
         session.setAttribute("authorized", "yes");
@@ -25,7 +25,7 @@
     {
         // Invalid login
         session.setAttribute("authorized", "no");
-        response.sendRedirect("login.jsp?msg=Invalid Login Information. Please reenter your login information.");
+        response.sendRedirect("login.jsp?msg=Invalid Login Information. "+ loginData.getPantherID() +" Please reenter your login information.");
     }
 
 

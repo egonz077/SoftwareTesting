@@ -48,8 +48,8 @@ public class FacadeController {
 		
 	}
 	
-	/*takes care of serving the pantherid in loginvalidation.jsp*/
-	public String getID(){
+	/*takes care of serving the pantherID in loginvalidation.jsp*/
+	public String getPantherID(){
 		
 		LoginOptions login = new LoginOptions();
 		
@@ -57,7 +57,7 @@ public class FacadeController {
 		
 	}
 	/*takes care of serving the password in loginvalidation.jsp*/
-	public String getPass(){
+	public String getPassword(){
 		
 		LoginOptions login = new LoginOptions();
 		
