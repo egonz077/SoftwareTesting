@@ -3,12 +3,16 @@ package ApplicationLogic;
 
 
 import Storage.Schedule;
+
 import java.util.Collection;
 
 
 
 
 public class FacadeController {
+	
+	 String pantherID;
+	 String password;
 	
 	
 	
@@ -52,16 +56,35 @@ public class FacadeController {
 	public String getPantherID(){
 		
 		LoginOptions login = new LoginOptions();
-		
 		return login.getPantherID();
 		
 	}
+	
+	/*takes care of serving the pantherID in loginvalidation.jsp*/
+	public void setPantherID(String pantherID){
+		
+		LoginOptions login = new LoginOptions();
+		
+		login.setPantherID(pantherID);
+		
+	}
+	
 	/*takes care of serving the password in loginvalidation.jsp*/
 	public String getPassword(){
 		
 		LoginOptions login = new LoginOptions();
 		
 		return login.getPassword();
+		
+		
+	}
+	
+	/*takes care of serving the pantherID in loginvalidation.jsp*/
+	public void setPassword(String password){
+		
+		LoginOptions login = new LoginOptions();
+		
+		login.setPassword(password);
 		
 	}
 
