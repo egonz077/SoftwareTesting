@@ -1,18 +1,16 @@
 package ApplicationLogic;
 
-//From Authentication.java
-import Storage.DatabaseInterface;
 
-//From FormatPage.java
-import Storage.ClassDetails;
+
 import Storage.Schedule;
-import java.util.ArrayList;
 import java.util.Collection;
 
-//From ScheduleMakerController.java
-import Storage.Course;
+
+
 
 public class FacadeController {
+	
+	
 	
 	/*Takes care of the login portion in loginvalidation.jsp*/
 	public boolean login(String user, String pass){
@@ -47,6 +45,23 @@ public class FacadeController {
 		FormatPage fp = new FormatPage();
 		
 		return fp.buildSchedulesPage(schedules, pg);
+		
+	}
+	
+	/*takes care of serving the pantherid in loginvalidation.jsp*/
+	public String getID(){
+		
+		LoginOptions login = new LoginOptions();
+		
+		return login.getPantherID();
+		
+	}
+	/*takes care of serving the password in loginvalidation.jsp*/
+	public String getPass(){
+		
+		LoginOptions login = new LoginOptions();
+		
+		return login.getPassword();
 		
 	}
 

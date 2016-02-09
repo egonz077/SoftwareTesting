@@ -1,39 +1,36 @@
 Facade Planning
 
-	LoginValidation.jsp
+	LoginValidation.jsp										//Done
  		Imports:
-			ApplicationLogic.Authentication
+			ApplicationLogic.Authentication    //Done
 				Authentication object "smc"
 		Not Imported but used:
-			ApplicationLogic.loginOptions
+			ApplicationLogic.loginOptions			//Done
 
 	search_schedules.jsp
 		Not Imported but used:
-			ApplicationLogic.ScheduleOptions
-	
+			ApplicationLogic.ScheduleOptions  // Dont see any implementation
+
 	view_schedules.jsp
 		Imports:
-			java.util.Collection
-				Collections schedules
-			ApplicationLogic.ScheduleMakerController
+			java.util.Collection														// Left alone
+				Collections schedules													// Left alone
+			ApplicationLogic.ScheduleMakerController				//Done
 				ScheduleMakerController object "smc"
-			ApplicationLogic.FormatPage
+			ApplicationLogic.FormatPage											// Done
 				FormatPage object "fp"
-		Not Imported but used:
+		Not Imported but used:														// Dont see any implementation
 			ApplicationLogic.ScheduleOptions
-	
+
 	view_schedules2.jsp
 		Imports:
-			java.util.Collection
-				Collection schedules
-				Collection<String> courses
-			ApplicationLogic.ScheduleMakerController
+			java.util.Collection												// Left alone
+				Collection schedules											// Left alone
+				Collection<String> courses								// Done
+			ApplicationLogic.ScheduleMakerController		//Done
 				ScheduleMakerController object "smc"
-			ApplicationLogic.FormatPage
+			ApplicationLogic.FormatPage									//Done
 				FormatPage object "fp"
 			java.util.ArrayList
 		Not Imported but used:
-			ApplicationLogic.ScheduleOptions
-				
-				
-			
+			ApplicationLogic.ScheduleOptions						// Dont see any implementation

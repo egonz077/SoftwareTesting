@@ -6,7 +6,7 @@
   Time: 11:55:28 PM
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="loginData" class="ApplicationLogic.LoginOptions" scope="session"/>
+<jsp:useBean id="loginData" class="ApplicationLogic.FacadeController" scope="session"/>
 <jsp:setProperty name="loginData" property="*"/>
 <html>
 <head><title>Simple jsp page</title></head>
@@ -15,7 +15,7 @@
       //  Authentication smc = new Authentication();
       FacadeController fc = new FacadeController();
 
-    if (fc.login(loginData.getPantherID(), loginData.getPassword()))
+    if (fc.login(loginData.getID(), loginData.getPass()))
     {
         // Valid login
         session.setAttribute("authorized", "yes");
