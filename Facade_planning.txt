@@ -18,7 +18,7 @@ Facade Planning
 				Collections schedules													// Left alone
 			ApplicationLogic.ScheduleMakerController				//Done
 				ScheduleMakerController object "smc"
-					.createSchedule(ScheduleOptions schOpt)
+					.createSchedule(ScheduleOptions schOpt)					//Never Used
 					.createSchedule(String term, Collection<String> courses, String cmp, String SPDays)
 					.sortSchedules() 																//Not implemented
 			    .getSavedSchedule() 														//Not implemented

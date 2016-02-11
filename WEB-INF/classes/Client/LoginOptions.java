@@ -1,4 +1,4 @@
-package ApplicationLogic;
+package Client;
 
 /**
  * Created by IntelliJ IDEA.

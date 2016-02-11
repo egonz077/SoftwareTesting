@@ -40,6 +40,25 @@ public class FacadeControllerTest {
 		assertEquals("Logged In?", true, fc.login("2234523", "abc345"));
 		
 	}
+	
+	@Test
+	public void testLogin4() {
+		//User name doesn't exist, but password does
+		assertEquals("Logged In?", false, fc.login("445984253", "abc123"));
+		
+	}
+	@Test
+	public void testLogin5() {
+		//User name exists, but password does not
+		assertEquals("Logged In?", false, fc.login("2354235", "!@#$%"));
+		
+	}
+	@Test
+	public void testLogin6() {
+		//Neither User name or password exists in the database
+		assertEquals("Logged In?", false, fc.login("2yourmom23", "1256738fjden"));
+		
+	}
 
 	@Test
 	public void testCreateScheduleScheduleOptions() {
