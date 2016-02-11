@@ -4,12 +4,13 @@ Facade Planning
  		Imports:
 			ApplicationLogic.Authentication    //Done
 				Authentication object "smc"
+					.isLoginValid(String pantherID, String password)
 		Not Imported but used:
 			ApplicationLogic.loginOptions			//Done
 
 	search_schedules.jsp
 		Not Imported but used:
-			ApplicationLogic.ScheduleOptions  // Dont see any implementation
+			ApplicationLogic.ScheduleOptions  // Don't see any implementation
 
 	view_schedules.jsp
 		Imports:
@@ -17,20 +18,40 @@ Facade Planning
 				Collections schedules													// Left alone
 			ApplicationLogic.ScheduleMakerController				//Done
 				ScheduleMakerController object "smc"
+					.createSchedule(ScheduleOptions schOpt)
+					.createSchedule(String term, Collection<String> courses, String cmp, String SPDays)
+					.sortSchedules() 																//Not implemented
+			    .getSavedSchedule() 														//Not implemented
+			    .getBalance()																		//Not implemented
+					.saveSchedules(Collection<Schedule> schedules)	//Not implemented
 			ApplicationLogic.FormatPage											// Done
 				FormatPage object "fp"
-		Not Imported but used:														// Dont see any implementation
+					.createPage()																//Not implemented
+			    .createPage(Schedule schedule[])						//Not implemented
+			    .buildPage() 																//Not implemented
+			    .requestPage(String pageName)								//Not implemented
+		Not Imported but used:								// Don't see any implementation
 			ApplicationLogic.ScheduleOptions
 
 	view_schedules2.jsp
 		Imports:
 			java.util.Collection												// Left alone
 				Collection schedules											// Left alone
-				Collection<String> courses								// Done
+				Collection<String> courses								// Left alone
 			ApplicationLogic.ScheduleMakerController		//Done
 				ScheduleMakerController object "smc"
-			ApplicationLogic.FormatPage									//Done
-				FormatPage object "fp"
-			java.util.ArrayList
+					.createSchedule(ScheduleOptions schOpt)
+					.createSchedule(String term, Collection<String> courses, String cmp, String SPDays)
+					.sortSchedules() 																//Not implemented
+					.getSavedSchedule() 														//Not implemented
+					.getBalance()																		//Not implemented
+					.saveSchedules(Collection<Schedule> schedules)	//Not implemented
+				ApplicationLogic.FormatPage											// Done
+					FormatPage object "fp"
+						.createPage()																//Not implemented
+				    .createPage(Schedule schedule[])						//Not implemented
+				    .buildPage() 																//Not implemented
+				    .requestPage(String pageName)								//Not implemented
+			java.util.ArrayList													// Left alone
 		Not Imported but used:
-			ApplicationLogic.ScheduleOptions						// Dont see any implementation
+			ApplicationLogic.ScheduleOptions						// Don't see any implementation
