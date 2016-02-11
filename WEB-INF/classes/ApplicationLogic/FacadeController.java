@@ -10,11 +10,6 @@ public class FacadeController {
 	 String pantherID;
 	 String password;
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> fecfe5c228042432f67e18149a4d5449200767d9
 	/*Takes care of the login portion in loginvalidation.jsp*/
 	public boolean login(String user, String pass){
 
@@ -48,9 +43,6 @@ public class FacadeController {
 		FormatPage fp = new FormatPage();
 
 		return fp.buildSchedulesPage(schedules, pg);
-
 	}
-
-
 
 }
