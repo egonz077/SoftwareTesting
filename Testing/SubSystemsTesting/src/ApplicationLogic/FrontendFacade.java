@@ -5,7 +5,7 @@ import Storage.Schedule;
 import java.util.Collection;
 
 
-public class FacadeController {
+public class FrontendFacade {
 
 	 String pantherID;
 	 String password;

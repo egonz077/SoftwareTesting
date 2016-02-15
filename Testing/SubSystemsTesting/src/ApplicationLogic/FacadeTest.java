@@ -12,11 +12,11 @@ import org.junit.Test;
 public class FacadeControllerTest {
 
 	
-	public FacadeController fc;
+	public FrontendFacade fc;
 	@Before
 	public void setUp() throws Exception {
 		
-		 fc = new FacadeController();
+		 fc = new FrontendFacade();
 	}
 
 	@After
