@@ -1,8 +1,6 @@
 package ApplicationLogic;
 
-import Storage.Schedule;
-import Storage.ClassDetails;
-import Storage.Course;
+import Storage.BackendFacade;
 import Storage.DatabaseInterface;
 
 import java.util.Collection;
@@ -136,12 +134,12 @@ public class ScheduleMakerController {
         else
             SPDays += "1";
 
-        Course course_tmp;
+        BackendFacade course_tmp;
         Collection<Collection<ClassDetails>> course_collection = new ArrayList<Collection<ClassDetails>>();
 
         for (Object c : courses)
         {
-            course_tmp = new Course(((String) c).substring(0, 3), ((String) c).substring(3));
+            course_tmp = new BackendFacade(((String) c).substring(0, 3), ((String) c).substring(3));
             Collection<ClassDetails> classes_tmp = course_tmp.getClasses(term, campus);
             if (classes_tmp.size() > 0)
             {
@@ -199,14 +197,14 @@ public class ScheduleMakerController {
         else
             campus.add(cmp);
 
-        Course course_tmp;
+        BackendFacade course_tmp;
         Collection<Collection<ClassDetails>> course_collection = new ArrayList<Collection<ClassDetails>>();
 
         for (Object c : courses)
         {
             if (!((String) c).equals(""))
             {
-                course_tmp = new Course(((String) c).substring(0, 3), ((String) c).substring(3));
+                course_tmp = new BackendFacade(((String) c).substring(0, 3), ((String) c).substring(3));
                 Collection<ClassDetails> classes_tmp = course_tmp.getClasses(term, campus);
                 if (classes_tmp.size() > 0)
                 {

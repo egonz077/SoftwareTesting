@@ -1,5 +1,5 @@
 <jsp:include page="validURL.jsp"/>
-<%@ page import="ApplicationLogic.FacadeController" %>
+<%@ page import="ApplicationLogic.FrontendFacade" %>
 <%
     response.setHeader("Cache-Control","no-cache"); //Forces caches to obtain a new copy of the page from the origin server
     response.setHeader("Cache-Control","no-store"); //Directs caches not to store the page under any circumstance
@@ -60,7 +60,7 @@
         <%
             Collection schedules;
             //ScheduleMakerController smc = new ScheduleMakerController();
-            FacadeController fc = new FacadeController();
+            FrontendFacade fc = new FrontendFacade();
             Collection<String> courses = new ArrayList<String>();
             if(request.getParameter("course1") != null && !request.getParameter("course1").trim().equals(""))
                 courses.add(request.getParameter("course1"));

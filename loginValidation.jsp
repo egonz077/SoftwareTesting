@@ -1,4 +1,4 @@
-<%@ page import="ApplicationLogic.FacadeController" %>
+<%@ page import="ApplicationLogic.FrontendFacade" %>
 <%--
   Created by IntelliJ IDEA.
   User: alain
@@ -13,7 +13,7 @@
 <body>
 <%
       //  Authentication smc = new Authentication();
-      FacadeController fc = new FacadeController();
+      FrontendFacade fc = new FrontendFacade();
 
     if (fc.login(loginData.getPantherID(), loginData.getPassword()))
     {

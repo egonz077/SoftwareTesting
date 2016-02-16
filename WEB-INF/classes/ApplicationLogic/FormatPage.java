@@ -1,8 +1,5 @@
 package ApplicationLogic;
 
-import Storage.ClassDetails;
-import Storage.Schedule;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -54,7 +51,7 @@ public class FormatPage {
         char d[];
         for (Object it : (ArrayList) c)
         {
-            ClassDetails classDetails = (ClassDetails) ((ArrayList) it).get(0);
+            ClassDetails classDetails =  (ClassDetails) ((ArrayList) it).get(0);
             for (int i = classDetails.getTime().frHr; i <= classDetails.getTime().toHr; i++)
             {
                 d = classDetails.getTime().days.toCharArray();

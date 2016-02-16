@@ -1,5 +1,8 @@
 package Storage;
 
+import ApplicationLogic.Schedule;
+import ApplicationLogic.Student;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
