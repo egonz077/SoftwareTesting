@@ -37,7 +37,7 @@ public class Course {
             ResultSet rs = dbconn.executeQuery();
             ClassDetails tmp;
             while (rs.next()) {
-                tmp = new ClassDetails(this, rs.getString("classNbr"));
+                tmp = new ClassDetails(new DatabaseStub(subject, catlgNbr), rs.getString("classNbr"));
                 //tmp.setFirstName(rs.getString("firstname"));
                 result.add(tmp);
             }
@@ -108,7 +108,7 @@ public class Course {
            ResultSet rs = dbconn.executeQuery();
            ClassDetails tmp;
            while (rs.next()) {
-               tmp = new ClassDetails(this, rs.getString("classNbr"));
+               tmp = new ClassDetails(new DatabaseStub(subject, catlgNbr), rs.getString("classNbr"));
                tmp.setCampus(rs.getString("campus"));
                tmp.setTerm(rs.getString("term"));
                tmp.setTime(new Time(rs.getString("from"), rs.getString("to"), rs.getString("days")));

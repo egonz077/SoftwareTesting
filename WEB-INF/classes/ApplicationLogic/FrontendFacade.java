@@ -6,14 +6,7 @@ import java.util.Collection;
 
 public class FrontendFacade {
 
-    String pantherID;
-    String password;
-
     /*Takes care of the login portion in loginvalidation.jsp*/
-    public boolean r(){
-        return false;
-    }
-
     public boolean login(String user, String pass) {
         return new Authentication().isLoginValid(user, pass);
     }

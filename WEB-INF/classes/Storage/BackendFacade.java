@@ -6,10 +6,16 @@ import java.util.Collection;
 
 public class BackendFacade {
 
-    Course c;
+    private String subject;
+    private String catlgNbr;
+
+    //Need to create an object since ScheduleMakerController.java needs a course object
+    DatabaseStub c;
+
 
     public BackendFacade(String substring, String substring1) {
-        c = new Course(substring, substring1);
+        this.subject = substring;
+        this.catlgNbr = substring1;
     }
 
     public BackendFacade() {
@@ -17,11 +23,10 @@ public class BackendFacade {
     }
 
     public boolean isLoginValid(String pantherID, String pass) {
-        return new DatabaseInterface().isLoginValid(pantherID, pass);
+        return new DatabaseStub().isLoginValid(pantherID, pass);
     }
 
-
     public Collection<ClassDetails> getClasses(String term, Collection<String> campus) {
-        return c.getClasses(term, campus);
+        return new DatabaseStub(subject, catlgNbr).getClasses(term, campus);
     }
 }

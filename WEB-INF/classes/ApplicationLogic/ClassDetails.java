@@ -1,6 +1,7 @@
 package ApplicationLogic;
 
-import Storage.Course;
+import Storage.BackendFacade;
+import Storage.DatabaseStub;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -8,7 +9,7 @@ import java.util.Iterator;
 
 public class ClassDetails {
 
-    private Course course;
+    private DatabaseStub db;
     private String classNbr;
     private Professor instructor;
     private String bldg_room;
@@ -30,8 +31,8 @@ public class ClassDetails {
         this.campus = campus;
     }
 
-    public ClassDetails(Course course, String classNbr) {
-        this.course = course;
+    public ClassDetails(DatabaseStub db, String classNbr) {
+        this.db = db;
         this.classNbr = classNbr;
     }
 
@@ -147,7 +148,7 @@ public class ClassDetails {
 
     public String toString() {
         String result = "";
-        result += course.toString() + "\n" + classNbr + "\n";
+        result += db.toString() + "\n" + classNbr + "\n";
         if (this.getTime() != null)
             result += "" + this.getTime().toString() + "\n";
 //        if (instructor != null)

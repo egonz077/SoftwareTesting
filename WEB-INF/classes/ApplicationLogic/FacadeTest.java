@@ -59,7 +59,7 @@ public class FacadeTest {
 	@Test
 	public void testLogin6() {
 		//Neither User name or password exists in the database
-		assertEquals("Logged In?", false, fc.login("2yourmom23", "1256738fjden"));
+		assertEquals("Logged In?", false, fc.login("tumadre3", "1256738fjden"));
 	}
 
 	
