@@ -9,7 +9,9 @@ import java.util.Collection;
 public class DatabaseStub {
 
     public String subject;
+    public String description;
     public String catlgNbr;
+    public int units;
 
     //ssn, pantherID, password
     String[][] studentDatabase = {
@@ -33,24 +35,30 @@ public class DatabaseStub {
     }
 
     public boolean isLoginValid(String pantherID, String pass) {
-        for (int i = 0; i < studentDatabase.length; i++)
-            if (studentDatabase[i][1].compareTo(pantherID) == 0)
-                if (studentDatabase[i][2].compareTo(pass) == 0)
+        for (String[] aStudentDatabase : studentDatabase)
+            if (aStudentDatabase[1].compareTo(pantherID) == 0)
+                if (aStudentDatabase[2].compareTo(pass) == 0)
                     return true;
         return false;
     }
 
     public Collection<ClassDetails> getClasses(String term, Collection<String> campus) {
         Collection<ClassDetails> result = new ArrayList<ClassDetails>();
-        for (int i = 0; i < classDatabase.length; i++)
-            if (classDatabase[i][2].compareTo(subject) == 0 &&
-                    classDatabase[i][3].compareTo(catlgNbr) == 0 &&
-                    classDatabase[i][4].compareTo(term) == 0) {
-                ClassDetails tmp = new ClassDetails(this, classDatabase[i][3]);
-                tmp.setCampus(classDatabase[i][5]);
-                tmp.setTerm(classDatabase[i][4]);
-                tmp.setTime(new Time(classDatabase[i][7], classDatabase[i][8], classDatabase[i][9]));
-                result.add(tmp);
+        for (String[] aClassDatabase : classDatabase)
+            if (aClassDatabase[2].compareTo(subject) == 0 &&
+                    aClassDatabase[3].compareTo(catlgNbr) == 0 &&
+                    aClassDatabase[4].compareTo(term) == 0) {
+                boolean c = true;
+                for (int i = 0; i < campus.size(); i++)
+                    if (aClassDatabase[5].compareTo((String) ((ArrayList) campus).get(i)) != 0)
+                        c = false;
+                if (c) {
+                    ClassDetails tmp = new ClassDetails(this, aClassDatabase[3]);
+                    tmp.setCampus(aClassDatabase[5]);
+                    tmp.setTerm(aClassDatabase[4]);
+                    tmp.setTime(new Time(aClassDatabase[7], aClassDatabase[8], aClassDatabase[9]));
+                    result.add(tmp);
+                }
             }
         return result;
     }

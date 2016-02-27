@@ -9,10 +9,6 @@ public class BackendFacade {
     private String subject;
     private String catlgNbr;
 
-    //Need to create an object since ScheduleMakerController.java needs a course object
-    DatabaseStub c;
-
-
     public BackendFacade(String substring, String substring1) {
         this.subject = substring;
         this.catlgNbr = substring1;

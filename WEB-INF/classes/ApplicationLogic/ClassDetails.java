@@ -1,6 +1,7 @@
 package ApplicationLogic;
 
 import Storage.BackendFacade;
+import Storage.Course;
 import Storage.DatabaseStub;
 
 import java.util.ArrayList;
@@ -164,5 +165,29 @@ public class ClassDetails {
 
     public String getDays() {
         return getTime().days;
+    }
+
+
+//New Getters
+
+
+    public DatabaseStub getCourse() {
+        return db;
+    }
+
+    public String getClassNbr() {
+        return classNbr;
+    }
+
+    public String getBldg_room() {
+        return bldg_room;
+    }
+
+    public String getCampus() {
+        return campus;
+    }
+
+    public String getTerm() {
+        return term;
     }
 }
