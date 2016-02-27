@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import org.junit.After;
 import org.junit.Before;
@@ -141,10 +142,12 @@ public class FacadeTest {
         } else {
             if (two.getClasses() == null)
                 return false;
-            while (one.getClasses().iterator().hasNext()) {
+            Iterator<ClassDetails> itr = one.getClasses().iterator();
+            Iterator<ClassDetails> itr2 = one.getClasses().iterator();
+            while (itr.hasNext()) {
 
-                ClassDetails oneClass = one.getClasses().iterator().next();
-                ClassDetails twoClass = two.getClasses().iterator().next();
+                ClassDetails oneClass = itr.next();
+                ClassDetails twoClass = itr2.next();
 
                 //Strings
                 if (oneClass.getDays() != null)
