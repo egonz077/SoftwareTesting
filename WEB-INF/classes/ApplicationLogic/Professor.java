@@ -16,4 +16,9 @@ public class Professor extends FacultyStaff {
     {
         return null;
     }
+
+    //New constructor
+    public Professor() {
+        super();
+    }
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import Storage.DatabaseStub;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,16 +18,16 @@ public class FacadeTest {
 
     @Before
     public void setUp() throws Exception {
-
         fc = new FrontendFacade();
     }
 
     @After
     public void tearDown() throws Exception {
-
         fc = null;
     }
 
+    //Testing method login
+    //Sunny-Day
     @Test
     public void testLogin1() {
         //User name and password exists in database
@@ -48,6 +49,7 @@ public class FacadeTest {
 
     }
 
+    //Rainy-Day
     @Test
     public void testLogin4() {
         //User name doesn't exist, but password does
@@ -69,29 +71,10 @@ public class FacadeTest {
     }
 
 
+    //Testing method createSchedule
+    //Sunny-Day
     @Test
-    public void testCreateScheduleScheduleOptions1() {
-
-
-        Collection<String> courses = new ArrayList<String>();
-        courses.add("HIS1010");
-        courses.add("STA3510");
-        courses.add("COP2210");
-        courses.add("COP3145");
-        courses.add("PHY2048");
-        courses.add("COP4338");
-
-
-        //System.out.println(fc.createSchedule("Spring 2007", courses, "All", "1111111"));
-
-        assertEquals("Collection:", true,
-                compareSchedule(new Schedule(courses), new Schedule(courses)));
-    }
-
-    @Test
-    public void testCreateScheduleScheduleOptions2() {
-
-
+    public void testCreateSchedule1() {
         Collection<String> courses = new ArrayList<String>();
         courses.add("HIS1010");
 
@@ -107,27 +90,347 @@ public class FacadeTest {
     }
 
     @Test
-    public void testCreateScheduleScheduleOptions3() {
-
-
-        Collection<String> courses = new ArrayList<String>();
-
-        courses.add("COP2210");
-
-
-        // System.out.println(fc.createSchedule("Spring 2007", courses, "All", "1111111"));
-
-        assertEquals("Collection:", true,
-                compareSchedule(new Schedule(courses), new Schedule(courses)));
+    public void testCreateSchedule2() {
+        fail("Need to Implement");
     }
-
 
     @Test
-    public void testBuildSchedulesPage() {
-        fail("Not yet implemented");
+    public void testCreateSchedule3() {
+        fail("Need to Implement");
     }
 
-    private boolean compareSchedule(Schedule one, Schedule two) {
+    //Rainy-Day
+    @Test
+    public void testCreateSchedule4() {
+        fail("Need to Implement");
+    }
+
+    @Test
+    public void testCreateSchedule5() {
+        fail("Need to Implement");
+    }
+
+    @Test
+    public void testCreateSchedule6() {
+        fail("Need to Implement");
+    }
+
+
+    //Testing method buildSchedules
+    //Sunny-Day
+    @Test
+    public void testBuildSchedulesPage1() {
+        //Test schedule object
+        DatabaseStub course = new DatabaseStub();
+        course.setCatlgNbr("");
+        course.setDescription("");
+        course.setSubject("");
+        course.setUnits(0);
+
+        Professor teacher = new Professor();
+        teacher.setFirstName("");
+        teacher.setLastName("");
+        teacher.setSSN("");
+
+        Time time = new Time();
+        time.setDays("");
+        time.setFrHr(0);
+        time.setFrMn(0);
+        time.setToHr(0);
+        time.setToMn(0);
+
+        ClassDetails classDetails = new ClassDetails();
+        classDetails.setDatabaseStub(course);
+        classDetails.setProfessor(teacher);
+        classDetails.setTime(time);
+        classDetails.setCampus("");
+        classDetails.setTerm("");
+        classDetails.setBldg_room("");
+        classDetails.setClassNbr("");
+
+        Collection<ClassDetails> collectionOfClassDetails = null;
+        collectionOfClassDetails.add(classDetails);
+
+        Schedule schedule = new Schedule();
+        schedule.setClasses(collectionOfClassDetails);
+        schedule.setPantherID("");
+        schedule.setId("");
+
+        Collection<Schedule> collectionOfSchedules = null;
+        collectionOfSchedules.add(schedule);
+
+        int pg = 1;
+
+        fc.buildSchedulesPage(collectionOfSchedules, pg);
+
+        //Client call schedule object - incomplete
+        Schedule schedule1 = new Schedule();
+
+        Collection<Schedule> Client = null;
+        Client.add(schedule1);
+
+        assertEquals("HTML String:", true,
+                fc.buildSchedulesPage(collectionOfSchedules, pg).compareTo());
+    }
+
+    @Test
+    public void testBuildSchedulesPage2() {
+        //Test schedule object
+        DatabaseStub course = new DatabaseStub();
+        course.setCatlgNbr("");
+        course.setDescription("");
+        course.setSubject("");
+        course.setUnits(0);
+
+        Professor teacher = new Professor();
+        teacher.setFirstName("");
+        teacher.setLastName("");
+        teacher.setSSN("");
+
+        Time time = new Time();
+        time.setDays("");
+        time.setFrHr(0);
+        time.setFrMn(0);
+        time.setToHr(0);
+        time.setToMn(0);
+
+        ClassDetails classDetails = new ClassDetails();
+        classDetails.setDatabaseStub(course);
+        classDetails.setProfessor(teacher);
+        classDetails.setTime(time);
+        classDetails.setCampus("");
+        classDetails.setTerm("");
+        classDetails.setBldg_room("");
+        classDetails.setClassNbr("");
+
+        Collection<ClassDetails> collectionOfClassDetails = null;
+        collectionOfClassDetails.add(classDetails);
+
+        Schedule schedule = new Schedule();
+        schedule.setClasses(collectionOfClassDetails);
+        schedule.setPantherID("");
+        schedule.setId("");
+
+        Collection<Schedule> Test = null;
+        Test.add(schedule);
+
+        //Client call schedule object - incomplete
+        Schedule schedule1 = new Schedule();
+
+        Collection<Schedule> Client = null;
+        Client.add(schedule1);
+
+        assertEquals("Collection:", true,
+                compareCollectionofSchedule(Test, Client));
+    }
+
+    @Test
+    public void testBuildSchedulesPage3() {
+        //Test schedule object
+        DatabaseStub course = new DatabaseStub();
+        course.setCatlgNbr("");
+        course.setDescription("");
+        course.setSubject("");
+        course.setUnits(0);
+
+        Professor teacher = new Professor();
+        teacher.setFirstName("");
+        teacher.setLastName("");
+        teacher.setSSN("");
+
+        Time time = new Time();
+        time.setDays("");
+        time.setFrHr(0);
+        time.setFrMn(0);
+        time.setToHr(0);
+        time.setToMn(0);
+
+        ClassDetails classDetails = new ClassDetails();
+        classDetails.setDatabaseStub(course);
+        classDetails.setProfessor(teacher);
+        classDetails.setTime(time);
+        classDetails.setCampus("");
+        classDetails.setTerm("");
+        classDetails.setBldg_room("");
+        classDetails.setClassNbr("");
+
+        Collection<ClassDetails> collectionOfClassDetails = null;
+        collectionOfClassDetails.add(classDetails);
+
+        Schedule schedule = new Schedule();
+        schedule.setClasses(collectionOfClassDetails);
+        schedule.setPantherID("");
+        schedule.setId("");
+
+        Collection<Schedule> Test = null;
+        Test.add(schedule);
+
+        //Client call schedule object - incomplete
+        Schedule schedule1 = new Schedule();
+
+        Collection<Schedule> Client = null;
+        Client.add(schedule1);
+
+        assertEquals("Collection:", true,
+                compareCollectionofSchedule(Test, Client));
+    }
+
+    //Rainy-Day
+    @Test
+    public void testBuildSchedulesPage4() {
+        //Test schedule object
+        DatabaseStub course = new DatabaseStub();
+        course.setCatlgNbr("");
+        course.setDescription("");
+        course.setSubject("");
+        course.setUnits(0);
+
+        Professor teacher = new Professor();
+        teacher.setFirstName("");
+        teacher.setLastName("");
+        teacher.setSSN("");
+
+        Time time = new Time();
+        time.setDays("");
+        time.setFrHr(0);
+        time.setFrMn(0);
+        time.setToHr(0);
+        time.setToMn(0);
+
+        ClassDetails classDetails = new ClassDetails();
+        classDetails.setDatabaseStub(course);
+        classDetails.setProfessor(teacher);
+        classDetails.setTime(time);
+        classDetails.setCampus("");
+        classDetails.setTerm("");
+        classDetails.setBldg_room("");
+        classDetails.setClassNbr("");
+
+        Collection<ClassDetails> collectionOfClassDetails = null;
+        collectionOfClassDetails.add(classDetails);
+
+        Schedule schedule = new Schedule();
+        schedule.setClasses(collectionOfClassDetails);
+        schedule.setPantherID("");
+        schedule.setId("");
+
+        Collection<Schedule> Test = null;
+        Test.add(schedule);
+
+        //Client call schedule object - incomplete
+        Schedule schedule1 = new Schedule();
+
+        Collection<Schedule> Client = null;
+        Client.add(schedule1);
+
+        assertEquals("Collection:", true,
+                compareCollectionofSchedule(Test, Client));
+    }
+
+    @Test
+    public void testBuildSchedulesPage5() {
+        //Test schedule object
+        DatabaseStub course = new DatabaseStub();
+        course.setCatlgNbr("");
+        course.setDescription("");
+        course.setSubject("");
+        course.setUnits(0);
+
+        Professor teacher = new Professor();
+        teacher.setFirstName("");
+        teacher.setLastName("");
+        teacher.setSSN("");
+
+        Time time = new Time();
+        time.setDays("");
+        time.setFrHr(0);
+        time.setFrMn(0);
+        time.setToHr(0);
+        time.setToMn(0);
+
+        ClassDetails classDetails = new ClassDetails();
+        classDetails.setDatabaseStub(course);
+        classDetails.setProfessor(teacher);
+        classDetails.setTime(time);
+        classDetails.setCampus("");
+        classDetails.setTerm("");
+        classDetails.setBldg_room("");
+        classDetails.setClassNbr("");
+
+        Collection<ClassDetails> collectionOfClassDetails = null;
+        collectionOfClassDetails.add(classDetails);
+
+        Schedule schedule = new Schedule();
+        schedule.setClasses(collectionOfClassDetails);
+        schedule.setPantherID("");
+        schedule.setId("");
+
+        Collection<Schedule> Test = null;
+        Test.add(schedule);
+
+        //Client call schedule object - incomplete
+        Schedule schedule1 = new Schedule();
+
+        Collection<Schedule> Client = null;
+        Client.add(schedule1);
+
+        assertEquals("Collection:", true,
+                compareCollectionofSchedule(Test, Client));
+    }
+
+    @Test
+    public void testBuildSchedulesPage6() {
+        //Test schedule object
+        DatabaseStub course = new DatabaseStub();
+        course.setCatlgNbr("");
+        course.setDescription("");
+        course.setSubject("");
+        course.setUnits(0);
+
+        Professor teacher = new Professor();
+        teacher.setFirstName("");
+        teacher.setLastName("");
+        teacher.setSSN("");
+
+        Time time = new Time();
+        time.setDays("");
+        time.setFrHr(0);
+        time.setFrMn(0);
+        time.setToHr(0);
+        time.setToMn(0);
+
+        ClassDetails classDetails = new ClassDetails();
+        classDetails.setDatabaseStub(course);
+        classDetails.setProfessor(teacher);
+        classDetails.setTime(time);
+        classDetails.setCampus("");
+        classDetails.setTerm("");
+        classDetails.setBldg_room("");
+        classDetails.setClassNbr("");
+
+        Collection<ClassDetails> collectionOfClassDetails = null;
+        collectionOfClassDetails.add(classDetails);
+
+        Schedule schedule = new Schedule();
+        schedule.setClasses(collectionOfClassDetails);
+        schedule.setPantherID("");
+        schedule.setId("");
+
+        Collection<Schedule> Test = null;
+        Test.add(schedule);
+
+        //Client call schedule object - incomplete
+        Schedule schedule1 = new Schedule();
+
+        Collection<Schedule> Client = null;
+        Client.add(schedule1);
+
+        assertEquals("Collection:", true,
+                compareCollectionofSchedule(Test, Client));
+    }
+
+    //Comaring
+    private boolean compareCollectionofSchedule(Collection<Schedule> one, Collection<Schedule> Schedule two) {
         if (one.getId() != null && one.getId().compareTo(two.getId()) != 0)
             return false;
         if (one.getPantherID() != null && one.getPantherID().compareTo(two.getPantherID()) != 0)

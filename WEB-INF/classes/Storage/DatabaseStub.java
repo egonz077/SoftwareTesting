@@ -62,4 +62,20 @@ public class DatabaseStub {
             }
         return result;
     }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCatlgNbr(String catlgNbr) {
+        this.catlgNbr = catlgNbr;
+    }
+
+    public void setUnits(int units) {
+        this.units = units;
+    }
 }

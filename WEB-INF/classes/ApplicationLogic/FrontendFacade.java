@@ -11,10 +11,12 @@ public class FrontendFacade {
         return new Authentication().isLoginValid(user, pass);
     }
 
-    /*Takes care of the creation of a schedule in view_schedules.jsp*/
+    /*Takes care of the creation of a schedule in view_schedules.jsp
+        This metoid is never called by the client
     public Collection<Schedule> createSchedule(ScheduleOptions schOpt) {
         return new ScheduleMakerController().createSchedule(schOpt);
     }
+    */
 
     /*Takes care of the creation of a schedule in view_schedules2.jsp*/
     public Collection<Schedule> createSchedule(String term, Collection<String> courses, String cmp, String SPDays) {

@@ -17,6 +17,8 @@ public class ClassDetails {
     private String campus;
     private String term;
     private Time time;
+    private DatabaseStub databaseStub;
+    private Professor professor;
 
     //constructor
 
@@ -168,9 +170,7 @@ public class ClassDetails {
     }
 
 
-//New Getters
-
-
+    //New Getters
     public DatabaseStub getCourse() {
         return db;
     }
@@ -189,5 +189,22 @@ public class ClassDetails {
 
     public String getTerm() {
         return term;
+    }
+
+    //New Setters
+    public void setDatabaseStub(DatabaseStub databaseStub) {
+        this.databaseStub = databaseStub;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+
+    public void setClassNbr(String classNbr) {
+        this.classNbr = classNbr;
+    }
+
+    public void setBldg_room(String bldg_room) {
+        this.bldg_room = bldg_room;
     }
 }
