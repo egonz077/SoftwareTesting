@@ -101,4 +101,9 @@ public class DatabaseStub {
     public void setUnits(int units) {
         this.units = units;
     }
+
+    @Override
+    public String toString() {
+        return subject + catlgNbr;
+    }
 }
