@@ -19,8 +19,8 @@ public class FrontendFacade {
     */
 
     /*Takes care of the creation of a schedule in view_schedules2.jsp*/
-    public Collection<Schedule> createSchedule(String term, Collection<String> courses, String cmp, String SPDays) {
-        return new ScheduleMakerController().createSchedule(term, courses, cmp, SPDays);
+    public Collection<Schedule> createSchedule(String term, Collection<String> courses, String campus, String SPDays) {
+        return new ScheduleMakerController().createSchedule(term, courses, campus, SPDays);
     }
 
     /*takes care of formatting the page and building the schedule in view_schedules.jsp and view_schedules.jsp2*/

@@ -14,16 +14,16 @@ import org.junit.Test;
 public class FacadeTest {
 
 
-    public FrontendFacade fc;
+    public FrontendFacade client;
 
     @Before
     public void setUp() throws Exception {
-        fc = new FrontendFacade();
+        client = new FrontendFacade();
     }
 
     @After
     public void tearDown() throws Exception {
-        fc = null;
+        client = null;
     }
 
     //Testing method login
@@ -31,21 +31,21 @@ public class FacadeTest {
     @Test
     public void testLogin1() {
         //User name and password exists in database
-        assertEquals("Logged In?", true, fc.login("1412412", "abc123"));
+        assertEquals("Logged In?", true, client.login("1412412", "abc123"));
 
     }
 
     @Test
     public void testLogin2() {
         //User name and password exists in database
-        assertEquals("Logged In?", true, fc.login("2354235", "abc234"));
+        assertEquals("Logged In?", true, client.login("2354235", "abc234"));
 
     }
 
     @Test
     public void testLogin3() {
         //User name and password exists in database
-        assertEquals("Logged In?", true, fc.login("2234523", "abc345"));
+        assertEquals("Logged In?", true, client.login("2234523", "abc345"));
 
     }
 
@@ -53,21 +53,21 @@ public class FacadeTest {
     @Test
     public void testLogin4() {
         //User name doesn't exist, but password does
-        assertEquals("Logged In?", false, fc.login("445984253", "abc123"));
+        assertEquals("Logged In?", false, client.login("445984253", "abc123"));
 
     }
 
     @Test
     public void testLogin5() {
         //User name exists, but password does not
-        assertEquals("Logged In?", false, fc.login("2354235", "!@#$%"));
+        assertEquals("Logged In?", false, client.login("2354235", "!@#$%"));
 
     }
 
     @Test
     public void testLogin6() {
         //Neither User name or password exists in the database
-        assertEquals("Logged In?", false, fc.login("tumadre3", "1256738fjden"));
+        assertEquals("Logged In?", false, client.login("tumadre3", "1256738fjden"));
     }
 
 
@@ -75,18 +75,65 @@ public class FacadeTest {
     //Sunny-Day
     @Test
     public void testCreateSchedule1() {
+        //Test schedule object
+        DatabaseStub course = new DatabaseStub("Subject", "catlgNbr");
+        course.setCatlgNbr("");
+        course.setDescription("");
+        course.setSubject("");
+        course.setUnits(0);
+
+        Professor teacher = new Professor();
+        teacher.setFirstName("");
+        teacher.setLastName("");
+        teacher.setSSN("");
+
+        Time time = new Time();
+        time.setDays("");
+        time.setFrHr(0);
+        time.setFrMn(0);
+        time.setToHr(0);
+        time.setToMn(0);
+
+        ClassDetails classDetails = new ClassDetails();
+        classDetails.setDatabaseStub(course);
+        classDetails.setProfessor(teacher);
+        classDetails.setTime(time);
+        classDetails.setCampus("");
+        classDetails.setTerm("");
+        classDetails.setBldg_room("");
+        classDetails.setClassNbr("");
+
+        Collection<ClassDetails> collectionOfClassDetails = new ArrayList<ClassDetails>();
+        collectionOfClassDetails.add(classDetails);
+
+        Schedule schedule = new Schedule();
+        schedule.setClasses(collectionOfClassDetails);
+        schedule.setPantherID("");
+        schedule.setId("");
+
+        Collection<Schedule> test = new ArrayList<Schedule>();
+        test.add(schedule);
+
+        //Client
+        //Term (Spring 2007)
+        String term = "";
+
+        //Collection of courses
         Collection<String> courses = new ArrayList<String>();
         courses.add("HIS1010");
-
         courses.add("COP2210");
         courses.add("COP3145");
-
         courses.add("COP4338");
 
-        // System.out.println(fc.createSchedule("Spring 2007", courses, "All", "1111111"));
+        //Campus (University, Biscane)
+        String campus = "";
 
+        //SPDays (10100000)
+        String SPdays = "";
+
+        // System.out.println(Client.createSchedule("Spring 2007", courses, "All", "1111111"));
         assertEquals("Collection:", true,
-                compareSchedule(new Schedule(courses), new Schedule(courses)));
+                compareCollectionofSchedule(client.createSchedule(term, courses, campus, SPdays), test));
     }
 
     @Test
@@ -120,386 +167,278 @@ public class FacadeTest {
     //Sunny-Day
     @Test
     public void testBuildSchedulesPage1() {
-        //Test schedule object
-        DatabaseStub course = new DatabaseStub();
-        course.setCatlgNbr("");
-        course.setDescription("");
-        course.setSubject("");
-        course.setUnits(0);
+        //Test String
+        String Test =
+                "<form id=\"form1\" method=\"post\" action=\"\"><h2>Schedule1</h2><table><tr><td>Hours</td><td>Monday</td><td>Tuesday</td><td>Wednesday</td><td>Thursday</td><td>Friday</td><td>Saturday</td><td>Sunday</td></tr><tr><td>0:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>1:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>2:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>3:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>4:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>5:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>6:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>7:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>8:00</td><td>Storage.DatabaseStub@573fd745\n" +
+                        "1010\n" +
+                        "8:0-9:15\n" +
+                        "University\n" +
+                        "</td><td>&nbsp;</td><td>Storage.DatabaseStub@573fd745\n" +
+                        "1010\n" +
+                        "8:0-9:15\n" +
+                        "University\n" +
+                        "</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>9:00</td><td>Storage.DatabaseStub@573fd745\n" +
+                        "1010\n" +
+                        "8:0-9:15\n" +
+                        "University\n" +
+                        "</td><td>&nbsp;</td><td>Storage.DatabaseStub@573fd745\n" +
+                        "1010\n" +
+                        "8:0-9:15\n" +
+                        "University\n" +
+                        "</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>10:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>11:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>12:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>13:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>14:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>15:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>16:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>17:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>18:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>19:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>20:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>21:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>22:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>23:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table>";
 
-        Professor teacher = new Professor();
-        teacher.setFirstName("");
-        teacher.setLastName("");
-        teacher.setSSN("");
+        //Client Collection<Schedule> Object
+        Collection collectionOfSchedules;
+        FrontendFacade fc = new FrontendFacade();
+        Collection<String> courses = new ArrayList<String>();
+        //Form Courses
+        courses.add("HIS1010");
 
-        Time time = new Time();
-        time.setDays("");
-        time.setFrHr(0);
-        time.setFrMn(0);
-        time.setToHr(0);
-        time.setToMn(0);
+        //Select days
+        String SPDays = "";
+        SPDays += "10100000";
 
-        ClassDetails classDetails = new ClassDetails();
-        classDetails.setDatabaseStub(course);
-        classDetails.setProfessor(teacher);
-        classDetails.setTime(time);
-        classDetails.setCampus("");
-        classDetails.setTerm("");
-        classDetails.setBldg_room("");
-        classDetails.setClassNbr("");
+        //Make collectionOfSchedules
+        collectionOfSchedules = fc.createSchedule("Spring 2007", courses, "University", SPDays);
 
-        Collection<ClassDetails> collectionOfClassDetails = null;
-        collectionOfClassDetails.add(classDetails);
+        int pg = 0;
 
-        Schedule schedule = new Schedule();
-        schedule.setClasses(collectionOfClassDetails);
-        schedule.setPantherID("");
-        schedule.setId("");
-
-        Collection<Schedule> collectionOfSchedules = null;
-        collectionOfSchedules.add(schedule);
-
-        int pg = 1;
-
-        fc.buildSchedulesPage(collectionOfSchedules, pg);
-
-        //Client call schedule object - incomplete
-        Schedule schedule1 = new Schedule();
-
-        Collection<Schedule> Client = null;
-        Client.add(schedule1);
-
+        //Sample HTML String
+        System.out.println(client.buildSchedulesPage(collectionOfSchedules, pg));
         assertEquals("HTML String:", true,
-                fc.buildSchedulesPage(collectionOfSchedules, pg).compareTo());
+                client.buildSchedulesPage(collectionOfSchedules, pg).compareTo(Test) == 0);
     }
 
     @Test
     public void testBuildSchedulesPage2() {
-        //Test schedule object
-        DatabaseStub course = new DatabaseStub();
-        course.setCatlgNbr("");
-        course.setDescription("");
-        course.setSubject("");
-        course.setUnits(0);
+        //Test String
+        String Test = "";
 
-        Professor teacher = new Professor();
-        teacher.setFirstName("");
-        teacher.setLastName("");
-        teacher.setSSN("");
+        //Client Collection<Schedule> Object
+        Collection collectionOfSchedules;
+        FrontendFacade fc = new FrontendFacade();
+        Collection<String> courses = new ArrayList<String>();
+        //Form Courses
+        courses.add("HIS1010");
 
-        Time time = new Time();
-        time.setDays("");
-        time.setFrHr(0);
-        time.setFrMn(0);
-        time.setToHr(0);
-        time.setToMn(0);
+        //Select days
+        String SPDays = "";
+        SPDays += "10100000";
 
-        ClassDetails classDetails = new ClassDetails();
-        classDetails.setDatabaseStub(course);
-        classDetails.setProfessor(teacher);
-        classDetails.setTime(time);
-        classDetails.setCampus("");
-        classDetails.setTerm("");
-        classDetails.setBldg_room("");
-        classDetails.setClassNbr("");
+        //Make collectionOfSchedules
+        collectionOfSchedules = fc.createSchedule("Spring 2007", courses, "University", SPDays);
 
-        Collection<ClassDetails> collectionOfClassDetails = null;
-        collectionOfClassDetails.add(classDetails);
+        //pg
+        int pg = 0;
 
-        Schedule schedule = new Schedule();
-        schedule.setClasses(collectionOfClassDetails);
-        schedule.setPantherID("");
-        schedule.setId("");
-
-        Collection<Schedule> Test = null;
-        Test.add(schedule);
-
-        //Client call schedule object - incomplete
-        Schedule schedule1 = new Schedule();
-
-        Collection<Schedule> Client = null;
-        Client.add(schedule1);
-
-        assertEquals("Collection:", true,
-                compareCollectionofSchedule(Test, Client));
+        assertEquals("HTML String:", true,
+                client.buildSchedulesPage(collectionOfSchedules, pg).compareTo(Test) == 0);
     }
 
     @Test
     public void testBuildSchedulesPage3() {
-        //Test schedule object
-        DatabaseStub course = new DatabaseStub();
-        course.setCatlgNbr("");
-        course.setDescription("");
-        course.setSubject("");
-        course.setUnits(0);
+        //Test String
+        String Test = "";
 
-        Professor teacher = new Professor();
-        teacher.setFirstName("");
-        teacher.setLastName("");
-        teacher.setSSN("");
+        //Client Collection<Schedule> Object
+        Collection collectionOfSchedules;
+        FrontendFacade fc = new FrontendFacade();
+        Collection<String> courses = new ArrayList<String>();
+        //Form Courses
+        courses.add("HIS1010");
 
-        Time time = new Time();
-        time.setDays("");
-        time.setFrHr(0);
-        time.setFrMn(0);
-        time.setToHr(0);
-        time.setToMn(0);
+        //Select days
+        String SPDays = "";
+        SPDays += "10100000";
 
-        ClassDetails classDetails = new ClassDetails();
-        classDetails.setDatabaseStub(course);
-        classDetails.setProfessor(teacher);
-        classDetails.setTime(time);
-        classDetails.setCampus("");
-        classDetails.setTerm("");
-        classDetails.setBldg_room("");
-        classDetails.setClassNbr("");
+        //Make collectionOfSchedules
+        collectionOfSchedules = fc.createSchedule("Spring 2007", courses, "University", SPDays);
 
-        Collection<ClassDetails> collectionOfClassDetails = null;
-        collectionOfClassDetails.add(classDetails);
+        int pg = 0;
 
-        Schedule schedule = new Schedule();
-        schedule.setClasses(collectionOfClassDetails);
-        schedule.setPantherID("");
-        schedule.setId("");
 
-        Collection<Schedule> Test = null;
-        Test.add(schedule);
-
-        //Client call schedule object - incomplete
-        Schedule schedule1 = new Schedule();
-
-        Collection<Schedule> Client = null;
-        Client.add(schedule1);
-
-        assertEquals("Collection:", true,
-                compareCollectionofSchedule(Test, Client));
+        assertEquals("HTML String:", true,
+                client.buildSchedulesPage(collectionOfSchedules, pg).compareTo(Test) == 0);
     }
 
     //Rainy-Day
     @Test
     public void testBuildSchedulesPage4() {
-        //Test schedule object
-        DatabaseStub course = new DatabaseStub();
-        course.setCatlgNbr("");
-        course.setDescription("");
-        course.setSubject("");
-        course.setUnits(0);
+        //Test String
+        String Test = "";
 
-        Professor teacher = new Professor();
-        teacher.setFirstName("");
-        teacher.setLastName("");
-        teacher.setSSN("");
+        //Client Collection<Schedule> Object
+        Collection collectionOfSchedules;
+        FrontendFacade fc = new FrontendFacade();
+        Collection<String> courses = new ArrayList<String>();
+        //Form Courses
+        courses.add("HIS1010");
 
-        Time time = new Time();
-        time.setDays("");
-        time.setFrHr(0);
-        time.setFrMn(0);
-        time.setToHr(0);
-        time.setToMn(0);
+        //Select days
+        String SPDays = "";
+        SPDays += "10100000";
 
-        ClassDetails classDetails = new ClassDetails();
-        classDetails.setDatabaseStub(course);
-        classDetails.setProfessor(teacher);
-        classDetails.setTime(time);
-        classDetails.setCampus("");
-        classDetails.setTerm("");
-        classDetails.setBldg_room("");
-        classDetails.setClassNbr("");
+        //Make collectionOfSchedules
+        collectionOfSchedules = fc.createSchedule("Spring 2007", courses, "University", SPDays);
 
-        Collection<ClassDetails> collectionOfClassDetails = null;
-        collectionOfClassDetails.add(classDetails);
+        int pg = 0;
 
-        Schedule schedule = new Schedule();
-        schedule.setClasses(collectionOfClassDetails);
-        schedule.setPantherID("");
-        schedule.setId("");
 
-        Collection<Schedule> Test = null;
-        Test.add(schedule);
-
-        //Client call schedule object - incomplete
-        Schedule schedule1 = new Schedule();
-
-        Collection<Schedule> Client = null;
-        Client.add(schedule1);
-
-        assertEquals("Collection:", true,
-                compareCollectionofSchedule(Test, Client));
+        assertEquals("HTML String:", true,
+                client.buildSchedulesPage(collectionOfSchedules, pg).compareTo(Test) == 0);
     }
 
     @Test
     public void testBuildSchedulesPage5() {
-        //Test schedule object
-        DatabaseStub course = new DatabaseStub();
-        course.setCatlgNbr("");
-        course.setDescription("");
-        course.setSubject("");
-        course.setUnits(0);
+        //Test String
+        String Test = "";
 
-        Professor teacher = new Professor();
-        teacher.setFirstName("");
-        teacher.setLastName("");
-        teacher.setSSN("");
+        //Client Collection<Schedule> Object
+        Collection collectionOfSchedules;
+        FrontendFacade fc = new FrontendFacade();
+        Collection<String> courses = new ArrayList<String>();
+        //Form Courses
+        courses.add("HIS1010");
 
-        Time time = new Time();
-        time.setDays("");
-        time.setFrHr(0);
-        time.setFrMn(0);
-        time.setToHr(0);
-        time.setToMn(0);
+        //Select days
+        String SPDays = "";
+        SPDays += "10100000";
 
-        ClassDetails classDetails = new ClassDetails();
-        classDetails.setDatabaseStub(course);
-        classDetails.setProfessor(teacher);
-        classDetails.setTime(time);
-        classDetails.setCampus("");
-        classDetails.setTerm("");
-        classDetails.setBldg_room("");
-        classDetails.setClassNbr("");
+        //Make collectionOfSchedules
+        collectionOfSchedules = fc.createSchedule("Spring 2007", courses, "University", SPDays);
 
-        Collection<ClassDetails> collectionOfClassDetails = null;
-        collectionOfClassDetails.add(classDetails);
+        int pg = 0;
 
-        Schedule schedule = new Schedule();
-        schedule.setClasses(collectionOfClassDetails);
-        schedule.setPantherID("");
-        schedule.setId("");
 
-        Collection<Schedule> Test = null;
-        Test.add(schedule);
-
-        //Client call schedule object - incomplete
-        Schedule schedule1 = new Schedule();
-
-        Collection<Schedule> Client = null;
-        Client.add(schedule1);
-
-        assertEquals("Collection:", true,
-                compareCollectionofSchedule(Test, Client));
+        assertEquals("HTML String:", true,
+                client.buildSchedulesPage(collectionOfSchedules, pg).compareTo(Test) == 0);
     }
 
     @Test
     public void testBuildSchedulesPage6() {
-        //Test schedule object
-        DatabaseStub course = new DatabaseStub();
-        course.setCatlgNbr("");
-        course.setDescription("");
-        course.setSubject("");
-        course.setUnits(0);
+        //Test String
+        String Test = "";
 
-        Professor teacher = new Professor();
-        teacher.setFirstName("");
-        teacher.setLastName("");
-        teacher.setSSN("");
+        //Client Collection<Schedule> Object
+        Collection collectionOfSchedules;
+        FrontendFacade fc = new FrontendFacade();
+        Collection<String> courses = new ArrayList<String>();
+        //Form Courses
+        courses.add("HIS1010");
 
-        Time time = new Time();
-        time.setDays("");
-        time.setFrHr(0);
-        time.setFrMn(0);
-        time.setToHr(0);
-        time.setToMn(0);
+        //Select days
+        String SPDays = "";
+        SPDays += "10100000";
 
-        ClassDetails classDetails = new ClassDetails();
-        classDetails.setDatabaseStub(course);
-        classDetails.setProfessor(teacher);
-        classDetails.setTime(time);
-        classDetails.setCampus("");
-        classDetails.setTerm("");
-        classDetails.setBldg_room("");
-        classDetails.setClassNbr("");
+        //Make collectionOfSchedules
+        collectionOfSchedules = fc.createSchedule("Spring 2007", courses, "University", SPDays);
 
-        Collection<ClassDetails> collectionOfClassDetails = null;
-        collectionOfClassDetails.add(classDetails);
+        int pg = 0;
 
-        Schedule schedule = new Schedule();
-        schedule.setClasses(collectionOfClassDetails);
-        schedule.setPantherID("");
-        schedule.setId("");
 
-        Collection<Schedule> Test = null;
-        Test.add(schedule);
-
-        //Client call schedule object - incomplete
-        Schedule schedule1 = new Schedule();
-
-        Collection<Schedule> Client = null;
-        Client.add(schedule1);
-
-        assertEquals("Collection:", true,
-                compareCollectionofSchedule(Test, Client));
+        assertEquals("HTML String:", true,
+                client.buildSchedulesPage(collectionOfSchedules, pg).compareTo(Test) == 0);
     }
 
-    //Comaring
-    private boolean compareCollectionofSchedule(Collection<Schedule> one, Collection<Schedule> Schedule two) {
-        if (one.getId() != null && one.getId().compareTo(two.getId()) != 0)
-            return false;
-        if (one.getPantherID() != null && one.getPantherID().compareTo(two.getPantherID()) != 0)
-            return false;
+    //Comaring Collections of schedules
+    private boolean compareCollectionofSchedule(Collection<Schedule> one, Collection<Schedule> two) {
+        try {
+            if (one != null) {
+                if (two == null)
+                    return false;
 
-        if (one.getClasses() == null) {
-            if (two.getClasses() != null)
-                return false;
+                Iterator<Schedule> ScheduleIterator1 = one.iterator();
+                Iterator<Schedule> ScheduleIterator2 = two.iterator();
 
-            //Comparing class details collection
-            //Compare all possible Classes in one.schedule with another
-        } else {
-            if (two.getClasses() == null)
-                return false;
-            Iterator<ClassDetails> itr = one.getClasses().iterator();
-            Iterator<ClassDetails> itr2 = one.getClasses().iterator();
-            while (itr.hasNext()) {
-
-                ClassDetails oneClass = itr.next();
-                ClassDetails twoClass = itr2.next();
-
-                //Strings
-                if (oneClass.getDays() != null)
-                    if (twoClass.getDays() == null)
+                //Comparing all Schedule Objects
+                if (ScheduleIterator1.hasNext() != ScheduleIterator2.hasNext())
+                    return false;
+                while (ScheduleIterator1.hasNext()) {
+                    if (!ScheduleIterator2.hasNext())
                         return false;
-                if (oneClass.getDays().compareTo(twoClass.getDays()) != 0)
-                    return false;
-                else if (twoClass.getDays() != null)
-                    return false;
 
-                if (oneClass.getBldg_room().compareTo(twoClass.getBldg_room()) != 0)
-                    return false;
-                if (oneClass.getCampus().compareTo(twoClass.getCampus()) != 0)
-                    return false;
-                if (oneClass.getClassNbr().compareTo(twoClass.getClassNbr()) != 0)
-                    return false;
+                    Schedule oneSchedule = ScheduleIterator1.next();
+                    Schedule twoSchedule = ScheduleIterator2.next();
 
-                //Time - 1 string, 4 ints
-                if (oneClass.getTime().days.compareTo(twoClass.getTime().days) != 0)
-                    return false;
-                if (oneClass.getTime().frHr != twoClass.getTime().frHr)
-                    return false;
-                if (oneClass.getTime().frMn != twoClass.getTime().frMn)
-                    return false;
-                if (oneClass.getTime().toHr != twoClass.getTime().toHr)
-                    return false;
-                if (oneClass.getTime().toMn != twoClass.getTime().toMn)
-                    return false;
+                    //Compare ID
+                    if (oneSchedule.getId() != null && twoSchedule.getId() != null
+                            && oneSchedule.getId().compareTo(twoSchedule.getId()) != 0)
+                        return false;
+                    else if (!oneSchedule.getId().equals(twoSchedule.getId()))
+                        return false;
 
-                //Course - 3 strings, 1 int
-                if (oneClass.getCourse().catlgNbr.compareTo(twoClass.getCourse().catlgNbr) != 0)
-                    return false;
-                if (oneClass.getCourse().subject.compareTo(twoClass.getCourse().subject) != 0)
-                    return false;
-                if (oneClass.getCourse().description.compareTo(twoClass.getCourse().description) != 0)
-                    return false;
-                if (oneClass.getCourse().units != twoClass.getCourse().units)
-                    return false;
+                    //Compare PantherID
+                    if (oneSchedule.getId() != null && twoSchedule.getId() != null
+                            && oneSchedule.getPantherID().compareTo(twoSchedule.getPantherID()) != 0)
+                        return false;
+                    else if (!oneSchedule.getPantherID().equals(twoSchedule.getPantherID()))
+                        return false;
 
-                //Professor - Need super of FacultyStaff
-                if (oneClass.getInstructor().getFirstName().compareTo(twoClass.getInstructor().getFirstName()) != 0)
-                    return false;
-                if (oneClass.getInstructor().getSSN().compareTo(twoClass.getInstructor().getSSN()) != 0)
-                    return false;
-                if (oneClass.getInstructor().getLastName().compareTo(twoClass.getInstructor().getLastName()) != 0)
-                    return false;
+                    Iterator<ClassDetails> itr = oneSchedule.getClasses().iterator();
+                    Iterator<ClassDetails> itr2 = oneSchedule.getClasses().iterator();
+
+                    //Comparing ClassDetails Objects
+                    if (itr.hasNext() != itr2.hasNext())
+                        return false;
+
+                    while (itr.hasNext()) {
+                        if (!itr2.hasNext())
+                            return false;
+
+                        ClassDetails oneClass = itr.next();
+                        ClassDetails twoClass = itr2.next();
+
+                        //Strings
+                        if (oneClass.getDays() != null)
+                            if (twoClass.getDays() == null)
+                                return false;
+                        if (oneClass.getDays().compareTo(twoClass.getDays()) != 0)
+                            return false;
+                        else if (twoClass.getDays() != null)
+                            return false;
+
+                        if (oneClass.getBldg_room().compareTo(twoClass.getBldg_room()) != 0)
+                            return false;
+                        if (oneClass.getCampus().compareTo(twoClass.getCampus()) != 0)
+                            return false;
+                        if (oneClass.getClassNbr().compareTo(twoClass.getClassNbr()) != 0)
+                            return false;
+
+                        //Time - 1 string, 4 ints
+                        if (oneClass.getTime().days.compareTo(twoClass.getTime().days) != 0)
+                            return false;
+                        if (oneClass.getTime().frHr != twoClass.getTime().frHr)
+                            return false;
+                        if (oneClass.getTime().frMn != twoClass.getTime().frMn)
+                            return false;
+                        if (oneClass.getTime().toHr != twoClass.getTime().toHr)
+                            return false;
+                        if (oneClass.getTime().toMn != twoClass.getTime().toMn)
+                            return false;
+
+                        //Course - 3 strings, 1 int
+                        if (oneClass.getCourse().catlgNbr.compareTo(twoClass.getCourse().catlgNbr) != 0)
+                            return false;
+                        if (oneClass.getCourse().subject.compareTo(twoClass.getCourse().subject) != 0)
+                            return false;
+                        if (oneClass.getCourse().description.compareTo(twoClass.getCourse().description) != 0)
+                            return false;
+                        if (oneClass.getCourse().units != twoClass.getCourse().units)
+                            return false;
+
+                        //Professor - Need super of FacultyStaff
+                        if (oneClass.getInstructor().getFirstName().compareTo(twoClass.getInstructor().getFirstName()) != 0)
+                            return false;
+                        if (oneClass.getInstructor().getSSN().compareTo(twoClass.getInstructor().getSSN()) != 0)
+                            return false;
+                        if (oneClass.getInstructor().getLastName().compareTo(twoClass.getInstructor().getLastName()) != 0)
+                            return false;
+                    }
+                }
             }
+            return true;
+        } catch (NullPointerException e) {
+            return false;
         }
-        return true;
     }
-
 }
