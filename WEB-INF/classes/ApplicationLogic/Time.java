@@ -25,6 +25,10 @@ public class Time {
         this.days = days;
     }
 
+    public Time() {
+
+    }
+
     public String toString() {
         return frHr + ":" + frMn + "-" + toHr + ":" + toMn;
     }
@@ -37,5 +41,24 @@ public class Time {
         return String.valueOf(toHr)+String.valueOf(toMn);
     }
 
+    public void setFrHr(int frHr) {
+        this.frHr = frHr;
+    }
+
+    public void setFrMn(int frMn) {
+        this.frMn = frMn;
+    }
+
+    public void setToHr(int toHr) {
+        this.toHr = toHr;
+    }
+
+    public void setToMn(int toMn) {
+        this.toMn = toMn;
+    }
+
+    public void setDays(String days) {
+        this.days = days;
+    }
 }
 
