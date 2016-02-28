@@ -70,7 +70,7 @@ public class DatabaseStub {
                     aClassDatabase[4].compareTo(term) == 0) {
                 boolean c = true;
                 for (int i = 0; i < campus.size(); i++)
-                    if (aClassDatabase[5].compareTo((String) ((ArrayList) campus).get(i)) != 0)
+                    if (aClassDatabase[5].compareTo((String) ((ArrayList) campus).get(i)) != 0 || aClassDatabase[5] != "All")
                         c = false;
                 if (c) {
                     ClassDetails tmp = new ClassDetails(this, aClassDatabase[3]);

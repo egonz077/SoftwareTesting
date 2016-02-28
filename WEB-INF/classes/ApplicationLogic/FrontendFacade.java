@@ -27,5 +27,24 @@ public class FrontendFacade {
     public String buildSchedulesPage(Collection<Schedule> schedules, int pg) {
         return new FormatPage().buildSchedulesPage(schedules, pg);
     }
-
+    
+    /*takes care of building a page*/
+    public void buildPage(){
+    	new FormatPage().buildPage();
+    }
+    
+    /*gets supposed saved schedule*/
+    public void getSavedSchedules(){
+    	new ScheduleMakerController().getSavedSchedule();
+    	
+    }
+    /*get supposed balance from smc*/
+    public void getBalance(){
+    	new ScheduleMakerController().getBalance();
+    	
+    }
+    /*does supposed logout for Authentiation*/
+    public void logout(){
+    	
+    }
 }
