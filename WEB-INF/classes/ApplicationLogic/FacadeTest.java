@@ -10,9 +10,9 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class FacadeTest {
-
 
     public FrontendFacade client;
 
@@ -29,21 +29,21 @@ public class FacadeTest {
     //Testing method login
     //Sunny-Day
     @Test
-    public void testLogin1() {
+    public void SM_001L_Subsystem_TC001() throws Exception {
         //User name and password exists in database
         assertEquals("Logged In?", true, client.login("1412412", "abc123"));
 
     }
 
     @Test
-    public void testLogin2() {
+    public void SM_001L_Subsystem_TC002() throws Exception {
         //User name and password exists in database
         assertEquals("Logged In?", true, client.login("2354235", "abc234"));
 
     }
 
     @Test
-    public void testLogin3() {
+    public void SM_001L_Subsystem_TC003() throws Exception {
         //User name and password exists in database
         assertEquals("Logged In?", true, client.login("2234523", "abc345"));
 
@@ -51,21 +51,21 @@ public class FacadeTest {
 
     //Rainy-Day
     @Test
-    public void testLogin4() {
+    public void SM_001L_Subsystem_TC004() throws Exception {
         //User name doesn't exist, but password does
         assertEquals("Logged In?", false, client.login("445984253", "abc123"));
 
     }
 
     @Test
-    public void testLogin5() {
+    public void SM_001L_Subsystem_TC005() throws Exception {
         //User name exists, but password does not
         assertEquals("Logged In?", false, client.login("2354235", "!@#$%"));
 
     }
 
     @Test
-    public void testLogin6() {
+    public void SM_001L_Subsystem_TC006() throws Exception {
         //Neither User name or password exists in the database
         assertEquals("Logged In?", false, client.login("tumadre3", "1256738fjden"));
     }
@@ -74,7 +74,7 @@ public class FacadeTest {
     //Testing method createSchedule
     //Sunny-Day
     @Test
-    public void testCreateSchedule1() {
+    public void SM_001CS_Subsystem_TC007() throws Exception {
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
         course.setCatlgNbr("1010");
@@ -127,7 +127,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void testCreateSchedule2() {
+    public void SM_001CS_Subsystem_TC008() throws Exception {
         //Test schedule object
         Collection<Collection<ClassDetails>> c = new ArrayList<Collection<ClassDetails>>();
 
@@ -205,8 +205,10 @@ public class FacadeTest {
     }
 
     @Test
-    public void testCreateSchedule3() {
+    public void SM_001CS_Subsystem_TC009() throws Exception {
         //Test schedule object
+        Collection<Collection<ClassDetails>> c = new ArrayList<Collection<ClassDetails>>();
+
         DatabaseStub course = new DatabaseStub();
         course.setCatlgNbr("1010");
         course.setSubject("HIS");
@@ -228,9 +230,55 @@ public class FacadeTest {
 
         Collection<ClassDetails> collectionOfClassDetails = new ArrayList<ClassDetails>();
         collectionOfClassDetails.add(classDetails);
-
-        Collection<Collection<ClassDetails>> c = new ArrayList<Collection<ClassDetails>>();
         c.add(collectionOfClassDetails);
+
+        //2nd Course
+        DatabaseStub course1 = new DatabaseStub();
+        course1.setCatlgNbr("2250");
+        course1.setSubject("COP");
+        course1.setUnits(0);
+
+        Time time1 = new Time();
+        time1.setDays("1010000");
+        time1.setFrHr(11);
+        time1.setFrMn(0);
+        time1.setToHr(12);
+        time1.setToMn(15);
+
+        ClassDetails classDetails1 = new ClassDetails();
+        classDetails1.setDatabaseStub(course1);
+        classDetails1.setTime(time1);
+        classDetails1.setCampus("University");
+        classDetails1.setTerm("Spring 2007");
+        classDetails1.setClassNbr("2250");
+
+        Collection<ClassDetails> collectionOfClassDetails1 = new ArrayList<ClassDetails>();
+        collectionOfClassDetails1.add(classDetails1);
+        c.add(collectionOfClassDetails1);
+
+        //3rd Course
+        DatabaseStub course2 = new DatabaseStub();
+        course1.setCatlgNbr("2250");
+        course1.setSubject("COP");
+        course1.setUnits(0);
+
+        Time time2 = new Time();
+        time1.setDays("1010000");
+        time1.setFrHr(11);
+        time1.setFrMn(0);
+        time1.setToHr(12);
+        time1.setToMn(15);
+
+        ClassDetails classDetails2 = new ClassDetails();
+        classDetails1.setDatabaseStub(course2);
+        classDetails1.setTime(time2);
+        classDetails1.setCampus("University");
+        classDetails1.setTerm("Spring 2007");
+        classDetails1.setClassNbr("2250");
+
+        Collection<ClassDetails> collectionOfClassDetails2 = new ArrayList<ClassDetails>();
+        collectionOfClassDetails1.add(classDetails1);
+        c.add(collectionOfClassDetails1);
 
         ArrayList list = (ArrayList) c;
         Schedule schedule = new Schedule(list);
@@ -245,20 +293,22 @@ public class FacadeTest {
         //Collection of courses
         Collection<String> courses = new ArrayList<String>();
         courses.add("HIS1010");
+        courses.add("COP2250");
 
         //Campus (University, Biscane)
-        String campus = "All";
+        String campus = "University";
 
         //SPDays (10100000)
         String SPdays = "1010000";
 
         Collection client = this.client.createSchedule(term, courses, campus, SPdays);
+
         assertEquals("Collection:", true, compareCollectionofSchedule(test, client));
     }
 
     //Rainy-Day
     @Test
-    public void testCreateSchedule4() {
+    public void SM_001CS_Subsystem_TC010() throws Exception {
         //Test schedule object
         Collection test = new ArrayList();
 
@@ -281,7 +331,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void testCreateSchedule5() {
+    public void SM_001CS_Subsystem_TC011() throws Exception {
         //Test schedule object
         Collection test = new ArrayList();
 
@@ -304,7 +354,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void testCreateSchedule6() {
+    public void SM_001CS_Subsystem_TC012() throws Exception {
         //Test schedule object
         Collection test = new ArrayList();
 
@@ -320,7 +370,7 @@ public class FacadeTest {
         String campus = "University";
 
         //SPDays (10100000)
-        String SPdays = "1111111";
+        String SPdays = "0000000";
 
         Collection client = this.client.createSchedule(term, courses, campus, SPdays);
 
@@ -331,7 +381,7 @@ public class FacadeTest {
     //Testing method buildSchedules
     //Sunny-Day
     @Test
-    public void SM_001BS_Subsystem_TC013() {
+    public void SM_001BS_Subsystem_TC013() throws Exception {
         //Test String
         String Test =
                 "<form id=\"form1\" method=\"post\" action=\"\"><h2>Schedule1</h2><table><tr><td>Hours</td><td>Monday</td><td>Tuesday</td><td>Wednesday</td><td>Thursday</td><td>Friday</td><td>Saturday</td><td>Sunday</td></tr><tr><td>0:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>1:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>2:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>3:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>4:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>5:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>6:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>7:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>8:00</td><td>HIS1010\n" +
@@ -372,7 +422,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void SM_001BS_Subsystem_TC014() {
+    public void SM_001BS_Subsystem_TC014() throws Exception {
         //Test String
         String Test =
                 "<form id=\"form1\" method=\"post\" action=\"\"><h2>Schedule1</h2><table><tr><td>Hours</td><td>Monday</td><td>Tuesday</td><td>Wednesday</td><td>Thursday</td><td>Friday</td><td>Saturday</td><td>Sunday</td></tr><tr><td>0:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>1:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>2:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>3:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>4:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>5:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>6:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>7:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>8:00</td><td>HIS1010\n" +
@@ -427,7 +477,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void SM_001BS_Subsystem_TC015() {
+    public void SM_001BS_Subsystem_TC015() throws Exception {
         //Test String
         String Test =
                 "<form id=\"form1\" method=\"post\" action=\"\"><h2>Schedule3</h2><table><tr><td>Hours</td><td>Monday</td><td>Tuesday</td><td>Wednesday</td><td>Thursday</td><td>Friday</td><td>Saturday</td><td>Sunday</td></tr><tr><td>0:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>1:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>2:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>3:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>4:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>5:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>6:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>7:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>8:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>9:00</td><td>PHY2048\n" +
@@ -498,7 +548,7 @@ public class FacadeTest {
      * On monday and wednesday, showing page 0
      */
     @Test
-    public void SM_001BS_Subsystem_TC016() {
+    public void SM_001BS_Subsystem_TC016() throws Exception {
         //Test String
         String Test =
                 "No Schedule Found";
@@ -523,7 +573,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void SM_001BS_Subsystem_TC017() {
+    public void SM_001BS_Subsystem_TC017() throws Exception {
         //Test String
         String Test =
                 "No Schedule Found";
@@ -548,7 +598,7 @@ public class FacadeTest {
     }
 
     @Test
-    public void SM_001BS_Subsystem_TC018() {
+    public void SM_001BS_Subsystem_TC018() throws Exception {
         //Test String
         String Test =
                 "No Schedule Found";
@@ -570,6 +620,26 @@ public class FacadeTest {
 
 
         assertEquals("HTML String:", Test, client.buildSchedulesPage(collectionOfSchedules, pg));
+    }
+
+    @Test
+    public void SM_001BP_Subsystem_TC019() throws Exception {
+        fail("Not yet implemented");
+    }
+
+    @Test
+    public void SM_001GSS_Subsystem_TC020() throws Exception {
+        fail("Not Yet Implamentaded");
+    }
+
+    @Test
+    public void SM_001GB_Subsystem_TC021() throws Exception {
+
+    }
+
+    @Test
+    public void SM_001LO_Subsystem_TC022() throws Exception {
+
     }
 
     //Compare Methods
