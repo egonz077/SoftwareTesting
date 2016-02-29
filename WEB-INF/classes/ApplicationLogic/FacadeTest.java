@@ -1,15 +1,16 @@
 package ApplicationLogic;
 
-import static org.junit.Assert.*;
+import Storage.DatabaseStub;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import Storage.DatabaseStub;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class FacadeTest {
 
@@ -20,7 +21,6 @@ public class FacadeTest {
     public void setUp() throws Exception {
         client = new FrontendFacade();
     }
-
     @After
     public void tearDown() throws Exception {
         client = null;
@@ -34,14 +34,12 @@ public class FacadeTest {
         assertEquals("Logged In?", true, client.login("1412412", "abc123"));
 
     }
-
     @Test
     public void testLogin2() {
         //User name and password exists in database
         assertEquals("Logged In?", true, client.login("2354235", "abc234"));
 
     }
-
     @Test
     public void testLogin3() {
         //User name and password exists in database
@@ -56,14 +54,12 @@ public class FacadeTest {
         assertEquals("Logged In?", false, client.login("445984253", "abc123"));
 
     }
-
     @Test
     public void testLogin5() {
         //User name exists, but password does not
         assertEquals("Logged In?", false, client.login("2354235", "!@#$%"));
 
     }
-
     @Test
     public void testLogin6() {
         //Neither User name or password exists in the database
@@ -76,12 +72,10 @@ public class FacadeTest {
     @Test
     public void testCreateSchedule1() {
         //Test schedule object
-        DatabaseStub course = new DatabaseStub("Subject", "catlgNbr");
+        DatabaseStub course = new DatabaseStub();
         course.setCatlgNbr("1010");
         course.setSubject("HIS");
         course.setUnits(0);
-
-        Professor teacher = new Professor();
 
         Time time = new Time();
         time.setDays("1010000");
@@ -92,7 +86,6 @@ public class FacadeTest {
 
         ClassDetails classDetails = new ClassDetails();
         classDetails.setDatabaseStub(course);
-        //classDetails.setProfessor(teacher);
         classDetails.setTime(time);
         classDetails.setCampus("University");
         classDetails.setTerm("Spring 2007");
@@ -105,11 +98,138 @@ public class FacadeTest {
         c.add(collectionOfClassDetails);
 
         ArrayList list = (ArrayList) c;
-
         Schedule schedule = new Schedule(list);
-        //schedule.setClasses(collectionOfClassDetails);
-        //schedule.setPantherID("");
-        //schedule.setId("");
+
+        Collection test = new ArrayList<Schedule>();
+        test.add(schedule);
+
+        //Client
+        //Term (Spring 2007)
+        String term = "Spring 2007";
+
+        //Collection of courses
+        Collection<String> courses = new ArrayList<String>();
+        courses.add("HIS1010");
+
+        //Campus (University, Biscane)
+        String campus = "All";
+
+        //SPDays (10100000)
+        String SPdays = "1010000";
+
+        Collection client = this.client.createSchedule(term, courses, campus, SPdays);
+        // System.out.println(Client.createSchedule("Spring 2007", courses, "All", "1111111"));
+        assertEquals("Collection:", true,
+                compareCollectionofSchedule(test, client));
+    }
+    @Test
+    public void testCreateSchedule2() {
+        //Test schedule object
+        Collection<Collection<ClassDetails>> c = new ArrayList<Collection<ClassDetails>>();
+
+        DatabaseStub course = new DatabaseStub();
+        course.setCatlgNbr("1010");
+        course.setSubject("HIS");
+        course.setUnits(0);
+
+        Time time = new Time();
+        time.setDays("1010000");
+        time.setFrHr(8);
+        time.setFrMn(0);
+        time.setToHr(9);
+        time.setToMn(15);
+
+        ClassDetails classDetails = new ClassDetails();
+        classDetails.setDatabaseStub(course);
+        classDetails.setTime(time);
+        classDetails.setCampus("University");
+        classDetails.setTerm("Spring 2007");
+        classDetails.setClassNbr("1010");
+
+        Collection<ClassDetails> collectionOfClassDetails = new ArrayList<ClassDetails>();
+        collectionOfClassDetails.add(classDetails);
+        c.add(collectionOfClassDetails);
+
+        //2nd Course
+        DatabaseStub course1 = new DatabaseStub();
+        course1.setCatlgNbr("2250");
+        course1.setSubject("COP");
+        course1.setUnits(0);
+
+        Time time1 = new Time();
+        time1.setDays("1010000");
+        time1.setFrHr(11);
+        time1.setFrMn(0);
+        time1.setToHr(12);
+        time1.setToMn(15);
+
+        ClassDetails classDetails1 = new ClassDetails();
+        classDetails1.setDatabaseStub(course1);
+        classDetails1.setTime(time1);
+        classDetails1.setCampus("University");
+        classDetails1.setTerm("Spring 2007");
+        classDetails1.setClassNbr("2250");
+
+        Collection<ClassDetails> collectionOfClassDetails1 = new ArrayList<ClassDetails>();
+        collectionOfClassDetails1.add(classDetails1);
+        c.add(collectionOfClassDetails1);
+
+        ArrayList list = (ArrayList) c;
+        Schedule schedule = new Schedule(list);
+
+        Collection test = new ArrayList<Schedule>();
+        test.add(schedule);
+
+        //Client
+        //Term (Spring 2007)
+        String term = "Spring 2007";
+
+        //Collection of courses
+        Collection<String> courses = new ArrayList<String>();
+        courses.add("HIS1010");
+        courses.add("COP2250");
+
+        //Campus (University, Biscane)
+        String campus = "University";
+
+        //SPDays (10100000)
+        String SPdays = "1010000";
+
+        Collection client = this.client.createSchedule(term, courses, campus, SPdays);
+        // System.out.println(Client.createSchedule("Spring 2007", courses, "All", "1111111"));
+        assertEquals("Collection:", true,
+                compareCollectionofSchedule(test, client));
+    }
+    @Test
+    public void testCreateSchedule3() {
+        //Test schedule object
+        DatabaseStub course = new DatabaseStub();
+        course.setCatlgNbr("1010");
+        course.setSubject("HIS");
+        course.setUnits(0);
+
+        Time time = new Time();
+        time.setDays("1010000");
+        time.setFrHr(8);
+        time.setFrMn(0);
+        time.setToHr(9);
+        time.setToMn(15);
+
+        ClassDetails classDetails = new ClassDetails();
+        classDetails.setDatabaseStub(course);
+        classDetails.setTime(time);
+        classDetails.setCampus("University");
+        classDetails.setTerm("Spring 2007");
+        classDetails.setClassNbr("1010");
+
+        Collection<ClassDetails> collectionOfClassDetails = new ArrayList<ClassDetails>();
+        collectionOfClassDetails.add(classDetails);
+
+        Collection<Collection<ClassDetails>> c = new ArrayList<Collection<ClassDetails>>();
+        c.add(collectionOfClassDetails);
+
+        ArrayList list = (ArrayList) c;
+        Schedule schedule = new Schedule(list);
 
         Collection test = new ArrayList<Schedule>();
         test.add(schedule);
@@ -134,27 +254,15 @@ public class FacadeTest {
                 compareCollectionofSchedule(test, client));
     }
 
-    @Test
-    public void testCreateSchedule2() {
-        fail("Need to Implement");
-    }
-
-    @Test
-    public void testCreateSchedule3() {
-        fail("Need to Implement");
-    }
-
     //Rainy-Day
     @Test
     public void testCreateSchedule4() {
         fail("Need to Implement");
     }
-
     @Test
     public void testCreateSchedule5() {
         fail("Need to Implement");
     }
-
     @Test
     public void testCreateSchedule6() {
         fail("Need to Implement");
@@ -186,7 +294,7 @@ public class FacadeTest {
                         "</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>10:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>11:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>12:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>13:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>14:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>15:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>16:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>17:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>18:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>19:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>20:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>21:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>22:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>23:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table>";
 
         //Client Collection<Schedule> Object
-        Collection collectionOfSchedules;
+        Collection<Schedule> collectionOfSchedules;
         FrontendFacade fc = new FrontendFacade();
         Collection<String> courses = new ArrayList<String>();
         //Form Courses
@@ -203,7 +311,6 @@ public class FacadeTest {
 
         assertEquals("HTML String:", Test, client.buildSchedulesPage(collectionOfSchedules, pg));
     }
-
     @Test
     public void SM_001BS_Subsystem_TC014() {
         //Test String
@@ -251,14 +358,13 @@ public class FacadeTest {
         String SPDays = "10100000";
 
         //Make collectionOfSchedules
-        Collection collectionOfSchedules = client.createSchedule("Spring 2007", courses, "University", SPDays);
+        Collection<Schedule> collectionOfSchedules = client.createSchedule("Spring 2007", courses, "University", SPDays);
 
         //Page number
         int pg = 0;
 
         assertEquals("HTML String:", Test, client.buildSchedulesPage(collectionOfSchedules, pg));
     }
-
     @Test
     public void SM_001BS_Subsystem_TC015() {
         //Test String
@@ -305,7 +411,7 @@ public class FacadeTest {
                         "University\n" +
                         "</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>19:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>20:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>21:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>22:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>23:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table>";
         //Client Collection<Schedule> Object
-        Collection collectionOfSchedules;
+        Collection<Schedule> collectionOfSchedules;
         FrontendFacade fc = new FrontendFacade();
         Collection<String> courses = new ArrayList<String>();
         //Form Courses
@@ -337,7 +443,7 @@ public class FacadeTest {
                 "No Schedule Found";
 
         //Client Collection<Schedule> Object
-        Collection collectionOfSchedules;
+        Collection<Schedule> collectionOfSchedules;
         FrontendFacade fc = new FrontendFacade();
         Collection<String> courses = new ArrayList<String>();
         //Form Courses
@@ -354,7 +460,6 @@ public class FacadeTest {
 
         assertEquals("HTML String:", Test, client.buildSchedulesPage(collectionOfSchedules, pg));
     }
-
     @Test
     public void SM_001BS_Subsystem_TC017() {
         //Test String
@@ -362,7 +467,7 @@ public class FacadeTest {
                 "No Schedule Found";
 
         //Client Collection<Schedule> Object
-        Collection collectionOfSchedules;
+        Collection<Schedule> collectionOfSchedules;
         FrontendFacade fc = new FrontendFacade();
         Collection<String> courses = new ArrayList<String>();
         //Form Courses
@@ -379,7 +484,6 @@ public class FacadeTest {
 
         assertEquals("HTML String:", Test, client.buildSchedulesPage(collectionOfSchedules, pg));
     }
-
     @Test
     public void SM_001BS_Subsystem_TC018() {
         //Test String
@@ -387,7 +491,7 @@ public class FacadeTest {
                 "No Schedule Found";
 
         //Client Collection<Schedule> Object
-        Collection collectionOfSchedules;
+        Collection<Schedule> collectionOfSchedules;
         FrontendFacade fc = new FrontendFacade();
         Collection<String> courses = new ArrayList<String>();
         //Form Courses
@@ -405,7 +509,7 @@ public class FacadeTest {
         assertEquals("HTML String:", Test, client.buildSchedulesPage(collectionOfSchedules, pg));
     }
 
-    //Comaring Collections of schedules
+    //Compare Methods
     private boolean compareCollectionofSchedule(Collection<Object> one, Collection<Object> two) {
         if (one != null) {
             if (two == null)
@@ -427,14 +531,16 @@ public class FacadeTest {
                 Schedule qwe = (Schedule) oneSchedule;
                 Schedule asd = (Schedule) twoSchedule;
 
-                if (!compareSchedules(qwe, asd))
+                if (!compareSchedules(qwe, asd)) {
+                    System.out.println("compareSchedule Failed");
                     return false;
+                }
 
-                Collection wer = qwe.getClasses();
-                Collection sdf = asd.getClasses();
+                Collection<ClassDetails> wer = qwe.getClasses();
+                Collection<ClassDetails> sdf = asd.getClasses();
 
-                Iterator e1 = wer.iterator();
-                Iterator e2 = sdf.iterator();
+                Iterator<ClassDetails> e1 = wer.iterator();
+                Iterator<ClassDetails> e2 = sdf.iterator();
 
                 while (e1.hasNext()) {
                     if (!e2.hasNext())
@@ -446,26 +552,27 @@ public class FacadeTest {
                     Collection<ClassDetails> w = (Collection<ClassDetails>) po;
                     Collection<ClassDetails> q = (Collection<ClassDetails>) pe;
 
-                    Iterator u1 = w.iterator();
-                    Iterator u2 = q.iterator();
+                    Iterator<ClassDetails> u1 = w.iterator();
+                    Iterator<ClassDetails> u2 = q.iterator();
 
                     while (u1.hasNext()) {
                         if (!u2.hasNext())
                             return false;
 
-                        ClassDetails classDetails1 = (ClassDetails) u1.next();
-                        ClassDetails classDetails2 = (ClassDetails) u2.next();
+                        ClassDetails classDetails1 = u1.next();
+                        ClassDetails classDetails2 = u2.next();
 
-                        if (!compareClassDetails(classDetails1, classDetails2))
+                        if (!compareClassDetails(classDetails1, classDetails2)) {
+                            System.out.println("compareClassDetails Failed");
                             return false;
-
+                        }
                     }
                 }
             }
-        }
+        } else if (two != null)
+            return false;
         return true;
     }
-
     private boolean compareClassDetails(ClassDetails oneClass, ClassDetails twoClass) {
         //Strings
         if (oneClass.getDays() != null) {
@@ -473,7 +580,7 @@ public class FacadeTest {
                 return false;
             if (oneClass.getDays().compareTo(twoClass.getDays()) != 0)
                 return false;
-        }else if (twoClass.getDays() != null)
+        } else if (twoClass.getDays() != null)
             return false;
 
         if (oneClass.getBldg_room() != null) {
@@ -481,7 +588,7 @@ public class FacadeTest {
                 return false;
             if (oneClass.getBldg_room().compareTo(twoClass.getBldg_room()) != 0)
                 return false;
-        }else if (twoClass.getBldg_room() != null)
+        } else if (twoClass.getBldg_room() != null)
             return false;
 
         //Time - 1 string, 4 ints
@@ -507,7 +614,7 @@ public class FacadeTest {
                 return false;
             if (oneClass.getCourse().description.compareTo(twoClass.getCourse().description) != 0)
                 return false;
-        }else if (twoClass.getCourse().description != null)
+        } else if (twoClass.getCourse().description != null)
             return false;
 
         if (oneClass.getCourse().units != twoClass.getCourse().units)
@@ -524,27 +631,26 @@ public class FacadeTest {
                     return false;
                 if (p1.getFirstName().compareTo(p1.getFirstName()) != 0)
                     return false;
-            }else if (p2.getFirstName() != null)
+            } else if (p2.getFirstName() != null)
                 return false;
             if (p1.getLastName() != null) {
                 if (p2.getLastName() == null)
                     return false;
                 if (p1.getLastName().compareTo(p1.getLastName()) != 0)
                     return false;
-            }else if (p2.getLastName() != null)
+            } else if (p2.getLastName() != null)
                 return false;
             if (p1.getSSN() != null) {
                 if (p2.getSSN() == null)
                     return false;
                 if (p1.getSSN().compareTo(p1.getSSN()) != 0)
                     return false;
-            }else if (p2.getSSN() != null)
+            } else if (p2.getSSN() != null)
                 return false;
-        }else if (twoClass.getInstructor() != null)
+        } else if (twoClass.getInstructor() != null)
             return false;
         return true;
     }
-
     private boolean compareSchedules(Schedule s1, Schedule s2) {
         //Compare ID
         if (s1.getId() != null && s2.getId() != null
