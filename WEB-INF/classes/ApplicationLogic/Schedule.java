@@ -44,7 +44,7 @@ public class Schedule {
 	{
         return classes;
     }
-	
+
 	public void combine (String id)
 	{}
 	
