@@ -716,14 +716,6 @@ public class FacadeTest {
 
     private boolean compareClassDetails(ClassDetails oneClass, ClassDetails twoClass) {
         //Strings
-        if (oneClass.getDays() != null) {
-            if (twoClass.getDays() == null)
-                return false;
-            if (oneClass.getDays().compareTo(twoClass.getDays()) != 0)
-                return false;
-        } else if (twoClass.getDays() != null)
-            return false;
-
         if (oneClass.getBldg_room() != null) {
             if (twoClass.getBldg_room() == null)
                 return false;
@@ -740,71 +732,98 @@ public class FacadeTest {
         } else if (twoClass.getTerm() != null)
             return false;
 
+        if (oneClass.getCampus() != null) {
+            if (twoClass.getCampus() == null)
+                return false;
+            if (oneClass.getCampus().compareTo(twoClass.getCampus()) != 0)
+                return false;
+        } else if (twoClass.getCampus() != null)
+            return false;
+
+        if (oneClass.getClassNbr() != null) {
+            if (twoClass.getClassNbr() == null)
+                return false;
+            if (oneClass.getClassNbr().compareTo(twoClass.getClassNbr()) != 0)
+                return false;
+        } else if (twoClass.getClassNbr() != null)
+            return false;
+
         //Time - 1 string, 4 ints
-        if (oneClass.getTime().days.compareTo(twoClass.getTime().days) != 0)
-            return false;
-        if (oneClass.getTime().frHr != twoClass.getTime().frHr)
-            return false;
-        if (oneClass.getTime().frMn != twoClass.getTime().frMn)
-            return false;
-        if (oneClass.getTime().toHr != twoClass.getTime().toHr)
-            return false;
-        if (oneClass.getTime().toMn != twoClass.getTime().toMn)
+        if (oneClass.getTime() != null) {
+            if (twoClass.getTime() == null)
+                return false;
+            if (oneClass.getTime().days != null) {
+                if (twoClass.getTime().days == null)
+                    return false;
+                if (oneClass.getTime().days.compareTo(twoClass.getTime().days) != 0)
+                    return false;
+            } else if (twoClass.getTime().days != null)
+                return false;
+            if (oneClass.getTime().frHr != twoClass.getTime().frHr)
+                return false;
+            if (oneClass.getTime().frMn != twoClass.getTime().frMn)
+                return false;
+            if (oneClass.getTime().toHr != twoClass.getTime().toHr)
+                return false;
+            if (oneClass.getTime().toMn != twoClass.getTime().toMn)
+                return false;
+        } else if (twoClass.getTime() != null)
             return false;
 
-        //Course - 3 strings, 1 int
-        if (oneClass.getCourse().catlgNbr != null) {
-            if (twoClass.getCourse().catlgNbr == null)
+        //Course(DatabaseStub) - 3 strings, 1 int
+        if (oneClass.getCourse() != null) {
+            if (twoClass.getCourse() == null)
                 return false;
-            if (oneClass.getCourse().catlgNbr.compareTo(twoClass.getCourse().catlgNbr) != 0)
+            if (oneClass.getCourse().catlgNbr != null) {
+                if (twoClass.getCourse().catlgNbr == null)
+                    return false;
+                if (oneClass.getCourse().catlgNbr.compareTo(twoClass.getCourse().catlgNbr) != 0)
+                    return false;
+            } else if (twoClass.getCourse().catlgNbr != null)
                 return false;
-        } else if (twoClass.getCourse().catlgNbr != null)
-            return false;
-        if (oneClass.getCourse().subject != null) {
-            if (twoClass.getCourse().subject == null)
+            if (oneClass.getCourse().subject != null) {
+                if (twoClass.getCourse().subject == null)
+                    return false;
+                if (oneClass.getCourse().subject.compareTo(twoClass.getCourse().subject) != 0)
+                    return false;
+            } else if (twoClass.getCourse().subject != null)
                 return false;
-            if (oneClass.getCourse().subject.compareTo(twoClass.getCourse().subject) != 0)
+            if (oneClass.getCourse().description != null) {
+                if (twoClass.getCourse().description == null)
+                    return false;
+                if (oneClass.getCourse().description.compareTo(twoClass.getCourse().description) != 0)
+                    return false;
+            } else if (twoClass.getCourse().description != null)
                 return false;
-        } else if (twoClass.getCourse().subject != null)
-            return false;
-
-        if (oneClass.getCourse().description != null) {
-            if (twoClass.getCourse().description == null)
+            if (oneClass.getCourse().units != twoClass.getCourse().units)
                 return false;
-            if (oneClass.getCourse().description.compareTo(twoClass.getCourse().description) != 0)
-                return false;
-        } else if (twoClass.getCourse().description != null)
-            return false;
-
-        if (oneClass.getCourse().units != twoClass.getCourse().units)
+        } else if (twoClass.getCourse() != null)
             return false;
 
         //Professor - Need super of FacultyStaff
         if (oneClass.getInstructor() != null) {
             if (twoClass.getInstructor() == null)
                 return false;
-            Professor p1 = oneClass.getInstructor();
-            Professor p2 = twoClass.getInstructor();
-            if (p1.getFirstName() != null) {
-                if (p2.getFirstName() == null)
+            if (oneClass.getInstructor().getFirstName() != null) {
+                if (twoClass.getInstructor().getFirstName() == null)
                     return false;
-                if (p1.getFirstName().compareTo(p1.getFirstName()) != 0)
+                if (oneClass.getInstructor().getFirstName().compareTo(oneClass.getInstructor().getFirstName()) != 0)
                     return false;
-            } else if (p2.getFirstName() != null)
+            } else if (twoClass.getInstructor().getFirstName() != null)
                 return false;
-            if (p1.getLastName() != null) {
-                if (p2.getLastName() == null)
+            if (oneClass.getInstructor().getLastName() != null) {
+                if (twoClass.getInstructor().getLastName() == null)
                     return false;
-                if (p1.getLastName().compareTo(p1.getLastName()) != 0)
+                if (oneClass.getInstructor().getLastName().compareTo(oneClass.getInstructor().getLastName()) != 0)
                     return false;
-            } else if (p2.getLastName() != null)
+            } else if (twoClass.getInstructor().getLastName() != null)
                 return false;
-            if (p1.getSSN() != null) {
-                if (p2.getSSN() == null)
+            if (oneClass.getInstructor().getSSN() != null) {
+                if (twoClass.getInstructor().getSSN() == null)
                     return false;
-                if (p1.getSSN().compareTo(p1.getSSN()) != 0)
+                if (oneClass.getInstructor().getSSN().compareTo(oneClass.getInstructor().getSSN()) != 0)
                     return false;
-            } else if (p2.getSSN() != null)
+            } else if (twoClass.getInstructor().getSSN() != null)
                 return false;
         } else if (twoClass.getInstructor() != null)
             return false;
