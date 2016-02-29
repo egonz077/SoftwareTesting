@@ -745,9 +745,19 @@ public class FacadeTest {
             return false;
 
         //Course - 3 strings, 1 int
-        if (oneClass.getCourse().catlgNbr.compareTo(twoClass.getCourse().catlgNbr) != 0)
+        if (oneClass.getCourse().catlgNbr != null) {
+            if (twoClass.getCourse().catlgNbr == null)
+                return false;
+            if (oneClass.getCourse().catlgNbr.compareTo(twoClass.getCourse().catlgNbr) != 0)
+                return false;
+        } else if (twoClass.getCourse().catlgNbr != null)
             return false;
-        if (oneClass.getCourse().subject.compareTo(twoClass.getCourse().subject) != 0)
+        if (oneClass.getCourse().subject != null) {
+            if (twoClass.getCourse().subject == null)
+                return false;
+            if (oneClass.getCourse().subject.compareTo(twoClass.getCourse().subject) != 0)
+                return false;
+        } else if (twoClass.getCourse().subject != null)
             return false;
 
         if (oneClass.getCourse().description != null) {
