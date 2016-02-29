@@ -17,8 +17,6 @@ public class ClassDetails {
     private String campus;
     private String term;
     private Time time;
-    private DatabaseStub databaseStub;
-    private Professor professor;
 
     //constructor
 
@@ -193,11 +191,11 @@ public class ClassDetails {
 
     //New Setters
     public void setDatabaseStub(DatabaseStub databaseStub) {
-        this.databaseStub = databaseStub;
+        this.db = databaseStub;
     }
 
     public void setProfessor(Professor professor) {
-        this.professor = professor;
+        this.instructor = professor;
     }
 
     public void setClassNbr(String classNbr) {

@@ -77,31 +77,26 @@ public class FacadeTest {
     public void testCreateSchedule1() {
         //Test schedule object
         DatabaseStub course = new DatabaseStub("Subject", "catlgNbr");
-        course.setCatlgNbr("");
-        course.setDescription("");
-        course.setSubject("");
+        course.setCatlgNbr("1010");
+        course.setSubject("HIS");
         course.setUnits(0);
 
         Professor teacher = new Professor();
-        teacher.setFirstName("");
-        teacher.setLastName("");
-        teacher.setSSN("");
 
         Time time = new Time();
-        time.setDays("");
-        time.setFrHr(0);
+        time.setDays("1010000");
+        time.setFrHr(8);
         time.setFrMn(0);
-        time.setToHr(0);
-        time.setToMn(0);
+        time.setToHr(9);
+        time.setToMn(15);
 
         ClassDetails classDetails = new ClassDetails();
         classDetails.setDatabaseStub(course);
-        classDetails.setProfessor(teacher);
+        //classDetails.setProfessor(teacher);
         classDetails.setTime(time);
-        classDetails.setCampus("");
-        classDetails.setTerm("");
-        classDetails.setBldg_room("");
-        classDetails.setClassNbr("");
+        classDetails.setCampus("University");
+        classDetails.setTerm("Spring 2007");
+        classDetails.setClassNbr("1010");
 
         Collection<ClassDetails> collectionOfClassDetails = new ArrayList<ClassDetails>();
         collectionOfClassDetails.add(classDetails);
@@ -473,19 +468,20 @@ public class FacadeTest {
 
     private boolean compareClassDetails(ClassDetails oneClass, ClassDetails twoClass) {
         //Strings
-        if (oneClass.getDays() != null)
+        if (oneClass.getDays() != null) {
             if (twoClass.getDays() == null)
                 return false;
-        if (oneClass.getDays().compareTo(twoClass.getDays()) != 0)
-            return false;
-        else if (twoClass.getDays() != null)
+            if (oneClass.getDays().compareTo(twoClass.getDays()) != 0)
+                return false;
+        }else if (twoClass.getDays() != null)
             return false;
 
-        if (oneClass.getBldg_room().compareTo(twoClass.getBldg_room()) != 0)
-            return false;
-        if (oneClass.getCampus().compareTo(twoClass.getCampus()) != 0)
-            return false;
-        if (oneClass.getClassNbr().compareTo(twoClass.getClassNbr()) != 0)
+        if (oneClass.getBldg_room() != null) {
+            if (twoClass.getBldg_room() == null)
+                return false;
+            if (oneClass.getBldg_room().compareTo(twoClass.getBldg_room()) != 0)
+                return false;
+        }else if (twoClass.getBldg_room() != null)
             return false;
 
         //Time - 1 string, 4 ints
@@ -505,17 +501,46 @@ public class FacadeTest {
             return false;
         if (oneClass.getCourse().subject.compareTo(twoClass.getCourse().subject) != 0)
             return false;
-        if (oneClass.getCourse().description.compareTo(twoClass.getCourse().description) != 0)
+
+        if (oneClass.getCourse().description != null) {
+            if (twoClass.getCourse().description == null)
+                return false;
+            if (oneClass.getCourse().description.compareTo(twoClass.getCourse().description) != 0)
+                return false;
+        }else if (twoClass.getCourse().description != null)
             return false;
+
         if (oneClass.getCourse().units != twoClass.getCourse().units)
             return false;
 
         //Professor - Need super of FacultyStaff
-        if (oneClass.getInstructor().getFirstName().compareTo(twoClass.getInstructor().getFirstName()) != 0)
-            return false;
-        if (oneClass.getInstructor().getSSN().compareTo(twoClass.getInstructor().getSSN()) != 0)
-            return false;
-        if (oneClass.getInstructor().getLastName().compareTo(twoClass.getInstructor().getLastName()) != 0)
+        if (oneClass.getInstructor() != null) {
+            if (twoClass.getInstructor() == null)
+                return false;
+            Professor p1 = oneClass.getInstructor();
+            Professor p2 = twoClass.getInstructor();
+            if (p1.getFirstName() != null) {
+                if (p2.getFirstName() == null)
+                    return false;
+                if (p1.getFirstName().compareTo(p1.getFirstName()) != 0)
+                    return false;
+            }else if (p2.getFirstName() != null)
+                return false;
+            if (p1.getLastName() != null) {
+                if (p2.getLastName() == null)
+                    return false;
+                if (p1.getLastName().compareTo(p1.getLastName()) != 0)
+                    return false;
+            }else if (p2.getLastName() != null)
+                return false;
+            if (p1.getSSN() != null) {
+                if (p2.getSSN() == null)
+                    return false;
+                if (p1.getSSN().compareTo(p1.getSSN()) != 0)
+                    return false;
+            }else if (p2.getSSN() != null)
+                return false;
+        }else if (twoClass.getInstructor() != null)
             return false;
         return true;
     }
