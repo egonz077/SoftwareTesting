@@ -258,27 +258,27 @@ public class FacadeTest {
 
         //3rd Course
         DatabaseStub course2 = new DatabaseStub();
-        course1.setCatlgNbr("2250");
-        course1.setSubject("COP");
-        course1.setUnits(0);
+        course2.setCatlgNbr("2049");
+        course2.setSubject("PHY");
+        course2.setUnits(0);
 
         Time time2 = new Time();
-        time1.setDays("1010000");
-        time1.setFrHr(11);
-        time1.setFrMn(0);
-        time1.setToHr(12);
-        time1.setToMn(15);
+        time2.setDays("1010000");
+        time2.setFrHr(9);
+        time2.setFrMn(30);
+        time2.setToHr(10);
+        time2.setToMn(45);
 
         ClassDetails classDetails2 = new ClassDetails();
-        classDetails1.setDatabaseStub(course2);
-        classDetails1.setTime(time2);
-        classDetails1.setCampus("University");
-        classDetails1.setTerm("Spring 2007");
-        classDetails1.setClassNbr("2250");
+        classDetails2.setDatabaseStub(course2);
+        classDetails2.setTime(time2);
+        classDetails2.setCampus("University");
+        classDetails2.setTerm("Spring 2007");
+        classDetails2.setClassNbr("2049");
 
         Collection<ClassDetails> collectionOfClassDetails2 = new ArrayList<ClassDetails>();
-        collectionOfClassDetails1.add(classDetails1);
-        c.add(collectionOfClassDetails1);
+        collectionOfClassDetails2.add(classDetails2);
+        c.add(collectionOfClassDetails2);
 
         ArrayList list = (ArrayList) c;
         Schedule schedule = new Schedule(list);
@@ -294,6 +294,7 @@ public class FacadeTest {
         Collection<String> courses = new ArrayList<String>();
         courses.add("HIS1010");
         courses.add("COP2250");
+        courses.add("PHY2049");
 
         //Campus (University, Biscane)
         String campus = "University";
@@ -550,8 +551,7 @@ public class FacadeTest {
     @Test
     public void SM_001BS_Subsystem_TC016() throws Exception {
         //Test String
-        String Test =
-                "No Schedule Found";
+        String test = null;
 
         //Client Collection<Schedule> Object
         Collection<Schedule> collectionOfSchedules;
@@ -565,25 +565,54 @@ public class FacadeTest {
         String SPDays = "1010000";
         //Make collectionOfSchedules
         collectionOfSchedules = fc.createSchedule("Summer 2007", courses, university, SPDays);
-        //if (collectionOfSchedules < 1)
         //Page number
         int pg = 0;
 
-        assertEquals("HTML String:", Test, client.buildSchedulesPage(collectionOfSchedules, pg));
+        try {
+            client.buildSchedulesPage(collectionOfSchedules, pg);
+        } catch (IndexOutOfBoundsException e) {
+            assertEquals("HTML String:", test, null);
+        }
     }
 
     @Test
     public void SM_001BS_Subsystem_TC017() throws Exception {
         //Test String
-        String Test =
-                "No Schedule Found";
+        String test = null;
 
         //Client Collection<Schedule> Object
         Collection<Schedule> collectionOfSchedules;
         FrontendFacade fc = new FrontendFacade();
         Collection<String> courses = new ArrayList<String>();
         //Form Courses
-            /*No Courses added*/
+        courses.add("HIS1010");
+        //University
+        String university = "University";
+        //Select days
+        String SPDays = "0000000";
+        //Make collectionOfSchedules
+        collectionOfSchedules = fc.createSchedule("Spring 2007", courses, university, SPDays);
+        //Page number
+        int pg = 0;
+
+        try {
+            client.buildSchedulesPage(collectionOfSchedules, pg);
+        } catch (IndexOutOfBoundsException e) {
+            assertEquals("HTML String:", test, null);
+        }
+    }
+
+    @Test
+    public void SM_001BS_Subsystem_TC018() throws Exception {
+        //Test String
+        String test = null;
+
+        //Client Collection<Schedule> Object
+        Collection<Schedule> collectionOfSchedules;
+        FrontendFacade fc = new FrontendFacade();
+        Collection<String> courses = new ArrayList<String>();
+        //Form Courses
+        courses.add("ABCD123");
         //University
         String university = "University";
         //Select days
@@ -593,33 +622,11 @@ public class FacadeTest {
         //Page number
         int pg = 0;
 
-
-        assertEquals("HTML String:", Test, client.buildSchedulesPage(collectionOfSchedules, pg));
-    }
-
-    @Test
-    public void SM_001BS_Subsystem_TC018() throws Exception {
-        //Test String
-        String Test =
-                "No Schedule Found";
-
-        //Client Collection<Schedule> Object
-        Collection<Schedule> collectionOfSchedules;
-        FrontendFacade fc = new FrontendFacade();
-        Collection<String> courses = new ArrayList<String>();
-        //Form Courses
-        courses.add("HIS1010");
-        //University
-        String university = "University";
-        //Select days
-        String SPDays = "1010000";
-        //Make collectionOfSchedules
-        collectionOfSchedules = fc.createSchedule("Summer 2007", courses, university, SPDays);
-        //Page number
-        int pg = 0;
-
-
-        assertEquals("HTML String:", Test, client.buildSchedulesPage(collectionOfSchedules, pg));
+        try {
+            client.buildSchedulesPage(collectionOfSchedules, pg);
+        } catch (IndexOutOfBoundsException e) {
+            assertEquals("HTML String:", test, null);
+        }
     }
 
     @Test
@@ -629,17 +636,17 @@ public class FacadeTest {
 
     @Test
     public void SM_001GSS_Subsystem_TC020() throws Exception {
-        fail("Not Yet Implamentaded");
+        fail("Not yet implemented");
     }
 
     @Test
     public void SM_001GB_Subsystem_TC021() throws Exception {
-
+        fail("Not yet implemented");
     }
 
     @Test
     public void SM_001LO_Subsystem_TC022() throws Exception {
-
+        fail("Not yet implemented");
     }
 
     //Compare Methods
