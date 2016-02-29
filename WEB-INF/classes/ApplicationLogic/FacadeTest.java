@@ -732,6 +732,14 @@ public class FacadeTest {
         } else if (twoClass.getBldg_room() != null)
             return false;
 
+        if (oneClass.getTerm() != null) {
+            if (twoClass.getTerm() == null)
+                return false;
+            if (oneClass.getTerm().compareTo(twoClass.getTerm()) != 0)
+                return false;
+        } else if (twoClass.getTerm() != null)
+            return false;
+
         //Time - 1 string, 4 ints
         if (oneClass.getTime().days.compareTo(twoClass.getTime().days) != 0)
             return false;
