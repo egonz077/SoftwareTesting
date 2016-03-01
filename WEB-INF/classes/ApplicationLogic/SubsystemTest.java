@@ -80,7 +80,7 @@ public class SubsystemTest {
     //Testing method createSchedule
     //Sunny-Day
     @Test
-    public void SM_001CS_Subsystem_TC007() throws Exception {
+    public void SM_002CS_Subsystem_TC007() throws Exception {
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
         course.setCatlgNbr("1010");
@@ -133,7 +133,7 @@ public class SubsystemTest {
     }
 
     @Test
-    public void SM_001CS_Subsystem_TC008() throws Exception {
+    public void SM_002CS_Subsystem_TC008() throws Exception {
         //Test schedule object
         Collection<Collection<ClassDetails>> c = new ArrayList<Collection<ClassDetails>>();
 
@@ -211,7 +211,7 @@ public class SubsystemTest {
     }
 
     @Test
-    public void SM_001CS_Subsystem_TC009() throws Exception {
+    public void SM_002CS_Subsystem_TC009() throws Exception {
         //Test schedule object
         Collection<Collection<ClassDetails>> c = new ArrayList<Collection<ClassDetails>>();
 
@@ -315,7 +315,7 @@ public class SubsystemTest {
 
     //Rainy-Day
     @Test
-    public void SM_001CS_Subsystem_TC010() throws Exception {
+    public void SM_002CS_Subsystem_TC010() throws Exception {
         //Test schedule object
         Collection test = new ArrayList();
 
@@ -338,7 +338,7 @@ public class SubsystemTest {
     }
 
     @Test
-    public void SM_001CS_Subsystem_TC011() throws Exception {
+    public void SM_002CS_Subsystem_TC011() throws Exception {
         //Test schedule object
         Collection test = new ArrayList();
 
@@ -361,7 +361,7 @@ public class SubsystemTest {
     }
 
     @Test
-    public void SM_001CS_Subsystem_TC012() throws Exception {
+    public void SM_002CS_Subsystem_TC012() throws Exception {
         //Test schedule object
         Collection test = new ArrayList();
 
@@ -388,7 +388,7 @@ public class SubsystemTest {
     //Testing method buildSchedules
     //Sunny-Day
     @Test
-    public void SM_001BS_Subsystem_TC013() throws Exception {
+    public void SM_003BS_Subsystem_TC013() throws Exception {
         //Test String
         String Test =
                 "<form id=\"form1\" method=\"post\" action=\"\"><h2>Schedule1</h2><table><tr><td>Hours</td><td>Monday</td><td>Tuesday</td><td>Wednesday</td><td>Thursday</td><td>Friday</td><td>Saturday</td><td>Sunday</td></tr><tr><td>0:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>1:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>2:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>3:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>4:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>5:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>6:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>7:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>8:00</td><td>HIS1010\n" +
@@ -429,7 +429,7 @@ public class SubsystemTest {
     }
 
     @Test
-    public void SM_001BS_Subsystem_TC014() throws Exception {
+    public void SM_003BS_Subsystem_TC014() throws Exception {
         //Test String
         String Test =
                 "<form id=\"form1\" method=\"post\" action=\"\"><h2>Schedule1</h2><table><tr><td>Hours</td><td>Monday</td><td>Tuesday</td><td>Wednesday</td><td>Thursday</td><td>Friday</td><td>Saturday</td><td>Sunday</td></tr><tr><td>0:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>1:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>2:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>3:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>4:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>5:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>6:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>7:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>8:00</td><td>HIS1010\n" +
@@ -484,7 +484,7 @@ public class SubsystemTest {
     }
 
     @Test
-    public void SM_001BS_Subsystem_TC015() throws Exception {
+    public void SM_003BS_Subsystem_TC015() throws Exception {
         //Test String
         String Test =
                 "<form id=\"form1\" method=\"post\" action=\"\"><h2>Schedule3</h2><table><tr><td>Hours</td><td>Monday</td><td>Tuesday</td><td>Wednesday</td><td>Thursday</td><td>Friday</td><td>Saturday</td><td>Sunday</td></tr><tr><td>0:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>1:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>2:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>3:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>4:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>5:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>6:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>7:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>8:00</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>9:00</td><td>PHY2048\n" +
@@ -555,7 +555,7 @@ public class SubsystemTest {
      * On monday and wednesday, showing page 0
      */
     @Test
-    public void SM_001BS_Subsystem_TC016() throws Exception {
+    public void SM_003BS_Subsystem_TC016() throws Exception {
         //Test String
         String test = null;
 
@@ -582,7 +582,7 @@ public class SubsystemTest {
     }
 
     @Test
-    public void SM_001BS_Subsystem_TC017() throws Exception {
+    public void SM_003BS_Subsystem_TC017() throws Exception {
         //Test String
         String test = null;
 
@@ -609,7 +609,7 @@ public class SubsystemTest {
     }
 
     @Test
-    public void SM_001BS_Subsystem_TC018() throws Exception {
+    public void SM_003BS_Subsystem_TC018() throws Exception {
         //Test String
         String test = null;
 
@@ -636,22 +636,26 @@ public class SubsystemTest {
     }
 
     @Test
-    public void SM_001BP_Subsystem_TC019() throws Exception {
+    public void SM_004BP_Subsystem_TC019() throws Exception {
+        client.buildPage();
         fail("Not yet implemented");
     }
 
     @Test
-    public void SM_001GSS_Subsystem_TC020() throws Exception {
+    public void SM_005GSS_Subsystem_TC020() throws Exception {
+        client.getSavedSchedules();
         fail("Not yet implemented");
     }
 
     @Test
-    public void SM_001GB_Subsystem_TC021() throws Exception {
+    public void SM_006GB_Subsystem_TC021() throws Exception {
+        client.getBalance();
         fail("Not yet implemented");
     }
 
     @Test
-    public void SM_001LO_Subsystem_TC022() throws Exception {
+    public void SM_007LO_Subsystem_TC022() throws Exception {
+        client.logout();
         fail("Not yet implemented");
     }
 
