@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 
 /**
  * Created by Omar on 2/29/2016 at 7:25 PM.
- * <p/>
+ *
  * This is the UnitTest Class for schedule maker
  */
 public class UnitTest {
@@ -28,6 +28,7 @@ public class UnitTest {
 
     }
 
+    //Class Details
     @Test
     public void SM_001CD_Unit_TC001() {
         DatabaseStub course1 = new DatabaseStub("History", "1000");
@@ -144,13 +145,10 @@ public class UnitTest {
 
         ClassDetails class1 = new ClassDetails(course1, "1000", teacher1, "101", "FIU", "Fall", time1);
 
-        System.out.print(class1.toString());
         assertEquals("Should print everything when campus and time are non-null",
                 "History1000" + "\n" + "1000" + "\n" +
                         "7:0-9:0" + "\n"
                         + "FIU" + "\n", class1.toString());
-
-
     }
 
     @Test
@@ -179,8 +177,10 @@ public class UnitTest {
                         "7:0-9:0" + "\n", class1.toString());
     }
 
+    //Testing createSchedule(ScheduleOptions)
+    //Sunny
     @Test
-    public void SM_002SMC_Unit_TC001() {
+    public void SM_002SMC_Unit_TC012() {
 
 
         ScheduleOptions sched = new ScheduleOptions(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
@@ -192,7 +192,7 @@ public class UnitTest {
     }
 
     @Test
-    public void SM_002SMC_Unit_TC002() {
+    public void SM_002SMC_Unit_TC013() {
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
 
@@ -241,7 +241,7 @@ public class UnitTest {
     }
 
     @Test
-    public void SM_002SMC_Unit_TC003() {
+    public void SM_002SMC_Unit_TC014() {
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
 
@@ -289,9 +289,9 @@ public class UnitTest {
 
     }
 
-
+    //Rainy
     @Test
-    public void SM_002SMC_Unit_TC004() {
+    public void SM_002SMC_Unit_TC015() {
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
 
@@ -340,7 +340,7 @@ public class UnitTest {
     }
 
     @Test
-    public void SM_002SMC_Unit_TC005() {
+    public void SM_002SMC_Unit_TC016() {
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
 
@@ -389,7 +389,7 @@ public class UnitTest {
     }
 
     @Test
-    public void SM_002SMC_Unit_TC006() {
+    public void SM_002SMC_Unit_TC017() {
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
 
@@ -438,7 +438,7 @@ public class UnitTest {
     }
 
     @Test
-    public void SM_002SMC_Unit_TC007() {
+    public void SM_002SMC_Unit_TC018() {
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
 
@@ -486,8 +486,10 @@ public class UnitTest {
 
     }
 
+    //Testing createSchedule w/ 4 parameters
+    //Sunny
     @Test
-    public void SM_002SMC_Unit_TC008() {
+    public void SM_003SMC_Unit_TC019() {
 
 
         String term = "Spring 2007";
@@ -502,7 +504,7 @@ public class UnitTest {
     }
 
     @Test
-    public void SM_002SMC_Unit_TC009() {
+    public void SM_003SMC_Unit_TC020() {
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
 
@@ -554,7 +556,7 @@ public class UnitTest {
     }
 
     @Test
-    public void SM_002SMC_Unit_TC010() {
+    public void SM_003SMC_Unit_TC021() {
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
 
@@ -605,9 +607,8 @@ public class UnitTest {
 
     }
 
-
     @Test
-    public void SM_002SMC_Unit_TC011() {
+    public void SM_003SMC_Unit_TC022() {
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
 
@@ -658,8 +659,9 @@ public class UnitTest {
 
     }
 
+    //Rainy
     @Test
-    public void SM_002SMC_Unit_TC012() {
+    public void SM_003SMC_Unit_TC023() {
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
 
@@ -711,7 +713,7 @@ public class UnitTest {
     }
 
     @Test
-    public void SM_002SMC_Unit_TC013() {
+    public void SM_003SMC_Unit_TC024() {
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
 
@@ -763,7 +765,7 @@ public class UnitTest {
     }
 
     @Test
-    public void SM_002SMC_Unit_TC014() {
+    public void SM_003SMC_Unit_TC025() {
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
 
@@ -815,22 +817,22 @@ public class UnitTest {
     }
 
     @Test
-    public void SM_001_SMC_Unit_TC_015() {
+    public void SM_004SMC_Unit_TC026() {
         fail("Not yet implemented");
     }
 
     @Test
-    public void SM_001_SMC_Unit_TC_016() {
+    public void SM_005SMC_Unit_TC027() {
         fail("Not yet implemented");
     }
 
     @Test
-    public void SM_001_SMC_Unit_TC_017() {
+    public void SM_006SMC_Unit_TC028() {
         fail("Not yet implemented");
     }
 
     @Test
-    public void SM_001_SMC_Unit_TC_018() {
+    public void SM_007SMC_Unit_TC029() {
         fail("Not yet implemented");
     }
 
@@ -856,7 +858,7 @@ public class UnitTest {
                 Schedule asd = (Schedule) twoSchedule;
 
                 if (!compareSchedules(qwe, asd)) {
-                    System.out.println("compareSchedule Failed");
+                    //System.out.println("compareSchedule Failed");
                     return false;
                 }
 
@@ -887,7 +889,7 @@ public class UnitTest {
                         ClassDetails classDetails2 = u2.next();
 
                         if (!compareClassDetails(classDetails1, classDetails2)) {
-                            System.out.println("compareClassDetails Failed");
+                            //System.out.println("compareClassDetails Failed");
                             return false;
                         }
                     }
