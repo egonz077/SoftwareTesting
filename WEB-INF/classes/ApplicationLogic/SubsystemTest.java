@@ -12,7 +12,13 @@ import java.util.Iterator;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-public class FacadeTest {
+/**
+ * Created by Dominick Martelly on 2/29/2016 at 7:25 PM.
+ *
+ * This is the SubsystemTest Class for schedule maker to test the package AppLogic by specification
+ */
+
+public class SubsystemTest {
 
     public FrontendFacade client;
 
