@@ -68,9 +68,9 @@ public class Course {
 
     /**
      * In this method, we return the classes searched for in the university database,
-     * given a certain course. To test our method, we created a stub which is normally
+     * given a certain course. To Unit_Sub our method, we created a stub which is normally
      * commented out - but will be uncommented and the remainder code commented - to
-     * test the output with a given stub database.
+     * Unit_Sub the output with a given stub database.
      * @param term
      * @param campus
      * @return Collection<ClassDetails>
