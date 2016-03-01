@@ -13,7 +13,25 @@ public class ScheduleOptions
     String campus;
     String m, t, w, th, f, s, su;
     Integer gap;
-
+	public ScheduleOptions(String term, String course1, String course2, String course3, String course4, String course5, String course6, String campus, String m, String t, String w, String th, String f, String s, String su, Integer gap)
+    {
+    	this.term = term;
+    	this.course1 = course1;
+    	this.course2 = course2;
+    	this.course3 = course3;
+    	this.course4 = course4;
+    	this.course5 = course5;
+    	this.course6 = course6;
+    	this.campus = campus;
+    	this.m = m;
+    	this.t= t;
+    	this.w = w;
+    	this.th = th;
+    	this.f = f;
+    	this.s = s;
+    	this.su = su;
+    	this.gap = gap;
+    }
     public String getTerm() {
         return term;
     }
