@@ -1,13 +1,12 @@
 package ApplicationLogic;
 
-import Storage.BackendFacade;
-import Storage.Course;
 import Storage.DatabaseStub;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 
+@SuppressWarnings("ALL")
 public class ClassDetails {
 
     private DatabaseStub db;
@@ -23,6 +22,7 @@ public class ClassDetails {
     public ClassDetails() {
 
     }
+
 
     public void setTerm(String term) {
         this.term = term;
@@ -204,5 +204,16 @@ public class ClassDetails {
 
     public void setBldg_room(String bldg_room) {
         this.bldg_room = bldg_room;
+    }
+
+    //New Constructor
+    public ClassDetails(DatabaseStub database, String classNbr, Professor teacher1, String bldg, String campus, String term, Time time1) {
+        this.db = database;
+        this.instructor = teacher1;
+        this.time = time1;
+        this.campus = campus;
+        this.term = term;
+        this.classNbr = classNbr;
+        this.bldg_room = bldg;
     }
 }
