@@ -14,13 +14,13 @@ public class DatabaseStub {
     public int units;
 
     //ssn, pantherID, password
-    String[][] studentDatabase = {
+    private final String[][] studentDatabase = {
             {"154345234", "2234523", "abc345"},
             {"134523135", "2354235", "abc234"},
             {"123456789", "1412412", "abc123"}
     };
     //courseid, classNbr, subject, catlgNbr, term, campus, sect, from, to, days
-    String[][] classDatabase = {
+    private final String[][] classDatabase = {
             {"1", "10772", "COP", "2210", "Spring 2007", "Biscayne",   "B51", "11:00:00", "12:15:00", "1010000"},
             {"1", "17736", "COP", "2210", "Spring 2007", "Biscayne",   "B52", "07:50:00", "09:05:00", "1010101"},
             {"2", "13136", "COP", "2250", "Spring 2007", "University", "U02", "15:30:00", "16:45:00", "1010100"},
