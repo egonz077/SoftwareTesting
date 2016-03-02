@@ -15,7 +15,7 @@ import static org.junit.Assert.fail;
 /**
  * Created by Dominick Martelly on 2/29/2016 at 7:25 PM.
  *
- * This is the SubsystemTest Class for schedule maker to Unit_Sub the package AppLogic by specification
+ * This is the SubsystemTest Class for schedule maker
  */
 
 public class SubsystemTest {
@@ -549,11 +549,6 @@ public class SubsystemTest {
     }
 
     //Rainy-Day
-    /*
-     * This Unit_Sub passes a Collection of Schedules that contains only one schedule where the
-     * term is Summer 2007, Courses Object containing HIS1010, in the campus University
-     * On monday and wednesday, showing page 0
-     */
     @Test
     public void SM_003BS_Subsystem_TC016() throws Exception {
         //Test String
