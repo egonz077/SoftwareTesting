@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 /**
  * Created by Dominick Martelly on 2/29/2016 at 7:25 PM.
@@ -59,21 +58,21 @@ public class SubsystemTest {
     @Test
     public void SM_001L_Subsystem_TC004() throws Exception {
         //User name doesn't exist, but password does
-        assertEquals("Logged In?", false, client.login("445984253", "abc123"));
+        assertFalse(client.login("445984253", "abc123"));
 
     }
 
     @Test
     public void SM_001L_Subsystem_TC005() throws Exception {
         //User name exists, but password does not
-        assertEquals("Logged In?", false, client.login("2354235", "!@#$%"));
+        assertFalse(client.login("2354235", "!@#$%"));
 
     }
 
     @Test
     public void SM_001L_Subsystem_TC006() throws Exception {
         //Neither User name or password exists in the database
-        assertEquals("Logged In?", false, client.login("tumadre3", "1256738fjden"));
+        assertFalse(client.login("", ""));
     }
 
 
@@ -631,25 +630,25 @@ public class SubsystemTest {
     }
 
     @Test
-    public void SM_004BP_Subsystem_TC019() throws Exception {
+    public void SM_003BP_Subsystem_TC019() throws Exception {
         client.buildPage();
         fail("Not yet implemented");
     }
 
     @Test
-    public void SM_005GSS_Subsystem_TC020() throws Exception {
+    public void SM_004GSS_Subsystem_TC020() throws Exception {
         client.getSavedSchedules();
         fail("Not yet implemented");
     }
 
     @Test
-    public void SM_006GB_Subsystem_TC021() throws Exception {
+    public void SM_005GB_Subsystem_TC021() throws Exception {
         client.getBalance();
         fail("Not yet implemented");
     }
 
     @Test
-    public void SM_007LO_Subsystem_TC022() throws Exception {
+    public void SM_006LO_Subsystem_TC022() throws Exception {
         client.logout();
         fail("Not yet implemented");
     }
