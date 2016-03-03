@@ -36,21 +36,21 @@ public class SubsystemTest {
     @Test
     public void SM_001L_Subsystem_TC001() throws Exception {
         //User name and password exists in database
-        assertEquals("Logged In?", true, client.login("1412412", "abc123"));
+        assertTrue(client.login("1412412", "abc123"));
 
     }
 
     @Test
     public void SM_001L_Subsystem_TC002() throws Exception {
         //User name and password exists in database
-        assertEquals("Logged In?", true, client.login("2354235", "abc234"));
+        assertTrue(client.login("2354235", "abc234"));
 
     }
 
     @Test
     public void SM_001L_Subsystem_TC003() throws Exception {
         //User name and password exists in database
-        assertEquals("Logged In?", true, client.login("2234523", "abc345"));
+        assertTrue(client.login("2234523", "abc345"));
 
     }
 
@@ -71,7 +71,7 @@ public class SubsystemTest {
 
     @Test
     public void SM_001L_Subsystem_TC006() throws Exception {
-        //Neither User name or password exists in the database
+        //Neither User name and password are both empty strings
         assertFalse(client.login("", ""));
     }
 
@@ -126,9 +126,11 @@ public class SubsystemTest {
         //SPDays (10100000)
         String SPdays = "1010000";
 
+        //Create the Collection of Schedules
         Collection client = this.client.createSchedule(term, courses, campus, SPdays);
 
-        assertEquals("Collection:", true, compareCollectionofSchedule(test, client));
+        //Compare the Test Collection against the Client collection
+        assertTrue(compareCollectionofSchedule(test, client));
     }
 
     @Test
@@ -206,7 +208,7 @@ public class SubsystemTest {
 
         Collection client = this.client.createSchedule(term, courses, campus, SPdays);
 
-        assertEquals("Collection:", true, compareCollectionofSchedule(test, client));
+        assertTrue(compareCollectionofSchedule(test, client));
     }
 
     @Test
@@ -309,7 +311,7 @@ public class SubsystemTest {
 
         Collection client = this.client.createSchedule(term, courses, campus, SPdays);
 
-        assertEquals("Collection:", true, compareCollectionofSchedule(test, client));
+        assertTrue(compareCollectionofSchedule(test, client));
     }
 
     //Rainy-Day
@@ -324,7 +326,7 @@ public class SubsystemTest {
 
         //Collection of courses
         Collection<String> courses = new ArrayList<String>();
-        courses.add("UnderWaterBasketWeaving101");
+        courses.add("IRA1010");
 
         //Campus (University, Biscane)
         String campus = "All";
@@ -333,7 +335,7 @@ public class SubsystemTest {
         String SPdays = "1010000";
 
         Collection client = this.client.createSchedule(term, courses, campus, SPdays);
-        assertEquals("Collection:", true, compareCollectionofSchedule(test, client));
+        assertTrue(compareCollectionofSchedule(test, client));
     }
 
     @Test
@@ -356,7 +358,7 @@ public class SubsystemTest {
         String SPdays = "1010000";
 
         Collection client = this.client.createSchedule(term, courses, campus, SPdays);
-        assertEquals("Collection:", true, compareCollectionofSchedule(test, client));
+        assertTrue(compareCollectionofSchedule(test, client));
     }
 
     @Test
@@ -380,7 +382,7 @@ public class SubsystemTest {
 
         Collection client = this.client.createSchedule(term, courses, campus, SPdays);
 
-        assertEquals("Collection:", true, compareCollectionofSchedule(test, client));
+        assertTrue(compareCollectionofSchedule(test, client));
     }
 
 
@@ -424,7 +426,7 @@ public class SubsystemTest {
 
         int pg = 0;
 
-        assertEquals("HTML String:", Test, client.buildSchedulesPage(collectionOfSchedules, pg));
+        assertTrue(Test.compareTo(client.buildSchedulesPage(collectionOfSchedules, pg)) == 0);
     }
 
     @Test
@@ -471,7 +473,7 @@ public class SubsystemTest {
         courses.add("HIS1010");
         courses.add("COP2250");
         //Select days
-        String SPDays = "10100000";
+        String SPDays = "1010000";
 
         //Make collectionOfSchedules
         Collection<Schedule> collectionOfSchedules = client.createSchedule("Spring 2007", courses, "University", SPDays);
@@ -479,7 +481,7 @@ public class SubsystemTest {
         //Page number
         int pg = 0;
 
-        assertEquals("HTML String:", Test, client.buildSchedulesPage(collectionOfSchedules, pg));
+        assertTrue(Test.compareTo(client.buildSchedulesPage(collectionOfSchedules, pg)) == 0);
     }
 
     @Test
@@ -537,14 +539,14 @@ public class SubsystemTest {
         //University
         String university = "All";
         //Select days
-        String SPDays = "10101000";
+        String SPDays = "1010100";
         //Make collectionOfSchedules
         collectionOfSchedules = fc.createSchedule("Spring 2007", courses, university, SPDays);
 
         int pg = 2;
 
         //Add courses PHY2048, COP4338, in all campuses, on days monday, wednesday, and friday, and show page 2
-        assertEquals("HTML String:", Test, client.buildSchedulesPage(collectionOfSchedules, pg));
+        assertTrue(Test.compareTo(client.buildSchedulesPage(collectionOfSchedules, pg)) == 0);
     }
 
     //Rainy-Day
@@ -571,7 +573,7 @@ public class SubsystemTest {
         try {
             client.buildSchedulesPage(collectionOfSchedules, pg);
         } catch (IndexOutOfBoundsException e) {
-            assertEquals("HTML String:", test, null);
+            assertNull(test);
         }
     }
 
@@ -598,7 +600,7 @@ public class SubsystemTest {
         try {
             client.buildSchedulesPage(collectionOfSchedules, pg);
         } catch (IndexOutOfBoundsException e) {
-            assertEquals("HTML String:", test, null);
+            assertNull(test);
         }
     }
 
@@ -612,7 +614,7 @@ public class SubsystemTest {
         FrontendFacade fc = new FrontendFacade();
         Collection<String> courses = new ArrayList<String>();
         //Form Courses
-        courses.add("ABCD123");
+        courses.add("HIS1010");
         //University
         String university = "University";
         //Select days
@@ -620,15 +622,16 @@ public class SubsystemTest {
         //Make collectionOfSchedules
         collectionOfSchedules = fc.createSchedule("Spring 2007", courses, university, SPDays);
         //Page number
-        int pg = 0;
+        int pg = 5;
 
         try {
             client.buildSchedulesPage(collectionOfSchedules, pg);
         } catch (IndexOutOfBoundsException e) {
-            assertEquals("HTML String:", test, null);
+            assertNull(test);
         }
     }
 
+    //Failed Tests
     @Test
     public void SM_003BP_Subsystem_TC019() throws Exception {
         client.buildPage();
