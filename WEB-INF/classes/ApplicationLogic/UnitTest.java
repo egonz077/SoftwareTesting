@@ -856,11 +856,11 @@ public class UnitTest {
         course.setUnits(0);
 
         Time time = new Time();
-        time.setDays("1010000");
-        time.setFrHr(8);
-        time.setFrMn(0);
-        time.setToHr(9);
-        time.setToMn(15);
+        time.days = "1010000";
+        time.frHr = 8;
+        time.frMn = 0;
+        time.toHr = 9;
+        time.toMn = 15;
 
         ClassDetails classDetails = new ClassDetails();
         classDetails.setDatabaseStub(course);
@@ -880,11 +880,11 @@ public class UnitTest {
         course1.setUnits(0);
 
         Time time1 = new Time();
-        time1.setDays("1010100");
-        time1.setFrHr(11);
-        time1.setFrMn(0);
-        time1.setToHr(12);
-        time1.setToMn(15);
+        time1.days = "1010100";
+        time1.frHr = 11;
+        time1.frMn = 0;
+        time1.toHr = 12;
+        time1.toMn = 15;
 
         ClassDetails classDetails1 = new ClassDetails();
         classDetails1.setDatabaseStub(course1);
