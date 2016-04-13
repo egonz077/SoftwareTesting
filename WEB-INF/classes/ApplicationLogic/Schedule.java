@@ -1,7 +1,5 @@
 package ApplicationLogic;
 
-import ApplicationLogic.ClassDetails;
-
 import java.util.Collection;
 
 public class Schedule {
@@ -57,12 +55,4 @@ public class Schedule {
     public void addClass(Collection<ClassDetails> classes) {
     }
 
-    //New setter and constructor
-    public void setClasses(Collection<ClassDetails> classes) {
-        this.classes = classes;
-    }
-
-    public Schedule() {
-
-    }
 }

@@ -1,9 +1,6 @@
 package ApplicationLogic;
 
 
-import ApplicationLogic.ClassDetails;
-import ApplicationLogic.FacultyStaff;
-
 public class Professor extends FacultyStaff {
 
 
@@ -17,8 +14,4 @@ public class Professor extends FacultyStaff {
         return null;
     }
 
-    //New constructor
-    public Professor() {
-        super();
-    }
 }

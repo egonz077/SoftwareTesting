@@ -656,6 +656,11 @@ public class SubsystemTest {
         fail("Not yet implemented");
     }
 
+    @Test
+    public void newTest1() throws Exception {
+
+    }
+
     //Compare Methods
     private boolean compareCollectionofSchedule(Collection<Object> one, Collection<Object> two) {
         if (one != null) {

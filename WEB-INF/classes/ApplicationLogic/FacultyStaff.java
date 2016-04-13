@@ -37,9 +37,4 @@ public class FacultyStaff {
         this.lastName = lastName;
     }
 
-
-    //Newly created Constructor
-    public FacultyStaff() {
-
-    }
 }
