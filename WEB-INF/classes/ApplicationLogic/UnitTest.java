@@ -818,23 +818,113 @@ public class UnitTest {
 
     @Test
     public void SM_004SMC_Unit_TC026() {
+        ScheduleMakerController driver = new ScheduleMakerController();
+        driver.sortSchedules();
         fail("Not yet implemented");
     }
 
     @Test
     public void SM_005SMC_Unit_TC027() {
+        ScheduleMakerController driver = new ScheduleMakerController();
+        driver.getSavedSchedule();
         fail("Not yet implemented");
     }
 
     @Test
     public void SM_006SMC_Unit_TC028() {
+        ScheduleMakerController driver = new ScheduleMakerController();
+        driver.getBalance();
         fail("Not yet implemented");
     }
 
     @Test
     public void SM_007SMC_Unit_TC029() {
+        ScheduleMakerController driver = new ScheduleMakerController();
+        Collection<Schedule> c = new ArrayList<Schedule>();
+
+        driver.saveSchedules(c);
         fail("Not yet implemented");
     }
+
+    @Test
+    public void SM_008SMC_Unit_TC030() {
+        Collection<Collection<ClassDetails>> c = new ArrayList<Collection<ClassDetails>>();
+
+        DatabaseStub course = new DatabaseStub();
+        course.setCatlgNbr("1010");
+        course.setSubject("HIS");
+        course.setUnits(0);
+
+        Time time = new Time();
+        time.setDays("1010000");
+        time.setFrHr(8);
+        time.setFrMn(0);
+        time.setToHr(9);
+        time.setToMn(15);
+
+        ClassDetails classDetails = new ClassDetails();
+        classDetails.setDatabaseStub(course);
+        classDetails.setTime(time);
+        classDetails.setCampus("University");
+        classDetails.setTerm("Spring 2007");
+        classDetails.setClassNbr("1010");
+
+        Collection<ClassDetails> collectionOfClassDetails = new ArrayList<ClassDetails>();
+        collectionOfClassDetails.add(classDetails);
+        c.add(collectionOfClassDetails);
+
+        //2nd Course
+        DatabaseStub course1 = new DatabaseStub();
+        course1.setCatlgNbr("2250");
+        course1.setSubject("COP");
+        course1.setUnits(0);
+
+        Time time1 = new Time();
+        time1.setDays("1010100");
+        time1.setFrHr(11);
+        time1.setFrMn(0);
+        time1.setToHr(12);
+        time1.setToMn(15);
+
+        ClassDetails classDetails1 = new ClassDetails();
+        classDetails1.setDatabaseStub(course1);
+        classDetails1.setTime(time1);
+        classDetails1.setCampus("University");
+        classDetails1.setTerm("Spring 2007");
+        classDetails1.setClassNbr("2250");
+
+        Collection<ClassDetails> collectionOfClassDetails1 = new ArrayList<ClassDetails>();
+        collectionOfClassDetails1.add(classDetails1);
+        c.add(collectionOfClassDetails1);
+
+        ArrayList list = (ArrayList) c;
+        Schedule schedule = new Schedule(list);
+
+        Collection test = new ArrayList<Schedule>();
+        test.add(schedule);
+
+        //Client
+        //Term (Spring 2007)
+        String term = "Spring 2007";
+
+        //Collection of courses
+        Collection<String> courses = new ArrayList<String>();
+        courses.add("HIS1010");
+        courses.add("COP2250");
+
+        //Campus (University, Biscane)
+        String campus = "All";
+
+        //SPDays (10100000)
+        String SPdays = "1010100";
+
+        ScheduleMakerController driver = new ScheduleMakerController();
+        Collection client = driver.createSchedule(term, courses, campus, SPdays);
+
+        assertTrue(compareCollectionofSchedule(test, client));
+    }
+
+
 
     private boolean compareCollectionofSchedule(Collection<Object> one, Collection<Object> two) {
         if (one != null) {
