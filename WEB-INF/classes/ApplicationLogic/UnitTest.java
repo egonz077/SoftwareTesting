@@ -923,6 +923,174 @@ public class UnitTest {
 
         assertTrue(compareCollectionofSchedule(test, client));
     }
+	@Test
+	public void SM_001SMC_Unit_TC031()
+	{
+		//Test schedule object
+        DatabaseStub course = new DatabaseStub();
+       
+        
+        course.setCatlgNbr("1010");
+        course.setSubject("HIS");
+        course.setUnits(0);
+        
+        Time time = new Time(8,00,9,15,"1010000");
+        
+
+        ClassDetails classDetails = new ClassDetails();
+        classDetails.setDatabaseStub(course);
+        classDetails.setTime(time);
+        classDetails.setCampus("University");
+        classDetails.setTerm("Spring 2007");
+        classDetails.setClassNbr("1010");
+
+        Collection<ClassDetails> collectionOfClassDetails = new ArrayList<ClassDetails>();
+        collectionOfClassDetails.add(classDetails);
+
+        Collection<Collection<ClassDetails>> c = new ArrayList<Collection<ClassDetails>>();
+        c.add(collectionOfClassDetails);
+
+        ArrayList list = (ArrayList) c;
+        Schedule schedule = new Schedule(list);
+
+        Collection control = new ArrayList<Schedule>();
+        control.add(schedule);
+
+        //Client
+        //Term (Spring 2007)
+        String term = "Spring 2007";
+
+        //Campus (University, Biscane)
+        String campus = "University";
+
+        
+		
+		ScheduleOptions sched = new ScheduleOptions(term, "HIS1010","", "", "", "", "", campus, "0", "0", "0", "0", "0", "0", "0", 1);
+		ScheduleMakerController driver = new ScheduleMakerController();
+		
+		Collection toTest = driver.createSchedule(sched);
+		
+		assertFalse("Empty return", compareCollectionofSchedule(control,toTest));
+		
+	}
+	@Test
+	public void SM_001SMC_Unit_TC032()
+	{
+		//Test schedule object
+        DatabaseStub course = new DatabaseStub();
+       
+        
+        course.setCatlgNbr("1010");
+        course.setSubject("HIS");
+        course.setUnits(0);
+        
+        Time time = new Time(8,00,9,15,"1010000");
+        
+
+        ClassDetails classDetails = new ClassDetails();
+        classDetails.setDatabaseStub(course);
+        classDetails.setTime(time);
+        classDetails.setCampus("University");
+        classDetails.setTerm("Spring 2007");
+        classDetails.setClassNbr("1010");
+
+        Collection<ClassDetails> collectionOfClassDetails = new ArrayList<ClassDetails>();
+        collectionOfClassDetails.add(classDetails);
+
+        Collection<Collection<ClassDetails>> c = new ArrayList<Collection<ClassDetails>>();
+        c.add(collectionOfClassDetails);
+
+        ArrayList list = (ArrayList) c;
+        Schedule schedule = new Schedule(list);
+
+        Collection control = new ArrayList<Schedule>();
+        control.add(schedule);
+
+        //Client
+        //Term (Spring 2007)
+        String term = "Spring 2007";
+
+        //Campus (University, Biscane)
+        String campus = "University";
+
+        
+		
+		ScheduleOptions sched = new ScheduleOptions(term, "HIS1010","STA3510", "PHY2048", "COP3175", "COP2250", "COP4338", campus, "0", "0", "0", "0", "0", "0", "0", 1);
+		ScheduleMakerController driver = new ScheduleMakerController();
+		
+		Collection toTest = driver.createSchedule(sched);
+		
+		assertFalse("Empty return", compareCollectionofSchedule(control,toTest));
+		
+	}
+	@Test
+	public void SM_001SMC_Unit_TC033()
+	{
+		//Test schedule object
+        DatabaseStub course = new DatabaseStub();
+       
+        
+        course.setCatlgNbr("1010");
+        course.setSubject("HIS");
+        course.setUnits(0);
+        
+        Time time = new Time(8,00,9,15,"1010000");
+        
+
+        ClassDetails classDetails = new ClassDetails();
+        classDetails.setDatabaseStub(course);
+        classDetails.setTime(time);
+        classDetails.setCampus("University");
+        classDetails.setTerm("Spring 2007");
+        classDetails.setClassNbr("1010");
+
+        Collection<ClassDetails> collectionOfClassDetails = new ArrayList<ClassDetails>();
+        collectionOfClassDetails.add(classDetails);
+
+        Collection<Collection<ClassDetails>> c = new ArrayList<Collection<ClassDetails>>();
+        c.add(collectionOfClassDetails);
+
+        ArrayList list = (ArrayList) c;
+        Schedule schedule = new Schedule(list);
+
+        Collection control = new ArrayList<Schedule>();
+        control.add(schedule);
+
+        //Client
+        //Term (Spring 2007)
+        String term = "Spring 2007";
+
+        //Campus (University, Biscane)
+        String campus = "University";
+
+        
+		
+		ScheduleOptions sched = new ScheduleOptions(term, "HIS1010","STA3510", "PHY2048", "COP3175", "COP2250", "COP4338", campus, null, null, null, null, null, null, null, 1);
+		ScheduleMakerController driver = new ScheduleMakerController();
+		
+		Collection toTest = driver.createSchedule(sched);
+		
+		assertFalse("Empty return", compareCollectionofSchedule(control,toTest));
+		
+	}
+	@Test
+	public void SM_001CD_Unit_TC012()
+	{
+		Course course1 = new Course("History", "1000");
+		Professor teacher1 = new Professor("123456789","John","Doe");
+		Time time1 = new Time(6,30,7,30,"1010100");
+		
+		Course course2 = new Course("Psychology", "2000");
+		Professor teacher2 = new Professor("987654321","Mary","Smith");
+		Time time2 = new Time(7,00,9,00,"1010100");
+		
+		ClassDetails class1 = new ClassDetails(course1,"1000",teacher1,"101","FIU","Fall",time1);
+		ClassDetails class2 = new ClassDetails(course2, "2000", teacher2,"102","FIU","Fall", time2);
+		
+		assertTrue("hasConflict should return true for when class1 end time overlaps with "
+				+ "class2 beginning time", 
+				class1.hasConflict(class2));
+	}
 
 
 
