@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
  * This is the SubsystemTest Class for schedule maker
  */
 
-public class SubsystemTest {
+public class OldSubsystemTest {
 
     public FrontendFacade client;
 
@@ -658,31 +658,6 @@ public class SubsystemTest {
     public void SM_006LO_Subsystem_TC022() throws Exception {
         client.logout();
         fail("Not yet implemented");
-    }
-
-    @Test
-    public void SM_002CS_Subsystem_TC023() throws Exception {
-        //Test schedule object
-        ArrayList test = new ArrayList();
-
-        //Client
-        //Term (Spring 2007)
-        String term = "Spring 2007";
-
-        //Collection of courses
-        Collection<String> courses = new ArrayList<String>();
-
-        //Campus (University, Biscane)
-        String campus = "All";
-
-        //SPDays (10100000)
-        String SPdays = "1010000";
-
-        //Create the Collection of Schedules
-        Collection client = this.client.createSchedule(term, courses, campus, SPdays);
-
-        //Compare the Test Collection against the Client collection
-        assertTrue(compareCollectionofSchedule(test, client));
     }
 
     //Compare Methods
