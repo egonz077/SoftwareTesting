@@ -194,16 +194,8 @@ public class ClassDetails {
         this.db = databaseStub;
     }
 
-    public void setProfessor(Professor professor) {
-        this.instructor = professor;
-    }
-
     public void setClassNbr(String classNbr) {
         this.classNbr = classNbr;
-    }
-
-    public void setBldg_room(String bldg_room) {
-        this.bldg_room = bldg_room;
     }
 
     //New Constructor
