@@ -1,5 +1,9 @@
-package ApplicationLogic;
+package JUnit;
 
+import ApplicationLogic.ClassDetails;
+import ApplicationLogic.FrontendFacade;
+import ApplicationLogic.Schedule;
+import ApplicationLogic.Time;
 import Storage.DatabaseStub;
 import org.junit.After;
 import org.junit.Before;
