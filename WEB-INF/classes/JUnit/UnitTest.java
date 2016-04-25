@@ -210,7 +210,6 @@ public class UnitTest {
 
         ClassDetails class1 = new ClassDetails(course1,"1000",teacher1,"101","FIU","Fall",time1);
 
-        System.out.print(class1.toString());
         assertEquals("Should print everything when campus and time are non-null",
                 "History1000" + "\n" + "1000" + "\n" +
                         "7:0-9:0" + "\n"
@@ -1264,7 +1263,6 @@ public class UnitTest {
                         ClassDetails classDetails2 = u2.next();
 
                         if (!compareClassDetails(classDetails1, classDetails2)) {
-                            //System.out.println("compareClassDetails Failed");
                             return false;
                         }
                     }
