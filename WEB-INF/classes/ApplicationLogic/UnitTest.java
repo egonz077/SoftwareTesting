@@ -533,7 +533,7 @@ public class UnitTest {
     public void SM_002SMC_Unit_TC019() {
         
 		//Verify that createSchedule makes use of the findSchedule and conflict private methods 
-		//when passed a class with no specified days, and that 
+		//when passed a class with days that don't match with any existing class, and that 
 		//additional coverage for the ScheduleMakerController class is achieved.
 		
 		//Test schedule object
@@ -1178,7 +1178,7 @@ public class UnitTest {
         ScheduleMakerController driver = new ScheduleMakerController();
         Collection client = driver.createSchedule(term, courses, campus, SPdays);
 
-        assertTrue(compareCollectionofSchedule(test, client));
+        assertFalse(compareCollectionofSchedule(test, client));
     }
 	
 	/*
