@@ -122,8 +122,7 @@ public class UnitTest {
     }
 
     @Test
-    public void SM_001CD_Unit_TC005()
-    {
+    public void SM_001CD_Unit_TC005() {
 
         //Need to create two ClassDetails objects where class 1 time overlaps into class 2
         //This test case substantially increases our coverage
@@ -170,7 +169,6 @@ public class UnitTest {
         //passing in an hour to isAtTime that isn't within the time range of the ClassDetails object we're testing
         assertFalse("isAtTime returns true for 8 which is within the range of 7-9", class1.isAtTime(10));
     }
-
 
     /*
     * isAtDay() method tests
@@ -245,16 +243,15 @@ public class UnitTest {
                         "7:0-9:0" + "\n", class1.toString());
     }
 
+
 	/*
 	* UNIT TESTS FOR ScheduleMakerController.java BEGIN HERE
 	*/
 
-
-
-
-    /*Testing createSchedule(ScheduleOptions)
-	*Sunny
+    /*
+    * Testing createSchedule(ScheduleOptions)
 	*/
+    //Sunny
     @Test
     public void SM_002SMC_Unit_TC013() {
 
@@ -370,7 +367,6 @@ public class UnitTest {
         assertTrue("Only COP class on Biscayne campus should be returned.", compareCollectionofSchedule(control, toTest));
 
     }
-
     //Rainy
     @Test
     public void SM_002SMC_Unit_TC016() {
@@ -580,9 +576,9 @@ public class UnitTest {
         assertFalse("Only history class on Spring 2007 should be returned, as opposed to History class on Fall 2007", compareCollectionofSchedule(control, toTest));
 
     }
+
     @Test
-    public void SM_002SMC_Unit_TC020()
-    {
+    public void SM_002SMC_Unit_TC020() {
 
         //Verify that createSchedule makes use of the findSchedule and conflict private methods
         //when passed a class with no specified days, and that
@@ -635,9 +631,9 @@ public class UnitTest {
         assertFalse("Empty return", compareCollectionofSchedule(control,toTest));
 
     }
+
     @Test
-    public void SM_002SMC_Unit_TC021()
-    {
+    public void SM_002SMC_Unit_TC021() {
 
         //Verify that createSchedule makes use of the findSchedule and conflict private methods
         //when passed a class with no specified days, and that
@@ -690,9 +686,9 @@ public class UnitTest {
         assertFalse("Empty return", compareCollectionofSchedule(control,toTest));
 
     }
+
     @Test
-    public void SM_002SMC_Unit_TC022()
-    {
+    public void SM_002SMC_Unit_TC022() {
 
         //Verify that createSchedule method returns schedule with courses only within the term that the user specified.
 
@@ -745,8 +741,9 @@ public class UnitTest {
     }
 
 
-    /*Testing createSchedule w/ 4 parameters
-	*
+
+    /*
+    * Testing createSchedule w/ 4 parameters
 	*/
     //Sunny
     @Test
@@ -932,7 +929,6 @@ public class UnitTest {
         assertTrue("Only history class on Monday and Wednesday should be returned.", compareCollectionofSchedule(control, toTest));
 
     }
-
     //Rainy
     @Test
     public void SM_003SMC_Unit_TC027() {
@@ -1182,7 +1178,6 @@ public class UnitTest {
 	/*
 	* Test cases for unimplemented methods
 	*/
-
     @Test
     public void SM_004SMC_Unit_TC031() {
         ScheduleMakerController driver = new ScheduleMakerController();
@@ -1212,15 +1207,10 @@ public class UnitTest {
         driver.saveSchedules(c);
         fail("Not yet implemented");
     }
-
-   
-	
 	
 	/*
-	* Private method written by the team to compare collections of schedules.
+	* Private methods written by the team to compare collections of schedules.
 	*/
-
-
     private boolean compareCollectionofSchedule(Collection<Object> one, Collection<Object> two) {
         if (one != null) {
             if (two == null)
