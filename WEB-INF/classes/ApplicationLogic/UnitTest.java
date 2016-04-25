@@ -205,46 +205,43 @@ public class UnitTest {
 	*/
     @Test
     public void SM_001CD_Unit_TC010() {
-        DatabaseStub course1 = new DatabaseStub("History", "1000");
-        Professor teacher1 = new Professor("123456789", "John", "Doe");
-        Time time1 = new Time(7, 0, 9, 0, "1010100");
+    	Course course1 = new Course("History", "1000");
+		Professor teacher1 = new Professor("123456789","John","Doe");
+		Time time1 = new Time(7,00,9,00,"1010100");
 		
-		//We create the ClassDetails object
-        ClassDetails class1 = new ClassDetails(course1, "1000", teacher1, "101", "FIU", "Fall", time1);
+		ClassDetails class1 = new ClassDetails(course1,"1000",teacher1,"101","FIU","Fall",time1);
 		
-		//We make sure that the parameters passed into the ClassDetails object are printed
-        assertEquals("Should print everything when campus and time are non-null",
-                "History1000" + "\n" + "1000" + "\n" +
-                        "7:0-9:0" + "\n"
-                        + "FIU" + "\n", class1.toString());
+		System.out.print(class1.toString());
+		assertEquals("Should print everything when campus and time are non-null", 
+				"History1000" + "\n" + "1000" + "\n" +
+					   "7:0-9:0" + "\n"
+						+ "FIU" + "\n", class1.toString());
     }
 
     @Test
     public void SM_001CD_Unit_TC011() {
-        DatabaseStub course1 = new DatabaseStub("History", "1000");
-        Professor teacher1 = new Professor("123456789", "John", "Doe");
-        Time time1 = null;
-
-        ClassDetails class1 = new ClassDetails(course1, "1000", teacher1, "101", "FIU", "Fall", time1);
+    	Course course1 = new Course("History", "1000");
+		Professor teacher1 = new Professor("123456789","John","Doe");
+		Time time1 = null;
 		
-		//toString shouldn't print the time
-        assertEquals("Should omit time details since time is null",
-                "History1000" + "\n" + "1000" + "\n"
-                        + "FIU" + "\n", class1.toString());
+		ClassDetails class1 = new ClassDetails(course1,"1000",teacher1,"101","FIU","Fall",time1);
+		
+		assertEquals("Should omit time details since time is null", 
+				"History1000" + "\n" + "1000" + "\n" 
+							+ "FIU" + "\n", class1.toString());
     }
 
     @Test
     public void SM_001CD_Unit_TC012() {
-        DatabaseStub course1 = new DatabaseStub("History", "1000");
-        Professor teacher1 = new Professor("123456789", "John", "Doe");
-        Time time1 = new Time(7, 0, 9, 0, "1010100");
-
-        ClassDetails class1 = new ClassDetails(course1, "1000", teacher1, "101", null, "Fall", time1);
+    	Course course1 = new Course("History", "1000");
+		Professor teacher1 = new Professor("123456789","John","Doe");
+		Time time1 = new Time(7,00,9,00,"1010100");
 		
-		//toString shouldn't print the campus
-        assertEquals("Should omit campus details since campus is null",
-                "History1000" + "\n" + "1000" + "\n" +
-                        "7:0-9:0" + "\n", class1.toString());
+		ClassDetails class1 = new ClassDetails(course1,"1000",teacher1,"101",null,"Fall",time1);
+		
+		assertEquals("Should omit campus details since campus is null", 
+				"History1000" + "\n" + "1000" + "\n" +
+						   "7:0-9:0" + "\n", class1.toString());
     }
 
 	/*
