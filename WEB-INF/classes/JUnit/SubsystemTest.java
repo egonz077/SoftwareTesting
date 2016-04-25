@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 
 /**
  * Created by Dominick Martelly on 2/29/2016 at 7:25 PM.
- *
+ * <p/>
  * This is the SubsystemTest Class for schedule maker
  */
 
@@ -35,27 +35,24 @@ public class SubsystemTest {
         client = null;
     }
 
-    //Testing method login
+    //Testing method Authentication.isLoginValid(String, String)
     //Sunny-Day
     @Test
     public void SM_001L_Subsystem_TC001() throws Exception {
         //User name and password exists in database
         assertTrue(client.login("1412412", "abc123"));
-
     }
 
     @Test
     public void SM_001L_Subsystem_TC002() throws Exception {
         //User name and password exists in database
         assertTrue(client.login("2354235", "abc234"));
-
     }
 
     @Test
     public void SM_001L_Subsystem_TC003() throws Exception {
         //User name and password exists in database
         assertTrue(client.login("2234523", "abc345"));
-
     }
 
     //Rainy-Day
@@ -63,14 +60,12 @@ public class SubsystemTest {
     public void SM_001L_Subsystem_TC004() throws Exception {
         //User name doesn't exist, but password does
         assertFalse(client.login("445984253", "abc123"));
-
     }
 
     @Test
     public void SM_001L_Subsystem_TC005() throws Exception {
         //User name exists, but password does not
         assertFalse(client.login("2354235", "!@#$%"));
-
     }
 
     @Test
@@ -79,8 +74,7 @@ public class SubsystemTest {
         assertFalse(client.login("", ""));
     }
 
-
-    //Testing method createSchedule
+    //Testing method ScheduleMakerController.createSchedule(String, Collection<String>, String, String)
     //Sunny-Day
     @Test
     public void SM_002CS_Subsystem_TC007() throws Exception {
@@ -91,7 +85,7 @@ public class SubsystemTest {
         course.setUnits(0);
 
         Time time = new Time();
-        time.days = "1010000" ;
+        time.days = "1010000";
         time.frHr = 8;
         time.frMn = 0;
         time.toHr = 9;
@@ -318,6 +312,32 @@ public class SubsystemTest {
         assertTrue(compareCollectionofSchedule(test, client));
     }
 
+    //Newly Added Test Case
+    @Test
+    public void SM_002CS_Subsystem_TC023() throws Exception {
+        //Test schedule object
+        ArrayList test = new ArrayList();
+
+        //Client
+        //Term (Spring 2007)
+        String term = "Spring 2007";
+
+        //Collection of courses
+        Collection<String> courses = new ArrayList<String>();
+
+        //Campus (University, Biscane)
+        String campus = "All";
+
+        //SPDays (10100000)
+        String SPdays = "1010000";
+
+        //Create the Collection of Schedules
+        Collection client = this.client.createSchedule(term, courses, campus, SPdays);
+
+        //Compare the Test Collection against the Client collection
+        assertTrue(compareCollectionofSchedule(test, client));
+    }
+
     //Rainy-Day
     @Test
     public void SM_002CS_Subsystem_TC010() throws Exception {
@@ -389,8 +409,7 @@ public class SubsystemTest {
         assertTrue(compareCollectionofSchedule(test, client));
     }
 
-
-    //Testing method buildSchedules
+    //Testing method FormatPage.buildSchedulesPage(Collection<Schedule>, int)
     //Sunny-Day
     @Test
     public void SM_003BS_Subsystem_TC013() throws Exception {
@@ -635,57 +654,37 @@ public class SubsystemTest {
         }
     }
 
-    //Failed Tests
+    //Failed Tests (Bugged)
+    //Testing method FormatPage.buildPage()
     @Test
     public void SM_003BP_Subsystem_TC019() throws Exception {
         client.buildPage();
         fail("Not yet implemented");
     }
 
+    //Testing method ScheduleMakerController.getSavedSchedule()
     @Test
     public void SM_004GSS_Subsystem_TC020() throws Exception {
         client.getSavedSchedules();
         fail("Not yet implemented");
     }
 
+    //Testing method ScheduleMakerController.getBalance()
     @Test
     public void SM_005GB_Subsystem_TC021() throws Exception {
         client.getBalance();
         fail("Not yet implemented");
     }
 
+    //Testing method Authentication.logout, but does not exist
     @Test
     public void SM_006LO_Subsystem_TC022() throws Exception {
         client.logout();
         fail("Not yet implemented");
     }
 
-    @Test
-    public void SM_002CS_Subsystem_TC023() throws Exception {
-        //Test schedule object
-        ArrayList test = new ArrayList();
 
-        //Client
-        //Term (Spring 2007)
-        String term = "Spring 2007";
-
-        //Collection of courses
-        Collection<String> courses = new ArrayList<String>();
-
-        //Campus (University, Biscane)
-        String campus = "All";
-
-        //SPDays (10100000)
-        String SPdays = "1010000";
-
-        //Create the Collection of Schedules
-        Collection client = this.client.createSchedule(term, courses, campus, SPdays);
-
-        //Compare the Test Collection against the Client collection
-        assertTrue(compareCollectionofSchedule(test, client));
-    }
-
-    //Compare Methods
+    //Private compare methods to compare client objects with test objects
     private boolean compareCollectionofSchedule(Collection<Object> one, Collection<Object> two) {
         if (one != null) {
             if (two == null)

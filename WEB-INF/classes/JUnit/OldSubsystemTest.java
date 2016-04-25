@@ -660,7 +660,7 @@ public class OldSubsystemTest {
         fail("Not yet implemented");
     }
 
-    //Compare Methods
+    //Private compare methods to compare client objects with test objects
     private boolean compareCollectionofSchedule(Collection<Object> one, Collection<Object> two) {
         if (one != null) {
             if (two == null)
