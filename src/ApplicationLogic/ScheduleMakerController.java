@@ -1,12 +1,13 @@
 package ApplicationLogic;
 
 import Storage.BackendFacade;
-import Storage.DatabaseInterface;
+import Storage.DatabaseStub;
 
 import java.util.Collection;
 import java.util.ArrayList;
 
 
+@SuppressWarnings("Duplicates")
 public class ScheduleMakerController {
 
     private boolean conflict(Collection c) {
@@ -38,12 +39,12 @@ public class ScheduleMakerController {
      * @param cursor
      * @param schedules
      */
-    private void findSchedule(Collection<Collection<ClassDetails>> c, int cursor, Collection<Schedule> schedules) {
+    private void findSchedule(Collection<Collection<ClassDetails>> c, int cursor, Collection<DatabaseStub.Schedule> schedules) {
         ArrayList list = (ArrayList) c;
         if (sizeIsOne(list))
         {
             if (!conflict(list))
-                schedules.add(new Schedule(list));
+                schedules.add(new DatabaseStub.Schedule(list));
         }
         else
         {
@@ -67,8 +68,8 @@ public class ScheduleMakerController {
         }
     }
 
-    public Collection<Schedule> createSchedule(ScheduleOptions schOpt) {
-        Collection<Schedule> schedules = new ArrayList<Schedule>();
+    public Collection<DatabaseStub.Schedule> createSchedule(DatabaseStub.ScheduleOptions schOpt) {
+        Collection<DatabaseStub.Schedule> schedules = new ArrayList<DatabaseStub.Schedule>();
 
         //get courses
         Collection<String> courses = new ArrayList<String>();
@@ -181,8 +182,8 @@ public class ScheduleMakerController {
         return schedules;
     }
 
-    public Collection<Schedule> createSchedule(String term, Collection<String> courses, String cmp, String SPDays) {
-        Collection<Schedule> schedules = new ArrayList<Schedule>();
+    public Collection<DatabaseStub.Schedule> createSchedule(String term, Collection<String> courses, String cmp, String SPDays) {
+        Collection<DatabaseStub.Schedule> schedules = new ArrayList<DatabaseStub.Schedule>();
 
         if (courses.size() <= 0)
             return schedules;
@@ -255,6 +256,6 @@ public class ScheduleMakerController {
 
     private void findClasses() { /*to be implemented*/ }
 
-    public void saveSchedules(Collection<Schedule> schedules) {
+    public void saveSchedules(Collection<DatabaseStub.Schedule> schedules) {
     }
 }

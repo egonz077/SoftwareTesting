@@ -14,11 +14,12 @@ import static org.junit.Assert.*;
 
 /**
  * Created by Omar on 2/29/2016 at 7:25 PM.
+ * Updated on 4/23/2016 with changes for implementation-based testing
  *
  * This is the UnitTest Class for schedule maker
  */
-
-public class OldUnitTest {
+@SuppressWarnings("Duplicates")
+public class UnitTest {
 
     @Before
     public void setUp() throws Exception {
@@ -30,122 +31,185 @@ public class OldUnitTest {
 
     }
 
-    //Class Details
+    /*
+	* UNIT TESTS FOR ClassDetails.java BEGIN HERE
+	*/
+
+    /*
+    * hasConflict() method tests
+    */
     @Test
     public void SM_001CD_Unit_TC001() {
+
+        //Create the parameters which will the used to create the two ClassDetails objects
+        //Making sure they both start at the exact same time
         DatabaseStub course1 = new DatabaseStub("History", "1000");
-        Professor teacher1 = new Professor("123456789", "John", "Doe");
-        Time time1 = new Time(6, 30, 7, 30, "1010100");
+        DatabaseStub.Professor teacher1 = new DatabaseStub.Professor("123456789", "John", "Doe");
+        DatabaseStub.Time time1 = new DatabaseStub.Time(6, 30, 7, 30, "1010100");
 
         DatabaseStub course2 = new DatabaseStub("Psychology", "2000");
-        Professor teacher2 = new Professor("987654321", "Mary", "Smith");
-        Time time2 = new Time(6, 30, 7, 30, "1010100");
+        DatabaseStub.Professor teacher2 = new DatabaseStub.Professor("987654321", "Mary", "Smith");
+        DatabaseStub.Time time2 = new DatabaseStub.Time(6, 30, 7, 30, "1010100");
 
+        //We create the ClassDetails objects which shall be passed into the tested method hasConflict
         ClassDetails class1 = new ClassDetails(course1, "1000", teacher1, "101", "FIU", "Fall", time1);
         ClassDetails class2 = new ClassDetails(course2, "2000", teacher2, "102", "FIU", "Fall", time2);
 
+        //Our expectations for this test case..
         assertTrue("hasConflict should return true for two classes starting at exact same time", class1.hasConflict(class2));
     }
 
     @Test
     public void SM_001CD_Unit_TC002() {
+
+        //Create the parameters which will the used to create the two ClassDetails objects
+        //Making sure the first course ends at a time that overlaps into the second course
         DatabaseStub course1 = new DatabaseStub("History", "1000");
-        Professor teacher1 = new Professor("123456789", "John", "Doe");
-        Time time1 = new Time(6, 30, 8, 0, "1010100");
+        DatabaseStub.Professor teacher1 = new DatabaseStub.Professor("123456789", "John", "Doe");
+        DatabaseStub.Time time1 = new DatabaseStub.Time(6, 30, 8, 0, "1010100");
 
         DatabaseStub course2 = new DatabaseStub("Psychology", "2000");
-        Professor teacher2 = new Professor("987654321", "Mary", "Smith");
-        Time time2 = new Time(7, 0, 9, 0, "1010100");
+        DatabaseStub.Professor teacher2 = new DatabaseStub.Professor("987654321", "Mary", "Smith");
+        DatabaseStub.Time time2 = new DatabaseStub.Time(7, 0, 9, 0, "1010100");
 
+        //We create the ClassDetails objects which shall be passed into the tested method hasConflict
         ClassDetails class1 = new ClassDetails(course1, "1000", teacher1, "101", "FIU", "Fall", time1);
         ClassDetails class2 = new ClassDetails(course2, "2000", teacher2, "102", "FIU", "Fall", time2);
 
+        //Our expectations for this test case..
         assertTrue("hasConflict should return true for when class1 end time overlaps with class2 beginning time", class1.hasConflict(class2));
     }
 
     @Test
     public void SM_001CD_Unit_TC003() {
+
+        //Create the parameters which will the used to create the two ClassDetails objects
+        //Making sure the second course ends at a time that overlaps into the first course
         DatabaseStub course1 = new DatabaseStub("History", "1000");
-        Professor teacher1 = new Professor("123456789", "John", "Doe");
-        Time time1 = new Time(7, 0, 9, 0, "1010100");
+        DatabaseStub.Professor teacher1 = new DatabaseStub.Professor("123456789", "John", "Doe");
+        DatabaseStub.Time time1 = new DatabaseStub.Time(7, 0, 9, 0, "1010100");
 
         DatabaseStub course2 = new DatabaseStub("Psychology", "2000");
-        Professor teacher2 = new Professor("987654321", "Mary", "Smith");
-        Time time2 = new Time(6, 30, 8, 0, "1010100");
+        DatabaseStub.Professor teacher2 = new DatabaseStub.Professor("987654321", "Mary", "Smith");
+        DatabaseStub.Time time2 = new DatabaseStub.Time(6, 30, 8, 0, "1010100");
 
+        //We create the ClassDetails objects which shall be passed into the tested method hasConflict
         ClassDetails class1 = new ClassDetails(course1, "1000", teacher1, "101", "FIU", "Fall", time1);
         ClassDetails class2 = new ClassDetails(course2, "2000", teacher2, "102", "FIU", "Fall", time2);
 
+        //Our expectations for this test case..
         assertTrue("hasConflict should return true for when class2 end time overlaps with class1 beginning time", class1.hasConflict(class2));
     }
 
     @Test
     public void SM_001CD_Unit_TC004() {
+
+        //Create the parameters which will the used to create the two ClassDetails objects
+        //These courses are not conflicting
         DatabaseStub course1 = new DatabaseStub("History", "1000");
-        Professor teacher1 = new Professor("123456789", "John", "Doe");
-        Time time1 = new Time(7, 0, 9, 0, "1010100");
+        DatabaseStub.Professor teacher1 = new DatabaseStub.Professor("123456789", "John", "Doe");
+        DatabaseStub.Time time1 = new DatabaseStub.Time(7, 0, 9, 0, "1010100");
 
         DatabaseStub course2 = new DatabaseStub("Psychology", "2000");
-        Professor teacher2 = new Professor("987654321", "Mary", "Smith");
-        Time time2 = new Time(10, 0, 11, 0, "1010100");
+        DatabaseStub.Professor teacher2 = new DatabaseStub.Professor("987654321", "Mary", "Smith");
+        DatabaseStub.Time time2 = new DatabaseStub.Time(10, 0, 11, 0, "1010100");
 
+        //Create the ClassDetails objects
         ClassDetails class1 = new ClassDetails(course1, "1000", teacher1, "101", "FIU", "Spring 2007", time1);
         ClassDetails class2 = new ClassDetails(course2, "2000", teacher2, "102", "FIU", "Spring 2007", time2);
 
+        //We expect the hasConflict to return false
         assertFalse("hasConflict should return false for two unconflicting classes ", class1.hasConflict(class2));
     }
 
     @Test
     public void SM_001CD_Unit_TC005() {
+
+        //Need to create two ClassDetails objects where class 1 time overlaps into class 2
+        //This test case substantially increases our coverage
         DatabaseStub course1 = new DatabaseStub("History", "1000");
-        Professor teacher1 = new Professor("123456789", "John", "Doe");
-        Time time1 = new Time(7, 0, 9, 0, "1010100");
+        DatabaseStub.Professor teacher1 = new DatabaseStub.Professor("123456789","John","Doe");
+        DatabaseStub.Time time1 = new DatabaseStub.Time(6,30,7,30,"1010100");
 
-        ClassDetails class1 = new ClassDetails(course1, "1000", teacher1, "101", "FIU", "Fall", time1);
+        DatabaseStub course2 = new DatabaseStub("Psychology", "2000");
+        DatabaseStub.Professor teacher2 = new DatabaseStub.Professor("987654321","Mary","Smith");
+        DatabaseStub.Time time2 = new DatabaseStub.Time(7,0,9,0,"1010100");
 
-        assertTrue("isAtTime returns true for 8 which is within the range of 7-9", class1.isAtTime(8));
+        //pass the parameters in to the ClassDetails objects
+        ClassDetails class1 = new ClassDetails(course1,"1000",teacher1,"101","FIU","Fall",time1);
+        ClassDetails class2 = new ClassDetails(course2, "2000", teacher2,"102","FIU","Fall", time2);
+
+        assertTrue("hasConflict should return true for when class1 end time overlaps with "
+                        + "class2 beginning time",
+                class1.hasConflict(class2));
     }
 
+    /*
+    * isAtTime() method tests
+    */
     @Test
     public void SM_001CD_Unit_TC006() {
         DatabaseStub course1 = new DatabaseStub("History", "1000");
-        Professor teacher1 = new Professor("123456789", "John", "Doe");
-        Time time1 = new Time(7, 0, 9, 0, "1010100");
+        DatabaseStub.Professor teacher1 = new DatabaseStub.Professor("123456789", "John", "Doe");
+        DatabaseStub.Time time1 = new DatabaseStub.Time(7, 0, 9, 0, "1010100");//creating a ClassDetails that covers the 8:00 timeslot
 
         ClassDetails class1 = new ClassDetails(course1, "1000", teacher1, "101", "FIU", "Fall", time1);
 
-        assertFalse("isAtTime returns true for 8 which is within the range of 7-9", class1.isAtTime(10));
+        //now we check whether isAtTime works as specified
+        assertTrue("isAtTime returns true for 8 which is within the range of 7-9", class1.isAtTime(8));
     }
 
     @Test
     public void SM_001CD_Unit_TC007() {
         DatabaseStub course1 = new DatabaseStub("History", "1000");
-        Professor teacher1 = new Professor("123456789", "John", "Doe");
-        Time time1 = new Time(7, 0, 9, 0, "1010100");
+        DatabaseStub.Professor teacher1 = new DatabaseStub.Professor("123456789", "John", "Doe");
+        DatabaseStub.Time time1 = new DatabaseStub.Time(7, 0, 9, 0, "1010100");
 
         ClassDetails class1 = new ClassDetails(course1, "1000", teacher1, "101", "FIU", "Fall", time1);
 
-        assertTrue("isAtDay returns true for 2 entered since class1 takes place on the 3rd day of the week (Wednesday)", class1.isAtDay(2));
+        //passing in an hour to isAtTime that isn't within the time range of the ClassDetails object we're testing
+        assertFalse("isAtTime returns true for 8 which is within the range of 7-9", class1.isAtTime(10));
     }
 
+    /*
+    * isAtDay() method tests
+    */
     @Test
     public void SM_001CD_Unit_TC008() {
         DatabaseStub course1 = new DatabaseStub("History", "1000");
-        Professor teacher1 = new Professor("123456789", "John", "Doe");
-        Time time1 = new Time(7, 0, 9, 0, "1010100");
+        DatabaseStub.Professor teacher1 = new DatabaseStub.Professor("123456789", "John", "Doe");
+        DatabaseStub.Time time1 = new DatabaseStub.Time(7, 0, 9, 0, "1010100");
 
+        //create the ClassDetails object that is on Monday, Wednesday, Friday
         ClassDetails class1 = new ClassDetails(course1, "1000", teacher1, "101", "FIU", "Fall", time1);
 
-        assertFalse("isAtDay returns true for 2 entered since class1 takes place on the 3rd day of the week (Wednesday)", class1.isAtDay(3));
+        //check if isAtDay returns true for when checking that class is on Wednesday
+        //keep in mind 0 represents Monday, 1 Tuesday, etc.
+        assertTrue("isAtDay returns true for 2 entered since class1 takes place on the 3rd day of the week (Wednesday)", class1.isAtDay(2));
     }
 
     @Test
     public void SM_001CD_Unit_TC009() {
         DatabaseStub course1 = new DatabaseStub("History", "1000");
-        Professor teacher1 = new Professor("123456789", "John", "Doe");
-        Time time1 = new Time(7, 0, 9, 0, "1010100");
+        DatabaseStub.Professor teacher1 = new DatabaseStub.Professor("123456789", "John", "Doe");
+        DatabaseStub.Time time1 = new DatabaseStub.Time(7, 0, 9, 0, "1010100");
 
         ClassDetails class1 = new ClassDetails(course1, "1000", teacher1, "101", "FIU", "Fall", time1);
+
+        //we check that the ClassDetails object above is not on a Thursday
+        assertFalse("isAtDay returns false for 3 entered since class1 doesn't take place on Thursday", class1.isAtDay(3));
+    }
+
+    /*
+    * toString() method tests
+    */
+    @Test
+    public void SM_001CD_Unit_TC010() {
+        DatabaseStub course1 = new DatabaseStub("History", "1000");
+        DatabaseStub.Professor teacher1 = new DatabaseStub.Professor("123456789","John","Doe");
+        DatabaseStub.Time time1 = new DatabaseStub.Time(7,0,9,0,"1010100");
+
+        ClassDetails class1 = new ClassDetails(course1,"1000",teacher1,"101","FIU","Fall",time1);
 
         assertEquals("Should print everything when campus and time are non-null",
                 "History1000" + "\n" + "1000" + "\n" +
@@ -154,12 +218,12 @@ public class OldUnitTest {
     }
 
     @Test
-    public void SM_001CD_Unit_TC010() {
+    public void SM_001CD_Unit_TC011() {
         DatabaseStub course1 = new DatabaseStub("History", "1000");
-        Professor teacher1 = new Professor("123456789", "John", "Doe");
-        Time time1 = null;
+        DatabaseStub.Professor teacher1 = new DatabaseStub.Professor("123456789","John","Doe");
+        DatabaseStub.Time time1 = null;
 
-        ClassDetails class1 = new ClassDetails(course1, "1000", teacher1, "101", "FIU", "Fall", time1);
+        ClassDetails class1 = new ClassDetails(course1,"1000",teacher1,"101","FIU","Fall",time1);
 
         assertEquals("Should omit time details since time is null",
                 "History1000" + "\n" + "1000" + "\n"
@@ -167,25 +231,33 @@ public class OldUnitTest {
     }
 
     @Test
-    public void SM_001CD_Unit_TC011() {
+    public void SM_001CD_Unit_TC012() {
         DatabaseStub course1 = new DatabaseStub("History", "1000");
-        Professor teacher1 = new Professor("123456789", "John", "Doe");
-        Time time1 = new Time(7, 0, 9, 0, "1010100");
+        DatabaseStub.Professor teacher1 = new DatabaseStub.Professor("123456789","John","Doe");
+        DatabaseStub.Time time1 = new DatabaseStub.Time(7,0,9,0,"1010100");
 
-        ClassDetails class1 = new ClassDetails(course1, "1000", teacher1, "101", null, "Fall", time1);
+        ClassDetails class1 = new ClassDetails(course1,"1000",teacher1,"101",null,"Fall",time1);
 
         assertEquals("Should omit campus details since campus is null",
                 "History1000" + "\n" + "1000" + "\n" +
                         "7:0-9:0" + "\n", class1.toString());
     }
 
-    //Testing createSchedule(ScheduleOptions)
+
+	/*
+	* UNIT TESTS FOR ScheduleMakerController.java BEGIN HERE
+	*/
+
+    /*
+    * Testing createSchedule(ScheduleOptions)
+	*/
     //Sunny
     @Test
-    public void SM_002SMC_Unit_TC012() {
+    public void SM_002SMC_Unit_TC013() {
 
-
-        ScheduleOptions sched = new ScheduleOptions(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        //creating a completely null ScheduleOptions object
+        //this will be passed into the createSchedule method
+        DatabaseStub.ScheduleOptions sched = new DatabaseStub.ScheduleOptions(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
         ScheduleMakerController test = new ScheduleMakerController();
 
@@ -194,7 +266,9 @@ public class OldUnitTest {
     }
 
     @Test
-    public void SM_002SMC_Unit_TC013() {
+    public void SM_002SMC_Unit_TC014() {
+
+        //This test checks if createSchedule can find classes with a chosen campus
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
 
@@ -203,7 +277,7 @@ public class OldUnitTest {
         course.setSubject("HIS");
         course.setUnits(0);
 
-        Time time = new Time(8, 0, 9, 15, "1010000");
+        DatabaseStub.Time time = new DatabaseStub.Time(8, 0, 9, 15, "1010000");
 
 
         ClassDetails classDetails = new ClassDetails();
@@ -220,9 +294,9 @@ public class OldUnitTest {
         c.add(collectionOfClassDetails);
 
         ArrayList list = (ArrayList) c;
-        Schedule schedule = new Schedule(list);
+        DatabaseStub.Schedule schedule = new DatabaseStub.Schedule(list);
 
-        Collection control = new ArrayList<Schedule>();
+        Collection control = new ArrayList<DatabaseStub.Schedule>();//this is the object that we compare to the return value of the tested method
         control.add(schedule);
 
         //Client
@@ -232,18 +306,21 @@ public class OldUnitTest {
         //Campus (University, Biscane)
         String campus = "University";
 
-
-        ScheduleOptions sched = new ScheduleOptions(term, "HIS1010", "", "", "", "", "", campus, "1", "0", "1", "0", "0", "0", "0", 1);
+        //create a schedule options that is identical to the mock object we created above
+        DatabaseStub.ScheduleOptions sched = new DatabaseStub.ScheduleOptions(term, "HIS1010", "", "", "", "", "", campus, "1", "0", "1", "0", "0", "0", "0", 1);
         ScheduleMakerController driver = new ScheduleMakerController();
 
-        Collection toTest = driver.createSchedule(sched);
+        Collection toTest = driver.createSchedule(sched);//test createSchedule and get the collection returned by it.
 
+        //finally we compare the returned collection with the mock collection
         assertTrue("Only history class on university campus should be returned.", compareCollectionofSchedule(control, toTest));
 
     }
 
     @Test
-    public void SM_002SMC_Unit_TC014() {
+    public void SM_002SMC_Unit_TC015() {
+
+        //This test method is similar to the one above. Also testing that createSchedule can find classes with the a chosen campus
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
 
@@ -252,7 +329,7 @@ public class OldUnitTest {
         course.setSubject("COP");
         course.setUnits(0);
 
-        Time time = new Time(15, 30, 16, 45, "1010100");
+        DatabaseStub.Time time = new DatabaseStub.Time(15, 30, 16, 45, "1010100");
 
 
         ClassDetails classDetails = new ClassDetails();
@@ -269,9 +346,9 @@ public class OldUnitTest {
         c.add(collectionOfClassDetails);
 
         ArrayList list = (ArrayList) c;
-        Schedule schedule = new Schedule(list);
+        DatabaseStub.Schedule schedule = new DatabaseStub.Schedule(list);
 
-        Collection control = new ArrayList<Schedule>();
+        Collection control = new ArrayList<DatabaseStub.Schedule>();
         control.add(schedule);
 
         //Client
@@ -282,7 +359,7 @@ public class OldUnitTest {
         String campus = "Biscayne";
 
 
-        ScheduleOptions sched = new ScheduleOptions(term, "COP2250", "", "", "", "", "", campus, "1", "0", "1", "0", "1", "0", "0", 1);
+        DatabaseStub.ScheduleOptions sched = new DatabaseStub.ScheduleOptions(term, "COP2250", "", "", "", "", "", campus, "1", "0", "1", "0", "1", "0", "0", 1);
         ScheduleMakerController driver = new ScheduleMakerController();
 
         Collection toTest = driver.createSchedule(sched);
@@ -290,10 +367,12 @@ public class OldUnitTest {
         assertTrue("Only COP class on Biscayne campus should be returned.", compareCollectionofSchedule(control, toTest));
 
     }
-
     //Rainy
     @Test
-    public void SM_002SMC_Unit_TC015() {
+    public void SM_002SMC_Unit_TC016() {
+
+        //this test checks if createSchedule returns classes on user-specified days.
+        //test is structured practically the same as the two above.
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
 
@@ -302,7 +381,7 @@ public class OldUnitTest {
         course.setSubject("HIS");
         course.setUnits(0);
 
-        Time time = new Time(8, 0, 9, 15, "1010000");
+        DatabaseStub.Time time = new DatabaseStub.Time(8, 0, 9, 15, "1010000");
 
 
         ClassDetails classDetails = new ClassDetails();
@@ -319,9 +398,9 @@ public class OldUnitTest {
         c.add(collectionOfClassDetails);
 
         ArrayList list = (ArrayList) c;
-        Schedule schedule = new Schedule(list);
+        DatabaseStub.Schedule schedule = new DatabaseStub.Schedule(list);
 
-        Collection control = new ArrayList<Schedule>();
+        Collection control = new ArrayList<DatabaseStub.Schedule>();
         control.add(schedule);
 
         //Client
@@ -332,7 +411,7 @@ public class OldUnitTest {
         String campus = "All";
 
 
-        ScheduleOptions sched = new ScheduleOptions(term, "HIS1010", "", "", "", "", "", campus, "1", "0", "1", "0", "0", "0", "0", 1);
+        DatabaseStub.ScheduleOptions sched = new DatabaseStub.ScheduleOptions(term, "HIS1010", "", "", "", "", "", campus, "1", "0", "1", "0", "0", "0", "0", 1);
         ScheduleMakerController driver = new ScheduleMakerController();
 
         Collection toTest = driver.createSchedule(sched);
@@ -342,7 +421,9 @@ public class OldUnitTest {
     }
 
     @Test
-    public void SM_002SMC_Unit_TC016() {
+    public void SM_002SMC_Unit_TC017() {
+
+        //This test is practically the same as TC016
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
 
@@ -351,7 +432,7 @@ public class OldUnitTest {
         course.setSubject("HIS");
         course.setUnits(0);
 
-        Time time = new Time(18, 25, 19, 40, "0101000");
+        DatabaseStub.Time time = new DatabaseStub.Time(18, 25, 19, 40, "0101000");
 
 
         ClassDetails classDetails = new ClassDetails();
@@ -368,9 +449,9 @@ public class OldUnitTest {
         c.add(collectionOfClassDetails);
 
         ArrayList list = (ArrayList) c;
-        Schedule schedule = new Schedule(list);
+        DatabaseStub.Schedule schedule = new DatabaseStub.Schedule(list);
 
-        Collection control = new ArrayList<Schedule>();
+        Collection control = new ArrayList<DatabaseStub.Schedule>();
         control.add(schedule);
 
         //Client
@@ -381,7 +462,7 @@ public class OldUnitTest {
         String campus = "All";
 
 
-        ScheduleOptions sched = new ScheduleOptions(term, "HIS1010", "", "", "", "", "", campus, "1", "0", "1", "0", "0", "0", "0", 1);
+        DatabaseStub.ScheduleOptions sched = new DatabaseStub.ScheduleOptions(term, "HIS1010", "", "", "", "", "", campus, "1", "0", "1", "0", "0", "0", "0", 1);
         ScheduleMakerController driver = new ScheduleMakerController();
 
         Collection toTest = driver.createSchedule(sched);
@@ -391,7 +472,10 @@ public class OldUnitTest {
     }
 
     @Test
-    public void SM_002SMC_Unit_TC017() {
+    public void SM_002SMC_Unit_TC018() {
+
+        //Verify that createSchedule method returns schedule with courses only within the term that the user specified.
+
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
 
@@ -400,7 +484,7 @@ public class OldUnitTest {
         course.setSubject("HIS");
         course.setUnits(0);
 
-        Time time = new Time(8, 0, 9, 15, "1010000");
+        DatabaseStub.Time time = new DatabaseStub.Time(8, 0, 9, 15, "1010000");
 
 
         ClassDetails classDetails = new ClassDetails();
@@ -417,9 +501,9 @@ public class OldUnitTest {
         c.add(collectionOfClassDetails);
 
         ArrayList list = (ArrayList) c;
-        Schedule schedule = new Schedule(list);
+        DatabaseStub.Schedule schedule = new DatabaseStub.Schedule(list);
 
-        Collection control = new ArrayList<Schedule>();
+        Collection control = new ArrayList<DatabaseStub.Schedule>();
         control.add(schedule);
 
         //Client
@@ -430,7 +514,7 @@ public class OldUnitTest {
         String campus = "University";
 
 
-        ScheduleOptions sched = new ScheduleOptions(term, "HIS1010", "", "", "", "", "", campus, "1", "0", "1", "0", "0", "0", "0", 1);
+        DatabaseStub.ScheduleOptions sched = new DatabaseStub.ScheduleOptions(term, "HIS1010", "", "", "", "", "", campus, "1", "0", "1", "0", "0", "0", "0", 1);
         ScheduleMakerController driver = new ScheduleMakerController();
 
         Collection toTest = driver.createSchedule(sched);
@@ -440,7 +524,12 @@ public class OldUnitTest {
     }
 
     @Test
-    public void SM_002SMC_Unit_TC018() {
+    public void SM_002SMC_Unit_TC019() {
+
+        //Verify that createSchedule makes use of the findSchedule and conflict private methods
+        //when passed a class with days that don't match with any existing class, and that
+        //additional coverage for the ScheduleMakerController class is achieved.
+
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
 
@@ -449,7 +538,7 @@ public class OldUnitTest {
         course.setSubject("HIS");
         course.setUnits(0);
 
-        Time time = new Time(8, 0, 9, 15, "1010000");
+        DatabaseStub.Time time = new DatabaseStub.Time(8, 0, 9, 15, "1010000");
 
 
         ClassDetails classDetails = new ClassDetails();
@@ -466,9 +555,9 @@ public class OldUnitTest {
         c.add(collectionOfClassDetails);
 
         ArrayList list = (ArrayList) c;
-        Schedule schedule = new Schedule(list);
+        DatabaseStub.Schedule schedule = new DatabaseStub.Schedule(list);
 
-        Collection control = new ArrayList<Schedule>();
+        Collection control = new ArrayList<DatabaseStub.Schedule>();
         control.add(schedule);
 
         //Client
@@ -479,7 +568,7 @@ public class OldUnitTest {
         String campus = "University";
 
 
-        ScheduleOptions sched = new ScheduleOptions(term, "HIS1010", "", "", "", "", "", campus, "1", "0", "1", "0", "0", "0", "0", 1);
+        DatabaseStub.ScheduleOptions sched = new DatabaseStub.ScheduleOptions(term, "HIS1010", "", "", "", "", "", campus, "1", "0", "1", "0", "0", "0", "0", 1);
         ScheduleMakerController driver = new ScheduleMakerController();
 
         Collection toTest = driver.createSchedule(sched);
@@ -488,25 +577,13 @@ public class OldUnitTest {
 
     }
 
-    //Testing createSchedule w/ 4 parameters
-    //Sunny
     @Test
-    public void SM_003SMC_Unit_TC019() {
+    public void SM_002SMC_Unit_TC020() {
 
+        //Verify that createSchedule makes use of the findSchedule and conflict private methods
+        //when passed a class with no specified days, and that
+        //additional coverage for the ScheduleMakerController class is achieved.
 
-        String term = "Spring 2007";
-        Collection<String> courses = new ArrayList<String>();
-        String campus = "University";
-        String SPDays = "1010000";
-
-        ScheduleMakerController test = new ScheduleMakerController();
-
-        assertTrue("An empty schedule is returned when the user did not specify any courses in their schedule options", test.createSchedule(term, courses, campus, SPDays).isEmpty());
-
-    }
-
-    @Test
-    public void SM_003SMC_Unit_TC020() {
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
 
@@ -515,7 +592,7 @@ public class OldUnitTest {
         course.setSubject("HIS");
         course.setUnits(0);
 
-        Time time = new Time(8, 0, 9, 15, "1010000");
+        DatabaseStub.Time time = new DatabaseStub.Time(8,0,9,15,"1010000");
 
 
         ClassDetails classDetails = new ClassDetails();
@@ -532,10 +609,197 @@ public class OldUnitTest {
         c.add(collectionOfClassDetails);
 
         ArrayList list = (ArrayList) c;
-        Schedule schedule = new Schedule(list);
+        DatabaseStub.Schedule schedule = new DatabaseStub.Schedule(list);
 
-        Collection control = new ArrayList<Schedule>();
+        Collection control = new ArrayList<DatabaseStub.Schedule>();
         control.add(schedule);
+
+        //Client
+        //Term (Spring 2007)
+        String term = "Spring 2007";
+
+        //Campus (University, Biscane)
+        String campus = "University";
+
+
+
+        DatabaseStub.ScheduleOptions sched = new DatabaseStub.ScheduleOptions(term, "HIS1010","", "", "", "", "", campus, "0", "0", "0", "0", "0", "0", "0", 1);
+        ScheduleMakerController driver = new ScheduleMakerController();
+
+        Collection toTest = driver.createSchedule(sched);
+
+        assertFalse("Empty return", compareCollectionofSchedule(control,toTest));
+
+    }
+
+    @Test
+    public void SM_002SMC_Unit_TC021() {
+
+        //Verify that createSchedule makes use of the findSchedule and conflict private methods
+        //when passed a class with no specified days, and that
+        //additional coverage for the ScheduleMakerController class is achieved.
+
+        //Test schedule object
+        DatabaseStub course = new DatabaseStub();
+
+
+        course.setCatlgNbr("1010");
+        course.setSubject("HIS");
+        course.setUnits(0);
+
+        DatabaseStub.Time time = new DatabaseStub.Time(8,0,9,15,"1010000");
+
+
+        ClassDetails classDetails = new ClassDetails();
+        classDetails.setDatabaseStub(course);
+        classDetails.setTime(time);
+        classDetails.setCampus("University");
+        classDetails.setTerm("Spring 2007");
+        classDetails.setClassNbr("1010");
+
+        Collection<ClassDetails> collectionOfClassDetails = new ArrayList<ClassDetails>();
+        collectionOfClassDetails.add(classDetails);
+
+        Collection<Collection<ClassDetails>> c = new ArrayList<Collection<ClassDetails>>();
+        c.add(collectionOfClassDetails);
+
+        ArrayList list = (ArrayList) c;
+        DatabaseStub.Schedule schedule = new DatabaseStub.Schedule(list);
+
+        Collection control = new ArrayList<DatabaseStub.Schedule>();
+        control.add(schedule);
+
+        //Client
+        //Term (Spring 2007)
+        String term = "Spring 2007";
+
+        //Campus (University, Biscane)
+        String campus = "University";
+
+
+
+        DatabaseStub.ScheduleOptions sched = new DatabaseStub.ScheduleOptions(term, "HIS1010","STA3510", "PHY2048", "COP3175", "COP2250", "COP4338", campus, "0", "0", "0", "0", "0", "0", "0", 1);
+        ScheduleMakerController driver = new ScheduleMakerController();
+
+        Collection toTest = driver.createSchedule(sched);
+
+        assertFalse("Empty return", compareCollectionofSchedule(control,toTest));
+
+    }
+
+    @Test
+    public void SM_002SMC_Unit_TC022() {
+
+        //Verify that createSchedule method returns schedule with courses only within the term that the user specified.
+
+        //Test schedule object
+        DatabaseStub course = new DatabaseStub();
+
+
+        course.setCatlgNbr("1010");
+        course.setSubject("HIS");
+        course.setUnits(0);
+
+        DatabaseStub.Time time = new DatabaseStub.Time(8,0,9,15,"1010000");
+
+
+        ClassDetails classDetails = new ClassDetails();
+        classDetails.setDatabaseStub(course);
+        classDetails.setTime(time);
+        classDetails.setCampus("University");
+        classDetails.setTerm("Spring 2007");
+        classDetails.setClassNbr("1010");
+
+        Collection<ClassDetails> collectionOfClassDetails = new ArrayList<ClassDetails>();
+        collectionOfClassDetails.add(classDetails);
+
+        Collection<Collection<ClassDetails>> c = new ArrayList<Collection<ClassDetails>>();
+        c.add(collectionOfClassDetails);
+
+        ArrayList list = (ArrayList) c;
+        DatabaseStub.Schedule schedule = new DatabaseStub.Schedule(list);
+
+        Collection control = new ArrayList<DatabaseStub.Schedule>();
+        control.add(schedule);
+
+        //Client
+        //Term (Spring 2007)
+        String term = "Spring 2007";
+
+        //Campus (University, Biscane)
+        String campus = "University";
+
+
+
+        DatabaseStub.ScheduleOptions sched = new DatabaseStub.ScheduleOptions(term, "HIS1010","STA3510", "PHY2048", "COP3175", "COP2250", "COP4338", campus, null, null, null, null, null, null, null, 1);
+        ScheduleMakerController driver = new ScheduleMakerController();
+
+        Collection toTest = driver.createSchedule(sched);
+
+        assertFalse("Empty return", compareCollectionofSchedule(control,toTest));
+
+    }
+
+
+
+    /*
+    * Testing createSchedule w/ 4 parameters
+	*/
+    //Sunny
+    @Test
+    public void SM_003SMC_Unit_TC023() {
+
+
+        //Verifies that if the user did not enter anything for their schedule option, createSchedule method returns an empty schedule.
+
+        String term = "Spring 2007";
+        Collection<String> courses = new ArrayList<String>(); //we leave this empty intentionally
+        String campus = "University";
+        String SPDays = "1010000";
+
+        ScheduleMakerController test = new ScheduleMakerController();
+
+        assertTrue("An empty schedule is returned when the user did not specify any courses in their schedule options", test.createSchedule(term, courses, campus, SPDays).isEmpty());
+
+    }
+
+    @Test
+    public void SM_003SMC_Unit_TC024() {
+
+        //Verify that schedules are returned by createSchedule method with the campuses user specified
+        //The following test cases up to TC030 are structured similarly
+
+
+
+        //Test schedule object
+        DatabaseStub course = new DatabaseStub();
+
+        //creating the mock objects
+        course.setCatlgNbr("1010");
+        course.setSubject("HIS");
+        course.setUnits(0);
+
+        DatabaseStub.Time time = new DatabaseStub.Time(8, 0, 9, 15, "1010000");
+
+
+        ClassDetails classDetails = new ClassDetails();
+        classDetails.setDatabaseStub(course);
+        classDetails.setTime(time);
+        classDetails.setCampus("University");
+        classDetails.setTerm("Spring 2007");
+        classDetails.setClassNbr("1010");
+
+        Collection<ClassDetails> collectionOfClassDetails = new ArrayList<ClassDetails>();
+        collectionOfClassDetails.add(classDetails);
+
+        Collection<Collection<ClassDetails>> c = new ArrayList<Collection<ClassDetails>>();//will be given to schedule object
+        c.add(collectionOfClassDetails);
+
+        ArrayList list = (ArrayList) c;
+        DatabaseStub.Schedule schedule = new DatabaseStub.Schedule(list);
+
+        Collection control = new ArrayList<DatabaseStub.Schedule>();
+        control.add(schedule);//collection of schedules
 
         //Client
         //Term (Spring 2007)
@@ -551,14 +815,17 @@ public class OldUnitTest {
 
         ScheduleMakerController driver = new ScheduleMakerController();
 
-        Collection toTest = driver.createSchedule(term, courses, campus, SPDays);
+        Collection toTest = driver.createSchedule(term, courses, campus, SPDays);//returns collection of schedules
 
+        //compare to mock object
         assertTrue("Only history class on university campus should be returned.", compareCollectionofSchedule(control, toTest));
 
     }
 
     @Test
-    public void SM_003SMC_Unit_TC021() {
+    public void SM_003SMC_Unit_TC025() {
+
+        //Verify that schedules are returned by createSchedule method with the campuses user specified
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
 
@@ -567,7 +834,7 @@ public class OldUnitTest {
         course.setSubject("COP");
         course.setUnits(0);
 
-        Time time = new Time(15, 30, 16, 45, "1010100");
+        DatabaseStub.Time time = new DatabaseStub.Time(15, 30, 16, 45, "1010100");
 
 
         ClassDetails classDetails = new ClassDetails();
@@ -584,9 +851,9 @@ public class OldUnitTest {
         c.add(collectionOfClassDetails);
 
         ArrayList list = (ArrayList) c;
-        Schedule schedule = new Schedule(list);
+        DatabaseStub.Schedule schedule = new DatabaseStub.Schedule(list);
 
-        Collection control = new ArrayList<Schedule>();
+        Collection control = new ArrayList<DatabaseStub.Schedule>();
         control.add(schedule);
 
         //Client
@@ -610,7 +877,9 @@ public class OldUnitTest {
     }
 
     @Test
-    public void SM_003SMC_Unit_TC022() {
+    public void SM_003SMC_Unit_TC026() {
+
+        //Verify that createSchedule method returns schedule with courses only on the days that the user specified.
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
 
@@ -619,7 +888,7 @@ public class OldUnitTest {
         course.setSubject("HIS");
         course.setUnits(0);
 
-        Time time = new Time(8, 0, 9, 15, "1010000");
+        DatabaseStub.Time time = new DatabaseStub.Time(8, 0, 9, 15, "1010000");
 
 
         ClassDetails classDetails = new ClassDetails();
@@ -636,9 +905,9 @@ public class OldUnitTest {
         c.add(collectionOfClassDetails);
 
         ArrayList list = (ArrayList) c;
-        Schedule schedule = new Schedule(list);
+        DatabaseStub.Schedule schedule = new DatabaseStub.Schedule(list);
 
-        Collection control = new ArrayList<Schedule>();
+        Collection control = new ArrayList<DatabaseStub.Schedule>();
         control.add(schedule);
 
         //Client
@@ -660,10 +929,11 @@ public class OldUnitTest {
         assertTrue("Only history class on Monday and Wednesday should be returned.", compareCollectionofSchedule(control, toTest));
 
     }
-
     //Rainy
     @Test
-    public void SM_003SMC_Unit_TC023() {
+    public void SM_003SMC_Unit_TC027() {
+
+        //Verify that createSchedule method returns schedule with courses only on the days that the user specified.
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
 
@@ -672,7 +942,7 @@ public class OldUnitTest {
         course.setSubject("HIS");
         course.setUnits(0);
 
-        Time time = new Time(18, 25, 19, 40, "0101000");
+        DatabaseStub.Time time = new DatabaseStub.Time(18, 25, 19, 40, "0101000");
 
 
         ClassDetails classDetails = new ClassDetails();
@@ -689,9 +959,9 @@ public class OldUnitTest {
         c.add(collectionOfClassDetails);
 
         ArrayList list = (ArrayList) c;
-        Schedule schedule = new Schedule(list);
+        DatabaseStub.Schedule schedule = new DatabaseStub.Schedule(list);
 
-        Collection control = new ArrayList<Schedule>();
+        Collection control = new ArrayList<DatabaseStub.Schedule>();
         control.add(schedule);
 
         //Client
@@ -715,7 +985,9 @@ public class OldUnitTest {
     }
 
     @Test
-    public void SM_003SMC_Unit_TC024() {
+    public void SM_003SMC_Unit_TC028() {
+
+        //Verify that createSchedule method returns schedule with courses only within the term that the user specified.
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
 
@@ -724,7 +996,7 @@ public class OldUnitTest {
         course.setSubject("HIS");
         course.setUnits(0);
 
-        Time time = new Time(8, 0, 9, 15, "1010000");
+        DatabaseStub.Time time = new DatabaseStub.Time(8, 0, 9, 15, "1010000");
 
 
         ClassDetails classDetails = new ClassDetails();
@@ -741,9 +1013,9 @@ public class OldUnitTest {
         c.add(collectionOfClassDetails);
 
         ArrayList list = (ArrayList) c;
-        Schedule schedule = new Schedule(list);
+        DatabaseStub.Schedule schedule = new DatabaseStub.Schedule(list);
 
-        Collection control = new ArrayList<Schedule>();
+        Collection control = new ArrayList<DatabaseStub.Schedule>();
         control.add(schedule);
 
         //Client
@@ -767,7 +1039,8 @@ public class OldUnitTest {
     }
 
     @Test
-    public void SM_003SMC_Unit_TC025() {
+    public void SM_003SMC_Unit_TC029() {
+        //Verify that createSchedule method returns schedule with courses only within the term that the user specified.
         //Test schedule object
         DatabaseStub course = new DatabaseStub();
 
@@ -776,7 +1049,7 @@ public class OldUnitTest {
         course.setSubject("HIS");
         course.setUnits(0);
 
-        Time time = new Time(8, 0, 9, 15, "1010000");
+        DatabaseStub.Time time = new DatabaseStub.Time(8, 0, 9, 15, "1010000");
 
 
         ClassDetails classDetails = new ClassDetails();
@@ -793,9 +1066,9 @@ public class OldUnitTest {
         c.add(collectionOfClassDetails);
 
         ArrayList list = (ArrayList) c;
-        Schedule schedule = new Schedule(list);
+        DatabaseStub.Schedule schedule = new DatabaseStub.Schedule(list);
 
-        Collection control = new ArrayList<Schedule>();
+        Collection control = new ArrayList<DatabaseStub.Schedule>();
         control.add(schedule);
 
         //Client
@@ -818,37 +1091,126 @@ public class OldUnitTest {
 
     }
 
-    //Failures
     @Test
-    public void SM_004SMC_Unit_TC026() {
+    public void SM_003SMC_Unit_TC030() {
+
+        //Verify that createSchedule returns schedule with both courses specified by the user,
+        //and that additional coverage of the ScheduleMaker class is achieved.
+        //this test was added to increase coverage for ScheduleMakerController
+
+        //will create two collections of class details, unlike previous cases
+        Collection<Collection<ClassDetails>> c = new ArrayList<Collection<ClassDetails>>();
+
+        DatabaseStub course = new DatabaseStub();
+        course.setCatlgNbr("1010");
+        course.setSubject("HIS");
+        course.setUnits(0);
+
+        DatabaseStub.Time time = new DatabaseStub.Time();
+        time.days = "1010000";
+        time.frHr = 8;
+        time.frMn = 0;
+        time.toHr = 9;
+        time.toMn = 15;
+
+        ClassDetails classDetails = new ClassDetails();
+        classDetails.setDatabaseStub(course);
+        classDetails.setTime(time);
+        classDetails.setCampus("University");
+        classDetails.setTerm("Spring 2007");
+        classDetails.setClassNbr("1010");
+
+        Collection<ClassDetails> collectionOfClassDetails = new ArrayList<ClassDetails>();
+        collectionOfClassDetails.add(classDetails);
+        c.add(collectionOfClassDetails);
+
+        //2nd Course
+        DatabaseStub course1 = new DatabaseStub();
+        course1.setCatlgNbr("2250");
+        course1.setSubject("COP");
+        course1.setUnits(0);
+
+        DatabaseStub.Time time1 = new DatabaseStub.Time();
+        time1.days = "1010100";
+        time1.frHr = 11;
+        time1.frMn = 0;
+        time1.toHr = 12;
+        time1.toMn = 15;
+
+        ClassDetails classDetails1 = new ClassDetails();
+        classDetails1.setDatabaseStub(course1);
+        classDetails1.setTime(time1);
+        classDetails1.setCampus("University");
+        classDetails1.setTerm("Spring 2007");
+        classDetails1.setClassNbr("2250");
+
+        Collection<ClassDetails> collectionOfClassDetails1 = new ArrayList<ClassDetails>();
+        collectionOfClassDetails1.add(classDetails1);
+        c.add(collectionOfClassDetails1);
+
+        ArrayList list = (ArrayList) c;
+        DatabaseStub.Schedule schedule = new DatabaseStub.Schedule(list);
+
+        Collection test = new ArrayList<DatabaseStub.Schedule>();
+        test.add(schedule);
+
+        //Client
+        //Term (Spring 2007)
+        String term = "Spring 2007";
+
+        //Collection of courses
+        Collection<String> courses = new ArrayList<String>();
+        courses.add("HIS1010");
+        courses.add("COP2250");
+
+        //Campus (University, Biscane)
+        String campus = "All";
+
+        //SPDays (10100000)
+        String SPdays = "1010100";
+
+        ScheduleMakerController driver = new ScheduleMakerController();
+        Collection client = driver.createSchedule(term, courses, campus, SPdays);
+
+        assertFalse(compareCollectionofSchedule(test, client));
+    }
+	
+	/*
+	* Test cases for unimplemented methods
+	*/
+    @Test
+    public void SM_004SMC_Unit_TC031() {
         ScheduleMakerController driver = new ScheduleMakerController();
         driver.sortSchedules();
         fail("Not yet implemented");
     }
 
     @Test
-    public void SM_005SMC_Unit_TC027() {
+    public void SM_005SMC_Unit_TC032() {
         ScheduleMakerController driver = new ScheduleMakerController();
         driver.getSavedSchedule();
         fail("Not yet implemented");
     }
 
     @Test
-    public void SM_006SMC_Unit_TC028() {
+    public void SM_006SMC_Unit_TC033() {
         ScheduleMakerController driver = new ScheduleMakerController();
         driver.getBalance();
         fail("Not yet implemented");
     }
 
     @Test
-    public void SM_007SMC_Unit_TC029() {
+    public void SM_007SMC_Unit_TC034() {
         ScheduleMakerController driver = new ScheduleMakerController();
-        Collection<Schedule> c = new ArrayList<Schedule>();
+        Collection<DatabaseStub.Schedule> c = new ArrayList<DatabaseStub.Schedule>();
 
         driver.saveSchedules(c);
         fail("Not yet implemented");
     }
-
+	
+	/*
+	* Private methods written by the team to compare collections of schedules.
+	*/
     private boolean compareCollectionofSchedule(Collection<Object> one, Collection<Object> two) {
         if (one != null) {
             if (two == null)
@@ -867,8 +1229,8 @@ public class OldUnitTest {
                 Object oneSchedule = ScheduleIterator1.next();
                 Object twoSchedule = ScheduleIterator2.next();
 
-                Schedule qwe = (Schedule) oneSchedule;
-                Schedule asd = (Schedule) twoSchedule;
+                DatabaseStub.Schedule qwe = (DatabaseStub.Schedule) oneSchedule;
+                DatabaseStub.Schedule asd = (DatabaseStub.Schedule) twoSchedule;
 
                 if (!compareSchedules(qwe, asd)) {
                     //System.out.println("compareSchedule Failed");
@@ -902,7 +1264,6 @@ public class OldUnitTest {
                         ClassDetails classDetails2 = u2.next();
 
                         if (!compareClassDetails(classDetails1, classDetails2)) {
-                            //System.out.println("compareClassDetails Failed");
                             return false;
                         }
                     }
@@ -1029,7 +1390,7 @@ public class OldUnitTest {
         return true;
     }
 
-    private boolean compareSchedules(Schedule s1, Schedule s2) {
+    private boolean compareSchedules(DatabaseStub.Schedule s1, DatabaseStub.Schedule s2) {
         //Compare ID
         if (s1.getId() != null && s2.getId() != null
                 && s1.getId().compareTo(s2.getId()) != 0)

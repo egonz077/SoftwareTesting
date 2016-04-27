@@ -11,11 +11,11 @@ public class ClassDetails {
 
     private DatabaseStub db;
     private String classNbr;
-    private Professor instructor;
+    private DatabaseStub.Professor instructor;
     private String bldg_room;
     private String campus;
     private String term;
-    private Time time;
+    private DatabaseStub.Time time;
 
     //constructor
 
@@ -37,13 +37,13 @@ public class ClassDetails {
         this.classNbr = classNbr;
     }
 
-    public Professor getInstructor() {
+    public DatabaseStub.Professor getInstructor() {
         return null;
     }
 
     public boolean hasConflict(ClassDetails cd) {
-        Time c1 = getTime();
-        Time c2 = cd.getTime();
+        DatabaseStub.Time c1 = getTime();
+        DatabaseStub.Time c2 = cd.getTime();
         //compare times
         String daysofC1 = c1.days;
         String daysofC2 = c2.days;
@@ -125,11 +125,11 @@ public class ClassDetails {
         return false;
     }
 
-    public Time getTime() {
+    public DatabaseStub.Time getTime() {
         return time;
     }
 
-    public void setTime(Time t) {
+    public void setTime(DatabaseStub.Time t) {
         time = t;
     }
 
@@ -199,7 +199,7 @@ public class ClassDetails {
     }
 
     //New Constructor
-    public ClassDetails(DatabaseStub database, String classNbr, Professor teacher1, String bldg, String campus, String term, Time time1) {
+    public ClassDetails(DatabaseStub database, String classNbr, DatabaseStub.Professor teacher1, String bldg, String campus, String term, DatabaseStub.Time time1) {
         this.db = database;
         this.instructor = teacher1;
         this.time = time1;
