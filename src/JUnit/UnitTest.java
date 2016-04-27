@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  *
  * This is the UnitTest Class for schedule maker
  */
-@SuppressWarnings("Duplicates")
+@SuppressWarnings({"Duplicates", "unchecked"})
 public class UnitTest {
 
     @Before
@@ -221,9 +221,8 @@ public class UnitTest {
     public void SM_001CD_Unit_TC011() {
         DatabaseStub course1 = new DatabaseStub("History", "1000");
         DatabaseStub.Professor teacher1 = new DatabaseStub.Professor("123456789","John","Doe");
-        DatabaseStub.Time time1 = null;
 
-        ClassDetails class1 = new ClassDetails(course1,"1000",teacher1,"101","FIU","Fall",time1);
+        ClassDetails class1 = new ClassDetails(course1, "1000", teacher1, "101", "FIU", "Fall", null);
 
         assertEquals("Should omit time details since time is null",
                 "History1000" + "\n" + "1000" + "\n"
