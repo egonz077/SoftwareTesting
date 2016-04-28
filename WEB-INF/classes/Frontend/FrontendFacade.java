@@ -1,4 +1,9 @@
-package ApplicationLogic;
+package Frontend;
+
+import ApplicationLogic.Authentication;
+import ApplicationLogic.FormatPage;
+import ApplicationLogic.Schedule;
+import ApplicationLogic.ScheduleMakerController;
 
 import java.util.Collection;
 

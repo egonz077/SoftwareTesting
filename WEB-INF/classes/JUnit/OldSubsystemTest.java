@@ -1,7 +1,7 @@
 package JUnit;
 
 import ApplicationLogic.ClassDetails;
-import ApplicationLogic.FrontendFacade;
+import Frontend.FrontendFacade;
 import ApplicationLogic.Schedule;
 import ApplicationLogic.Time;
 import Storage.DatabaseStub;
@@ -21,6 +21,7 @@ import static org.junit.Assert.*;
  * This is the SubsystemTest Class for schedule maker
  */
 
+@SuppressWarnings({"Duplicates", "unchecked"})
 public class OldSubsystemTest {
 
     public FrontendFacade client;
@@ -554,6 +555,7 @@ public class OldSubsystemTest {
     }
 
     //Rainy-Day
+    @SuppressWarnings("ConstantConditions")
     @Test
     public void SM_003BS_Subsystem_TC016() throws Exception {
         //Test String
@@ -581,6 +583,7 @@ public class OldSubsystemTest {
         }
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Test
     public void SM_003BS_Subsystem_TC017() throws Exception {
         //Test String
@@ -608,6 +611,7 @@ public class OldSubsystemTest {
         }
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Test
     public void SM_003BS_Subsystem_TC018() throws Exception {
         //Test String

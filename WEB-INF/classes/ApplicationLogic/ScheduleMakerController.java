@@ -1,7 +1,6 @@
 package ApplicationLogic;
 
 import Storage.BackendFacade;
-import Storage.DatabaseInterface;
 
 import java.util.Collection;
 import java.util.ArrayList;
@@ -202,7 +201,7 @@ public class ScheduleMakerController {
 
         for (Object c : courses)
         {
-            if (!((String) c).equals(""))
+            if (!c.equals(""))
             {
                 course_tmp = new BackendFacade(((String) c).substring(0, 3), ((String) c).substring(3));
                 Collection<ClassDetails> classes_tmp = course_tmp.getClasses(term, campus);

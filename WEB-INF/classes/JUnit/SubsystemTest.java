@@ -1,7 +1,7 @@
 package JUnit;
 
 import ApplicationLogic.ClassDetails;
-import ApplicationLogic.FrontendFacade;
+import Frontend.FrontendFacade;
 import ApplicationLogic.Schedule;
 import ApplicationLogic.Time;
 import Storage.DatabaseStub;
@@ -21,6 +21,7 @@ import static org.junit.Assert.*;
  * This is the SubsystemTest Class for schedule maker
  */
 
+@SuppressWarnings({"Duplicates", "unchecked"})
 public class SubsystemTest {
 
     public FrontendFacade client;
